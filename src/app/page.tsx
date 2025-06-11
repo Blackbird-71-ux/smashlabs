@@ -13,9 +13,9 @@ import AboutUsPage from '../app/about-us/page'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-20 pb-10">
+      <section id="hero" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 z-0">
           <video
@@ -23,7 +23,7 @@ export default function Home() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-20"
           >
             <source src="/smashlabs-room.mp4" type="video/mp4" />
           </video>
@@ -35,13 +35,13 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-6"
+            className="mb-8"
           >
             <Image
               src="/logo.png"
               alt="SmashLabs Logo"
-              width={120}
-              height={120}
+              width={100}
+              height={100}
               className="mx-auto drop-shadow-lg"
             />
           </motion.div>
@@ -50,7 +50,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold mb-8 leading-tight text-gray-900 drop-shadow-xl"
+            className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-gray-900"
           >
             Transform Your Corporate Wellness
           </motion.h1>
@@ -59,7 +59,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full max-w-2xl mb-12 rounded-xl overflow-hidden shadow-xl"
+            className="w-full max-w-2xl mb-10 rounded-xl overflow-hidden shadow-lg"
           >
             <video
               controls 
@@ -75,7 +75,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-xl text-gray-700 mb-12 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
             Step into a unique, aesthetic space where corporate visitors can smash, release, and rejuvenate. Transform your workplace stress into cathartic release.
           </motion.p>
@@ -84,7 +84,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-col md:flex-row gap-6 justify-center"
+            className="flex flex-col md:flex-row gap-4 justify-center"
           >
             <Link href="/packages">
               <motion.button
@@ -109,19 +109,39 @@ export default function Home() {
       </section>
       
       {/* Stats Section */}
-      <StatsSection />
+      <section id="stats" className="py-16 bg-white">
+        <StatsSection />
+      </section>
+
       {/* Why SmashLabs Section */}
-      <WhySmashLabsPage />
+      <section id="why-smashlabs" className="py-16 bg-gray-50">
+        <WhySmashLabsPage />
+      </section>
+
       {/* The Experience Section */}
-      <TheExperiencePage />
+      <section id="experience" className="py-16 bg-white">
+        <TheExperiencePage />
+      </section>
+
       {/* Corporate Packages Section */}
-      <PackagesPage />
+      <section id="packages" className="py-16 bg-gray-50">
+        <PackagesPage />
+      </section>
+
       {/* Testimonials Section */}
-      <TestimonialsPage />
-      {/* Call To Action Section (using ContactPage as a CTA) */}
-      <ContactPage />
+      <section id="testimonials" className="py-16 bg-white">
+        <TestimonialsPage />
+      </section>
+
+      {/* Call To Action Section */}
+      <section id="contact" className="py-16 bg-gray-50">
+        <ContactPage />
+      </section>
+
       {/* About Us Section */}
-      <AboutUsPage />
-    </main>
+      <section id="about" className="py-16 bg-white">
+        <AboutUsPage />
+      </section>
+    </div>
   );
 } 

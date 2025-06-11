@@ -17,13 +17,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-white min-h-screen`}>
-        <Navbar />
-        <main className="pt-20">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.className} bg-gradient-to-b from-white to-gray-50 min-h-screen`}>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   )
