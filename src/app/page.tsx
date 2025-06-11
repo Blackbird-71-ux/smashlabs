@@ -3,115 +3,266 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image'
 import Link from 'next/link';
-import StatsSection from '../components/StatsSection'
-import WhySmashLabsPage from '../app/why-smashlabs/page'
-import TheExperiencePage from '../app/the-experience/page'
-import PackagesPage from '../app/packages/page'
-import TestimonialsPage from '../app/testimonials/page'
-import ContactPage from '../app/contact/page'
-import AboutUsPage from '../app/about-us/page'
+import { useEffect, useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function Home() {
+  const [stats, setStats] = useState({
+    professionals: 0,
+    stressReduction: 0,
+    partners: 0
+  });
+
+  useEffect(() => {
+    const targetStats = {
+      professionals: 1000,
+      stressReduction: 85,
+      partners: 50
+    };
+
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const interval = duration / steps;
+
+    let currentStep = 0;
+    const timer = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+
+      setStats({
+        professionals: Math.floor(targetStats.professionals * progress),
+        stressReduction: Math.floor(targetStats.stressReduction * progress),
+        partners: Math.floor(targetStats.partners * progress)
+      });
+
+      if (currentStep === steps) clearInterval(timer);
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="flex flex-col">
+    <main className="min-h-screen bg-white">
+      <Navbar />
+      
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 z-10 relative flex flex-col items-center justify-center text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-12"
-          >
-            <Image
-              src="/logo.png"
-              alt="SmashLabs Logo"
-              width={120}
-              height={120}
-              className="mx-auto"
-            />
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold mb-8 leading-tight text-gray-900"
-          >
-            Transform Your Corporate Wellness
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
-          >
-            Step into a unique, aesthetic space where corporate visitors can smash, release, and rejuvenate. Transform your workplace stress into cathartic release.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col md:flex-row gap-6 justify-center"
-          >
-            <Link href="/packages">
+      <section className="pt-32 pb-20 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex flex-col items-center text-center mb-16">
+            <Image src="/logo.png" alt="SmashLabs Logo" width={80} height={80} className="mb-8" />
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+              Transform Your Workplace with SmashLabs™
+            </h1>
+            <div className="w-full max-w-4xl aspect-video mb-8">
+              <video 
+                src="/smashlabs-video.mp4" 
+                controls 
+                className="w-full h-full rounded-lg shadow-xl"
+                poster="/video-poster.jpg"
+              />
+            </div>
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl">
+              SmashLabs™ is a revolutionary corporate wellness program that combines physical activity, 
+              team building, and stress relief through the therapeutic power of breaking things.
+            </p>
+            <div className="flex gap-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Explore Packages
               </motion.button>
-            </Link>
-            <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white border-2 border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-white text-gray-900 border-2 border-gray-900 px-8 py-3 rounded-full font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Book a Demo
               </motion.button>
-            </Link>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
-      
+
       {/* Stats Section */}
-      <section id="stats" className="py-20 bg-white">
-        <StatsSection />
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto max-w-6xl px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <h3 className="text-5xl font-bold text-gray-900 mb-2">10,000+</h3>
+              <p className="text-gray-600">Professionals Transformed</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-5xl font-bold text-gray-900 mb-2">85%</h3>
+              <p className="text-gray-600">Stress Reduction</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-5xl font-bold text-gray-900 mb-2">500+</h3>
+              <p className="text-gray-600">Corporate Partners</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Why SmashLabs Section */}
-      <section id="why-smashlabs" className="py-20 bg-gray-50">
-        <WhySmashLabsPage />
+      <section id="why-smashlabs" className="py-20">
+        <div className="container mx-auto max-w-6xl px-6">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">Why SmashLabs™?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Stress Relief</h3>
+              <p className="text-gray-600">Release tension and stress through controlled destruction in a safe environment.</p>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Team Building</h3>
+              <p className="text-gray-600">Strengthen team bonds through shared experiences and collaborative activities.</p>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Corporate Wellness</h3>
+              <p className="text-gray-600">Promote employee well-being and mental health in a unique and engaging way.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* The Experience Section */}
-      <section id="experience" className="py-20 bg-white">
-        <TheExperiencePage />
+      {/* Experience Section */}
+      <section id="experience" className="py-20 bg-gray-50">
+        <div className="container mx-auto max-w-6xl px-6">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">The Experience</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">What to Expect</h3>
+              <ul className="space-y-4 text-gray-600">
+                <li>• Professional safety briefing and equipment</li>
+                <li>• Guided destruction activities</li>
+                <li>• Team challenges and competitions</li>
+                <li>• Post-activity debrief and reflection</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">The Process</h3>
+              <ul className="space-y-4 text-gray-600">
+                <li>• Initial consultation and planning</li>
+                <li>• Customized program design</li>
+                <li>• On-site setup and safety measures</li>
+                <li>• Professional facilitation and support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Corporate Packages Section */}
-      <section id="packages" className="py-20 bg-gray-50">
-        <PackagesPage />
+      {/* Packages Section */}
+      <section id="packages" className="py-20">
+        <div className="container mx-auto max-w-6xl px-6">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">Corporate Packages</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Basic Package</h3>
+              <p className="text-gray-600 mb-6">Perfect for small teams and departments</p>
+              <ul className="space-y-4 text-gray-600 mb-8">
+                <li>• 2-hour session</li>
+                <li>• Basic equipment</li>
+                <li>• Up to 10 participants</li>
+                <li>• Safety briefing</li>
+              </ul>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Request Quote
+              </motion.button>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Premium Package</h3>
+              <p className="text-gray-600 mb-6">Ideal for medium-sized teams</p>
+              <ul className="space-y-4 text-gray-600 mb-8">
+                <li>• 3-hour session</li>
+                <li>• Premium equipment</li>
+                <li>• Up to 20 participants</li>
+                <li>• Team building activities</li>
+              </ul>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Request Quote
+              </motion.button>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Enterprise Package</h3>
+              <p className="text-gray-600 mb-6">For large organizations</p>
+              <ul className="space-y-4 text-gray-600 mb-8">
+                <li>• 4-hour session</li>
+                <li>• Full equipment suite</li>
+                <li>• Up to 50 participants</li>
+                <li>• Custom activities</li>
+              </ul>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Request Quote
+              </motion.button>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-white">
-        <TestimonialsPage />
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto max-w-6xl px-6">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <p className="text-gray-600 mb-6">"SmashLabs™ transformed our team's dynamics. The experience was both therapeutic and fun!"</p>
+              <p className="font-semibold text-gray-900">- Sarah Johnson, HR Director</p>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-lg">
+              <p className="text-gray-600 mb-6">"An innovative approach to corporate wellness that actually works. Our employees loved it!"</p>
+              <p className="font-semibold text-gray-900">- Michael Chen, CEO</p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Call To Action Section */}
-      <section id="contact" className="py-20 bg-gray-50">
-        <ContactPage />
+      {/* CTA Section */}
+      <section className="py-20">
+        <div className="container mx-auto max-w-6xl px-6">
+          <div className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl p-12 text-center">
+            <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Workplace?</h2>
+            <p className="text-white/90 mb-8 text-lg">Schedule a demo and experience the power of SmashLabs™</p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300"
+            >
+              Book a Demo
+            </motion.button>
+          </div>
+        </div>
       </section>
 
-      {/* About Us Section */}
-      <section id="about" className="py-20 bg-white">
-        <AboutUsPage />
+      {/* About Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto max-w-6xl px-6">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">About SmashLabs™</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              SmashLabs™ is a pioneering corporate wellness program that combines physical activity, 
+              team building, and stress relief through the therapeutic power of breaking things. 
+              Our mission is to create healthier, happier, and more productive workplaces.
+            </p>
+          </div>
+        </div>
       </section>
-    </div>
+
+      <Footer />
+    </main>
   );
 } 

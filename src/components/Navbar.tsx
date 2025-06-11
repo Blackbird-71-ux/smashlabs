@@ -9,11 +9,11 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
+    { href: '/', label: 'Home' },
     { href: '/#why-smashlabs', label: 'Why SmashLabs' },
     { href: '/#experience', label: 'The Experience' },
     { href: '/#packages', label: 'Packages' },
-    { href: '/#testimonials', label: 'Testimonials' },
-    { href: '/#about', label: 'About Us' },
+    { href: '/#contact', label: 'Contact' },
   ];
 
   return (
@@ -32,7 +32,7 @@ export default function Navbar() {
           >
             <Link href="/" className="flex items-center">
               <Image src="/logo.png" alt="SmashLabs Logo" width={45} height={45} className="mr-3" />
-              <span className="text-2xl font-bold text-gray-900">SmashLabs</span>
+              <span className="text-2xl font-bold text-gray-900">SmashLabs™</span>
             </Link>
           </motion.div>
           
@@ -51,15 +51,6 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link href="/#contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2.5 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Book Now
-              </motion.button>
-            </Link>
           </motion.div>
 
           <motion.button
@@ -93,15 +84,6 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link href="/#contact" onClick={() => setIsMenuOpen(false)}>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2.5 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Book Now
-                </motion.button>
-              </Link>
             </div>
           </motion.div>
         )}
