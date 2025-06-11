@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import Image from 'next/image'
 import Link from 'next/link';
 import StatsSection from '../components/StatsSection'
-// import WhySmashLabsSection from '../components/WhySmashLabsSection'
-// import TheExperienceSection from '../components/TheExperienceSection'
-// import CorporatePackagesSection from '../components/CorporatePackagesSection'
-// import TestimonialsSection from '../components/TestimonialsSection'
-// import CallToActionSection from '../components/CallToActionSection'
-// import AboutUsSection from '../components/AboutUsSection'
+import WhySmashLabsPage from '../app/why-smashlabs/page'
+import TheExperiencePage from '../app/the-experience/page'
+import PackagesPage from '../app/packages/page'
+import TestimonialsPage from '../app/testimonials/page'
+import ContactPage from '../app/contact/page'
+import AboutUsPage from '../app/about-us/page'
 
 export default function Home() {
   return (
@@ -92,12 +92,18 @@ export default function Home() {
       
       {/* Stats Section */}
       <StatsSection />
-      {/* <WhySmashLabsSection /> */}
-      {/* <TheExperienceSection /> */}
-      {/* <CorporatePackagesSection /> */}
-      {/* <TestimonialsSection /> */}
-      {/* <CallToActionSection /> */}
-      {/* <AboutUsSection /> */}
+      {/* Why SmashLabs Section */}
+      <WhySmashLabsPage />
+      {/* The Experience Section */}
+      <TheExperiencePage />
+      {/* Corporate Packages Section */}
+      <PackagesPage />
+      {/* Testimonials Section */}
+      <TestimonialsPage />
+      {/* Call To Action Section (using ContactPage as a CTA) */}
+      <ContactPage />
+      {/* About Us Section */}
+      <AboutUsPage />
     </main>
   );
 } 
