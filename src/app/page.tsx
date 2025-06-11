@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import StatsSection from '../components/StatsSection'
-import WhySmashLabsSection from '../components/WhySmashLabsSection'
-import TheExperienceSection from '../components/TheExperienceSection'
-import CorporatePackagesSection from '../components/CorporatePackagesSection'
+// import WhySmashLabsSection from '../components/WhySmashLabsSection'
+// import TheExperienceSection from '../components/TheExperienceSection'
+// import CorporatePackagesSection from '../components/CorporatePackagesSection'
 import TestimonialsSection from '../components/TestimonialsSection'
 import CallToActionSection from '../components/CallToActionSection'
 import AboutUsSection from '../components/AboutUsSection'
@@ -48,9 +48,9 @@ export default function Home() {
       
       {/* New Sections */}
       <StatsSection />
-      <WhySmashLabsSection />
-      <TheExperienceSection />
-      <CorporatePackagesSection />
+      {/* <WhySmashLabsSection /> */}
+      {/* <TheExperienceSection /> */}
+      {/* <CorporatePackagesSection /> */}
       <TestimonialsSection />
       <CallToActionSection />
       <AboutUsSection />
