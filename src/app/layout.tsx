@@ -1,14 +1,28 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Montserrat } from 'next/font/google'
 import './globals.css'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'SmashLabs - Transform Your Corporate Wellness',
-  description: 'Experience the future of stress relief and entertainment at SmashLabs.',
+  title: 'SmashLabs - Corporate Entertainment & Team Building',
+  description: 'SmashLabs offers unique corporate entertainment and team building experiences through rage rooms and interactive activities.',
+  keywords: 'corporate entertainment, team building, rage room, corporate events, stress relief, team activities',
+  authors: [{ name: 'SmashLabs' }],
+  viewport: 'width=device-width, initial-scale=1',
+  robots: 'index, follow',
 }
 
 export default function RootLayout({
@@ -17,9 +31,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-white antialiased`}>
-        <div className="flex flex-col min-h-screen">
+    <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
+      <body className="min-h-screen bg-white font-sans text-gray-900 antialiased">
+        <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className="flex-grow">
             {children}

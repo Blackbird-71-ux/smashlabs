@@ -1,263 +1,411 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-// Cosmetic change to trigger Vercel rebuild if cache clear fails.
+import Link from 'next/link'
 
 export default function Home() {
   const [stats, setStats] = useState({
-    professionals: 0,
-    stressReduction: 0,
-    partners: 0
-  });
+    customers: 0,
+    satisfaction: 0,
+    events: 0
+  })
 
   useEffect(() => {
     const targetStats = {
-      professionals: 10000,
-      stressReduction: 85,
-      partners: 500
-    };
+      customers: 10000,
+      satisfaction: 85,
+      events: 500
+    }
 
-    const duration = 2000; // 2 seconds
-    const steps = 60;
-    const interval = duration / steps;
+    const duration = 2000 // 2 seconds
+    const steps = 60
+    const stepDuration = duration / steps
 
-    let currentStep = 0;
-    const timer = setInterval(() => {
-      currentStep++;
-      const progress = currentStep / steps;
+    let currentStep = 0
+    const interval = setInterval(() => {
+      currentStep++
+      const progress = currentStep / steps
 
       setStats({
-        professionals: Math.floor(targetStats.professionals * progress),
-        stressReduction: Math.floor(targetStats.stressReduction * progress),
-        partners: Math.floor(targetStats.partners * progress)
-      });
+        customers: Math.floor(targetStats.customers * progress),
+        satisfaction: Math.floor(targetStats.satisfaction * progress),
+        events: Math.floor(targetStats.events * progress)
+      })
 
-      if (currentStep === steps) clearInterval(timer);
-    }, interval);
+      if (currentStep === steps) {
+        clearInterval(interval)
+      }
+    }, stepDuration)
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(interval)
+  }, [])
 
   return (
-    <main className="min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col items-center text-center mb-16">
-            <Image src="/logo.png" alt="SmashLabs Logo" width={80} height={80} className="mb-8" />
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">
-              Transform Your Workplace with SmashLabs™
-            </h1>
-            <div className="w-full max-w-4xl aspect-video mb-8">
-              <video 
-                src="/smashlabs-room.mp4" 
-                controls 
-                className="w-full h-full rounded-lg shadow-xl"
-              />
-            </div>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl">
-              SmashLabs™ is a revolutionary corporate wellness program that combines physical activity, 
-              team building, and stress relief through the therapeutic power of breaking things.
-            </p>
-            <div className="flex gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Explore Packages
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-gray-900 border-2 border-gray-900 px-8 py-3 rounded-full font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Book a Demo
-              </motion.button>
-            </div>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        
+        <div className="container relative z-10 text-center text-white">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-in">
+            Break Free. Smash Stress.
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-slide-up">
+            Experience the ultimate stress relief and team building activity at SmashLabs.
+            Perfect for corporate events, team outings, and private parties.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+            <Link href="#contact" className="btn btn-primary">
+              Book Your Session
+            </Link>
+            <Link href="#about" className="btn btn-outline text-white border-white hover:bg-white/10">
+              Learn More
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <section className="section bg-gray-50">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <h3 className="text-5xl font-bold text-gray-900 mb-2">{stats.professionals}+</h3>
-              <p className="text-gray-600">Professionals Transformed</p>
+              <div className="text-4xl md:text-5xl font-display font-bold text-primary-600 mb-2">
+                {stats.customers.toLocaleString()}+
+              </div>
+              <div className="text-gray-600">Happy Customers</div>
             </div>
             <div className="text-center">
-              <h3 className="text-5xl font-bold text-gray-900 mb-2">{stats.stressReduction}%</h3>
-              <p className="text-gray-600">Stress Reduction</p>
+              <div className="text-4xl md:text-5xl font-display font-bold text-primary-600 mb-2">
+                {stats.satisfaction}%
+              </div>
+              <div className="text-gray-600">Customer Satisfaction</div>
             </div>
             <div className="text-center">
-              <h3 className="text-5xl font-bold text-gray-900 mb-2">{stats.partners}+</h3>
-              <p className="text-gray-600">Corporate Partners</p>
+              <div className="text-4xl md:text-5xl font-display font-bold text-primary-600 mb-2">
+                {stats.events}+
+              </div>
+              <div className="text-gray-600">Corporate Events</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Why SmashLabs Section */}
-      <section id="why-smashlabs" className="py-20">
-        <div className="container mx-auto max-w-6xl px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">Why SmashLabs™?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Stress Relief</h3>
-              <p className="text-gray-600">Release tension and stress through controlled destruction in a safe environment.</p>
+      <section id="about" className="section">
+        <div className="container">
+          <div className="section-title">
+            <h2>Why SmashLabs?</h2>
+            <p>Experience the perfect blend of stress relief and team building</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-white rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Stress Relief</h3>
+              <p className="text-gray-600">Release tension and stress in a safe, controlled environment.</p>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Team Building</h3>
-              <p className="text-gray-600">Strengthen team bonds through shared experiences and collaborative activities.</p>
+            <div className="p-6 bg-white rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Team Building</h3>
+              <p className="text-gray-600">Strengthen team bonds through shared experiences and fun activities.</p>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Corporate Wellness</h3>
-              <p className="text-gray-600">Promote employee well-being and mental health in a unique and engaging way.</p>
+            <div className="p-6 bg-white rounded-lg shadow-lg">
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Unique Experience</h3>
+              <p className="text-gray-600">Create unforgettable memories with our innovative rage room concept.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 bg-gray-50">
-        <div className="container mx-auto max-w-6xl px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">The Experience</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">What to Expect</h3>
-              <ul className="space-y-4 text-gray-600">
-                <li>• Professional safety briefing and equipment</li>
-                <li>• Guided destruction activities</li>
-                <li>• Team challenges and competitions</li>
-                <li>• Post-activity debrief and reflection</li>
-              </ul>
+      <section id="services" className="section bg-gray-50">
+        <div className="container">
+          <div className="section-title">
+            <h2>The Experience</h2>
+            <p>What to expect at SmashLabs</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="relative h-[400px] rounded-lg overflow-hidden">
+              <Image
+                src="/experience.jpg"
+                alt="SmashLabs Experience"
+                fill
+                className="object-cover"
+              />
             </div>
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">The Process</h3>
-              <ul className="space-y-4 text-gray-600">
-                <li>• Initial consultation and planning</li>
-                <li>• Customized program design</li>
-                <li>• On-site setup and safety measures</li>
-                <li>• Professional facilitation and support</li>
-              </ul>
+            <div className="space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <span className="text-primary-600 font-bold">1</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Safety Briefing</h3>
+                  <p className="text-gray-600">Get equipped with safety gear and learn the rules of the rage room.</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <span className="text-primary-600 font-bold">2</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Choose Your Tools</h3>
+                  <p className="text-gray-600">Select from our range of safe, specially designed smashing tools.</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <span className="text-primary-600 font-bold">3</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Smash & Release</h3>
+                  <p className="text-gray-600">Enter the rage room and let your stress out in a controlled environment.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Packages Section */}
-      <section id="packages" className="py-20">
-        <div className="container mx-auto max-w-6xl px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">Corporate Packages</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Basic Package</h3>
-              <p className="text-gray-600 mb-6">Perfect for small teams and departments</p>
-              <ul className="space-y-4 text-gray-600 mb-8">
-                <li>• 2-hour session</li>
-                <li>• Basic equipment</li>
-                <li>• Up to 10 participants</li>
-                <li>• Safety briefing</li>
-              </ul>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Request Quote
-              </motion.button>
+      {/* Corporate Packages Section */}
+      <section id="packages" className="section">
+        <div className="container">
+          <div className="section-title">
+            <h2>Corporate Packages</h2>
+            <p>Tailored experiences for your team</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-4">Team Building</h3>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Up to 20 participants
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    2-hour session
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Team activities
+                  </li>
+                </ul>
+                <Link href="#contact" className="btn btn-primary w-full">
+                  Book Now
+                </Link>
+              </div>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Premium Package</h3>
-              <p className="text-gray-600 mb-6">Ideal for medium-sized teams</p>
-              <ul className="space-y-4 text-gray-600 mb-8">
-                <li>• 3-hour session</li>
-                <li>• Premium equipment</li>
-                <li>• Up to 20 participants</li>
-                <li>• Team building activities</li>
-              </ul>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Request Quote
-              </motion.button>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-4">Corporate Event</h3>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Up to 50 participants
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    4-hour session
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Custom activities
+                  </li>
+                </ul>
+                <Link href="#contact" className="btn btn-primary w-full">
+                  Book Now
+                </Link>
+              </div>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Enterprise Package</h3>
-              <p className="text-gray-600 mb-6">For large organizations</p>
-              <ul className="space-y-4 text-gray-600 mb-8">
-                <li>• 4-hour session</li>
-                <li>• Full equipment suite</li>
-                <li>• Up to 50 participants</li>
-                <li>• Custom activities</li>
-              </ul>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-3 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                Request Quote
-              </motion.button>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-4">Private Party</h3>
+                <ul className="space-y-3 mb-6">
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Up to 30 participants
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    3-hour session
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-primary-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Party package
+                  </li>
+                </ul>
+                <Link href="#contact" className="btn btn-primary w-full">
+                  Book Now
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto max-w-6xl px-6">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">What Our Clients Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <p className="text-gray-600 mb-6">"SmashLabs™ transformed our team's dynamics. The experience was both therapeutic and fun!"</p>
-              <p className="font-semibold text-gray-900">- Sarah Johnson, HR Director</p>
+      <section className="section bg-gray-50">
+        <div className="container">
+          <div className="section-title">
+            <h2>What Our Clients Say</h2>
+            <p>Hear from our satisfied customers</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                  <span className="text-primary-600 font-bold">JD</span>
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-bold">John Doe</h4>
+                  <p className="text-gray-600">CEO, Tech Corp</p>
+                </div>
+              </div>
+              <p className="text-gray-600">"An amazing team building experience. Our employees loved it and came back energized!"</p>
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <p className="text-gray-600 mb-6">"An innovative approach to corporate wellness that actually works. Our employees loved it!"</p>
-              <p className="font-semibold text-gray-900">- Michael Chen, CEO</p>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                  <span className="text-primary-600 font-bold">JS</span>
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-bold">Jane Smith</h4>
+                  <p className="text-gray-600">HR Manager, Design Co</p>
+                </div>
+              </div>
+              <p className="text-gray-600">"The perfect stress relief activity for our team. Highly recommended for corporate events!"</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                  <span className="text-primary-600 font-bold">RJ</span>
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-bold">Robert Johnson</h4>
+                  <p className="text-gray-600">Team Lead, Marketing Inc</p>
+                </div>
+              </div>
+              <p className="text-gray-600">"Great facility and amazing staff. Our team had a blast and can't wait to come back!"</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto max-w-6xl px-6">
-          <div className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-2xl p-12 text-center">
-            <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Workplace?</h2>
-            <p className="text-white/90 mb-8 text-lg">Schedule a demo and experience the power of SmashLabs™</p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold text-lg shadow-md hover:shadow-lg transition-all duration-300"
-            >
-              Book a Demo
-            </motion.button>
-          </div>
+      <section className="section bg-primary-600 text-white">
+        <div className="container text-center">
+          <h2 className="text-4xl font-bold mb-6">Ready to Smash Stress?</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Book your session today and experience the ultimate stress relief and team building activity.
+          </p>
+          <Link href="#contact" className="btn bg-white text-primary-600 hover:bg-gray-100">
+            Book Now
+          </Link>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto max-w-6xl px-6">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">About SmashLabs™</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              SmashLabs™ is a pioneering corporate wellness program that combines physical activity, 
-              team building, and stress relief through the therapeutic power of breaking things. 
-              Our mission is to create healthier, happier, and more productive workplaces.
-            </p>
+      {/* Contact Section */}
+      <section id="contact" className="section">
+        <div className="container">
+          <div className="section-title">
+            <h2>Contact Us</h2>
+            <p>Get in touch to book your session</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <form className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  ></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary w-full">
+                  Send Message
+                </button>
+              </form>
+            </div>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-bold mb-2">Location</h3>
+                <p className="text-gray-600">123 Smash Street, City, State 12345</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Contact Info</h3>
+                <p className="text-gray-600">Phone: (123) 456-7890</p>
+                <p className="text-gray-600">Email: info@smashlabs.com</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Hours</h3>
+                <p className="text-gray-600">Monday - Friday: 9:00 AM - 9:00 PM</p>
+                <p className="text-gray-600">Saturday - Sunday: 10:00 AM - 8:00 PM</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-    </main>
-  );
+    </div>
+  )
 } 
