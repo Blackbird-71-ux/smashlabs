@@ -18,9 +18,9 @@ export default function Home() {
 
   useEffect(() => {
     const targetStats = {
-      professionals: 1000,
+      professionals: 10000,
       stressReduction: 85,
-      partners: 50
+      partners: 500
     };
 
     const duration = 2000; // 2 seconds
