@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import StatsSection from '../components/StatsSection'
 // import WhySmashLabsSection from '../components/WhySmashLabsSection'
 // import TheExperienceSection from '../components/TheExperienceSection'
@@ -6,47 +7,83 @@ import StatsSection from '../components/StatsSection'
 // import TestimonialsSection from '../components/TestimonialsSection'
 // import CallToActionSection from '../components/CallToActionSection'
 // import AboutUsSection from '../components/AboutUsSection'
+import '../styles/animations.css'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24">
+    <main className="min-h-screen gradient-primary text-white">
       <div className="container mx-auto px-4 py-16 flex flex-col items-center justify-center text-center">
         {/* Hexagonal Logo/Icon */}
-        <div className="mb-12">
-          <Image src="/logo.png" alt="Smashlabs Hex Logo" width={120} height={120} />
-        </div>
+        <motion.div 
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Image 
+            src="/logo.png" 
+            alt="Smashlabs Hex Logo" 
+            width={120} 
+            height={120}
+            className="animate-float"
+          />
+        </motion.div>
 
         {/* Headline */}
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-8 text-pink-500 tracking-wide leading-tight">
+        <motion.h1 
+          className="text-5xl md:text-6xl font-extrabold mb-8 bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           Transform Your Corporate Wellness
-        </h1>
+        </motion.h1>
 
         {/* Video Player Placeholder */}
-        <div className="w-full max-w-4xl mb-16 rounded-lg overflow-hidden shadow-2xl">
-          <video controls className="w-full h-auto">
+        <motion.div 
+          className="w-full max-w-4xl mb-16 rounded-2xl overflow-hidden shadow-modern"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <video 
+            controls 
+            className="w-full h-auto"
+            poster="/video-poster.jpg"
+          >
             <source src="/smashlabs-room.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-        </div>
+        </motion.div>
 
         {/* Descriptive Text */}
-        <p className="text-lg md:text-xl text-gray-300 mb-16 max-w-3xl leading-relaxed">
+        <motion.p 
+          className="text-lg md:text-xl text-gray-300 mb-16 max-w-3xl leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
           Step into a unique, aesthetic space where corporate visitors can smash, release, and rejuvenate.
           Transform your workplace stress into cathartic release.
-        </p>
+        </motion.p>
 
         {/* Call-to-Action Buttons */}
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-20">
-          <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+        <motion.div 
+          className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <button className="btn-modern hover-lift">
             Explore Packages
           </button>
-          <button className="bg-transparent border-2 border-pink-600 hover:border-pink-700 text-pink-600 hover:text-pink-700 font-bold py-4 px-8 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+          <button className="bg-transparent border-2 border-pink-500 hover:border-pink-600 text-pink-500 hover:text-pink-600 font-bold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105">
             Book a Demo
           </button>
-        </div>
+        </motion.div>
       </div>
       
-      {/* New Sections */}
+      {/* Stats Section */}
       <StatsSection />
       {/* <WhySmashLabsSection /> */}
       {/* <TheExperienceSection /> */}
