@@ -92,15 +92,15 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center">
-              <h3 className="text-5xl font-bold text-gray-900 mb-2">10,000+</h3>
+              <h3 className="text-5xl font-bold text-gray-900 mb-2">{stats.professionals}+</h3>
               <p className="text-gray-600">Professionals Transformed</p>
             </div>
             <div className="text-center">
-              <h3 className="text-5xl font-bold text-gray-900 mb-2">85%</h3>
+              <h3 className="text-5xl font-bold text-gray-900 mb-2">{stats.stressReduction}%</h3>
               <p className="text-gray-600">Stress Reduction</p>
             </div>
             <div className="text-center">
-              <h3 className="text-5xl font-bold text-gray-900 mb-2">500+</h3>
+              <h3 className="text-5xl font-bold text-gray-900 mb-2">{stats.partners}+</h3>
               <p className="text-gray-600">Corporate Partners</p>
             </div>
           </div>
