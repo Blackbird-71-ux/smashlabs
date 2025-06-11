@@ -67,11 +67,11 @@ export default function TheExperiencePage() {
                 whileHover={{ scale: 1.02 }}
                 className="bg-gray-900 p-6 rounded-xl shadow-xl border border-gray-800 transition-colors duration-300 transform"
               >
-                <h3 className="text-2xl font-bold mb-2 text-blue-300 flex items-center">
+                <h3 className="text-3xl font-bold mb-2 text-blue-300 flex items-center">
                   <span className="mr-3 text-3xl">💡</span> 
                   What to Expect
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-base leading-relaxed">
                   A guided journey through our state-of-the-art facility, designed specifically for corporate stress relief and team building.
                 </p>
               </motion.div>
@@ -82,11 +82,11 @@ export default function TheExperiencePage() {
                 whileHover={{ scale: 1.02 }}
                 className="bg-gray-900 p-6 rounded-xl shadow-xl border border-gray-800 transition-colors duration-300 transform"
               >
-                <h3 className="text-2xl font-bold mb-2 text-purple-300 flex items-center">
+                <h3 className="text-3xl font-bold mb-2 text-purple-300 flex items-center">
                   <span className="mr-3 text-3xl">⚙️</span>
                   The Process
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-base leading-relaxed">
                   Professional guidance through safe, controlled stress release activities, tailored to your team's needs.
                 </p>
               </motion.div>
@@ -97,11 +97,11 @@ export default function TheExperiencePage() {
                 whileHover={{ scale: 1.02 }}
                 className="bg-gray-900 p-6 rounded-xl shadow-xl border border-gray-800 transition-colors duration-300 transform"
               >
-                <h3 className="text-2xl font-bold mb-2 text-pink-300 flex items-center">
+                <h3 className="text-3xl font-bold mb-2 text-pink-300 flex items-center">
                   <span className="mr-3 text-3xl">🤝</span>
                   Team Building Elements
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-base leading-relaxed">
                   Strengthen team bonds through shared experiences and collaborative activities.
                 </p>
               </motion.div>
@@ -112,11 +112,11 @@ export default function TheExperiencePage() {
                 whileHover={{ scale: 1.02 }}
                 className="bg-gray-900 p-6 rounded-xl shadow-xl border border-gray-800 transition-colors duration-300 transform"
               >
-                <h3 className="text-2xl font-bold mb-2 text-green-300 flex items-center">
+                <h3 className="text-3xl font-bold mb-2 text-green-300 flex items-center">
                   <span className="mr-3 text-3xl">🧘</span>
                   Therapeutic Benefits
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-base leading-relaxed">
                   Experience immediate stress relief and long-term wellness improvements.
                 </p>
               </motion.div>
