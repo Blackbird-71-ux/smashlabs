@@ -28,6 +28,15 @@ export default function StatsSection() {
   return (
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-600 text-transparent bg-clip-text drop-shadow-lg"
+        >
+          Our Achievements
+        </motion.h2>
         <motion.div
           variants={container}
           initial="hidden"
