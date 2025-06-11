@@ -3,9 +3,9 @@ import StatsSection from '../components/StatsSection'
 // import WhySmashLabsSection from '../components/WhySmashLabsSection'
 // import TheExperienceSection from '../components/TheExperienceSection'
 // import CorporatePackagesSection from '../components/CorporatePackagesSection'
-import TestimonialsSection from '../components/TestimonialsSection'
-import CallToActionSection from '../components/CallToActionSection'
-import AboutUsSection from '../components/AboutUsSection'
+// import TestimonialsSection from '../components/TestimonialsSection'
+// import CallToActionSection from '../components/CallToActionSection'
+// import AboutUsSection from '../components/AboutUsSection'
 
 export default function Home() {
   return (
@@ -51,9 +51,9 @@ export default function Home() {
       {/* <WhySmashLabsSection /> */}
       {/* <TheExperienceSection /> */}
       {/* <CorporatePackagesSection /> */}
-      <TestimonialsSection />
-      <CallToActionSection />
-      <AboutUsSection />
+      {/* <TestimonialsSection /> */}
+      {/* <CallToActionSection /> */}
+      {/* <AboutUsSection /> */}
 
     </main>
   );
