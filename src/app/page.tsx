@@ -1,28 +1,41 @@
+import Image from 'next/image'
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
-            Welcome to Smashlabs
-          </h1>
-          <p className="text-xl text-gray-300 mb-8">
-            Your Digital Innovation Hub
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors">
-              <h2 className="text-2xl font-semibold mb-4 text-blue-400">Innovation</h2>
-              <p className="text-gray-300">
-                Pushing the boundaries of what's possible in the digital world.
-              </p>
-            </div>
-            <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors">
-              <h2 className="text-2xl font-semibold mb-4 text-purple-400">Technology</h2>
-              <p className="text-gray-300">
-                Cutting-edge solutions for modern challenges.
-              </p>
-            </div>
-          </div>
+    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24">
+      <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center text-center">
+        {/* Hexagonal Logo/Icon */}
+        <div className="mb-8">
+          <Image src="/logo-hex.svg" alt="Smashlabs Hex Logo" width={100} height={100} />
+        </div>
+
+        {/* Headline */}
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 text-pink-500 tracking-wide leading-tight">
+          Transform Your Corporate Wellness
+        </h1>
+
+        {/* Video Player Placeholder */}
+        <div className="w-full max-w-4xl mb-12 rounded-lg overflow-hidden shadow-xl">
+          <video controls className="w-full h-auto">
+            <source src="/smashlabs-video-placeholder.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        {/* Descriptive Text */}
+        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl leading-relaxed">
+          Step into a unique, aesthetic space where corporate visitors can smash, release, and rejuvenate.
+          Transform your workplace stress into cathartic release.
+        </p>
+
+        {/* Call-to-Action Buttons */}
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+          <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            Explore Packages
+          </button>
+          <button className="bg-transparent border-2 border-pink-600 hover:border-pink-700 text-pink-600 hover:text-pink-700 font-bold py-4 px-8 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            Book a Demo
+          </button>
         </div>
       </div>
     </main>
