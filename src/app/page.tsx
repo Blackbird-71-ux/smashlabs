@@ -59,7 +59,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full max-w-4xl mb-12 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-black bg-opacity-30 backdrop-blur-sm"
+            className="w-full max-w-2xl mb-12 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-black bg-opacity-30 backdrop-blur-sm"
           >
             <video
               controls 
