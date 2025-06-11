@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="bg-gray-900 bg-opacity-70 backdrop-blur-md fixed w-full z-10 top-0">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
-          <Image src="/logo.svg" alt="Smashlabs Logo" width={40} height={40} className="mr-3" />
+          <Image src="/logo.png" alt="Smashlabs Logo" width={40} height={40} className="mr-3" />
           <Link href="/" className="text-white text-2xl font-bold">
             SMASHLABS™
           </Link>

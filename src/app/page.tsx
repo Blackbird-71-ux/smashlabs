@@ -6,7 +6,7 @@ export default function Home() {
       <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center text-center">
         {/* Hexagonal Logo/Icon */}
         <div className="mb-8">
-          <Image src="/logo-hex.svg" alt="Smashlabs Hex Logo" width={100} height={100} />
+          <Image src="/logo.png" alt="Smashlabs Hex Logo" width={100} height={100} />
         </div>
 
         {/* Headline */}
@@ -17,7 +17,7 @@ export default function Home() {
         {/* Video Player Placeholder */}
         <div className="w-full max-w-4xl mb-12 rounded-lg overflow-hidden shadow-xl">
           <video controls className="w-full h-auto">
-            <source src="/smashlabs-video-placeholder.mp4" type="video/mp4" />
+            <source src="/smashlabs-room.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
