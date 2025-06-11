@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image'
+import Link from 'next/link';
 import StatsSection from '../components/StatsSection'
 // import WhySmashLabsSection from '../components/WhySmashLabsSection'
 // import TheExperienceSection from '../components/TheExperienceSection'
@@ -9,8 +10,6 @@ import StatsSection from '../components/StatsSection'
 // import TestimonialsSection from '../components/TestimonialsSection'
 // import CallToActionSection from '../components/CallToActionSection'
 // import AboutUsSection from '../components/AboutUsSection'
-import '../styles/animations.css'
-import AnimatedWrapper from '../components/AnimatedWrapper'
 
 export default function Home() {
   return (
