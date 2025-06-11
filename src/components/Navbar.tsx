@@ -9,7 +9,7 @@ export default function Navbar() {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gray-900 border-b border-gray-800"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -20,8 +20,8 @@ export default function Navbar() {
             className="flex items-center"
           >
             <Link href="/" className="flex items-center">
-              <Image src="/logo.png" alt="SmashLabs Logo" width={50} height={50} className="mr-2" />
-              <span className="text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">SmashLabs</span>
+              <Image src="/logo.png" alt="SmashLabs Logo" width={40} height={40} className="mr-2" />
+              <span className="text-2xl font-bold text-gray-900">SmashLabs</span>
             </Link>
           </motion.div>
           
@@ -31,28 +31,30 @@ export default function Navbar() {
             transition={{ duration: 0.5 }}
             className="hidden md:flex items-center space-x-8"
           >
-            <Link href="/why-smashlabs" className="text-gray-300 hover:text-white transition-colors duration-300 text-lg">
+            <Link href="/why-smashlabs" className="text-gray-700 hover:text-gray-900 transition-colors duration-300 text-base font-medium">
               Why SmashLabs
             </Link>
-            <Link href="/the-experience" className="text-gray-300 hover:text-white transition-colors duration-300 text-lg">
+            <Link href="/the-experience" className="text-gray-700 hover:text-gray-900 transition-colors duration-300 text-base font-medium">
               The Experience
             </Link>
-            <Link href="/packages" className="text-gray-300 hover:text-white transition-colors duration-300 text-lg">
+            <Link href="/packages" className="text-gray-700 hover:text-gray-900 transition-colors duration-300 text-base font-medium">
               Packages
             </Link>
-            <Link href="/testimonials" className="text-gray-300 hover:text-white transition-colors duration-300 text-lg">
+            <Link href="/testimonials" className="text-gray-700 hover:text-gray-900 transition-colors duration-300 text-base font-medium">
               Testimonials
             </Link>
-            <Link href="/about-us" className="text-gray-300 hover:text-white transition-colors duration-300 text-lg">
+            <Link href="/about-us" className="text-gray-700 hover:text-gray-900 transition-colors duration-300 text-base font-medium">
               About Us
             </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold text-lg"
-            >
-              Book Now
-            </motion.button>
+            <Link href="/contact">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Book Now
+              </motion.button>
+            </Link>
           </motion.div>
 
           <motion.button
