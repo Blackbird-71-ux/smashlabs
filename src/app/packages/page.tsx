@@ -55,8 +55,10 @@ export default function PackagesPage() {
               <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">
                 Team Express
               </h3>
-              <p className="text-gray-400 mb-6">Ideal for quick team rejuvenation</p>
-              <ul className="list-none space-y-3 text-gray-300 text-left mb-8">
+              <p className="text-gray-400 mb-6 text-lg">
+                Ideal for quick team rejuvenation
+              </p>
+              <ul className="list-none space-y-3 text-gray-300 text-left mb-8 text-base">
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> 2-hour stress relief session</li>
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Up to 10 team members</li>
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Basic safety equipment</li>
@@ -84,8 +86,8 @@ export default function PackagesPage() {
               <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
                 Corporate Catalyst
               </h3>
-              <p className="text-gray-400 mb-6">Comprehensive solution for growing teams</p>
-              <ul className="list-none space-y-3 text-gray-300 text-left mb-8">
+              <p className="text-gray-400 mb-6 text-lg">Comprehensive solution for growing teams</p>
+              <ul className="list-none space-y-3 text-gray-300 text-left mb-8 text-base">
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> 4-hour premium experience</li>
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Up to 25 team members</li>
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Premium safety equipment</li>
@@ -113,8 +115,8 @@ export default function PackagesPage() {
               <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-transparent bg-clip-text">
                 Executive Edge
               </h3>
-              <p className="text-gray-400 mb-6">Ultimate experience for leadership teams</p>
-              <ul className="list-none space-y-3 text-gray-300 text-left mb-8">
+              <p className="text-gray-400 mb-6 text-lg">Ultimate experience for leadership teams</p>
+              <ul className="list-none space-y-3 text-gray-300 text-left mb-8 text-base">
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Full-day premium experience</li>
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Up to 50 team members</li>
                 <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Advanced safety equipment</li>
