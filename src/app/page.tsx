@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Navbar from '@/components/Navbar';
 
 // Cosmetic change to trigger Vercel rebuild if cache clear fails.
 
@@ -45,8 +44,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
-      
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto max-w-6xl">
