@@ -49,7 +49,7 @@ export default function Footer() {
           {/* Navigation Links */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="font-bold text-gray-200 mb-4 text-lg">Company</h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-base">
               <li><Link href="/about-us" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/why-smashlabs" className="hover:text-white transition-colors">Why SmashLabs</Link></li>
               <li><Link href="/testimonials" className="hover:text-white transition-colors">Testimonials</Link></li>
@@ -59,7 +59,7 @@ export default function Footer() {
 
           <div className="flex flex-col items-center md:items-start">
             <h4 className="font-bold text-gray-200 mb-4 text-lg">Services</h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-base">
               <li><Link href="/the-experience" className="hover:text-white transition-colors">The Experience</Link></li>
               <li><Link href="/packages" className="hover:text-white transition-colors">Corporate Packages</Link></li>
               {/* Add more service links if applicable */}
@@ -69,7 +69,7 @@ export default function Footer() {
           {/* Legal Links */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="font-bold text-gray-200 mb-4 text-lg">Legal</h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-base">
               <li><Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link></li>
             </ul>
@@ -79,10 +79,10 @@ export default function Footer() {
         {/* Social Media and Copyright */}
         <div className="border-t border-gray-800 pt-8 mt-8 text-center text-sm">
           <div className="flex justify-center space-x-6 mb-4">
-            <a href="#" className="hover:text-white transition-colors"><i className="fab fa-facebook-f"></i>Facebook</a>
-            <a href="#" className="hover:text-white transition-colors"><i className="fab fa-twitter"></i>Twitter</a>
-            <a href="#" className="hover:text-white transition-colors"><i className="fab fa-linkedin-in"></i>LinkedIn</a>
-            <a href="#" className="hover:text-white transition-colors"><i className="fab fa-instagram"></i>Instagram</a>
+            <a href="#" className="hover:text-white transition-colors text-base"><i className="fab fa-facebook-f"></i>Facebook</a>
+            <a href="#" className="hover:text-white transition-colors text-base"><i className="fab fa-twitter"></i>Twitter</a>
+            <a href="#" className="hover:text-white transition-colors text-base"><i className="fab fa-linkedin-in"></i>LinkedIn</a>
+            <a href="#" className="hover:text-white transition-colors text-base"><i className="fab fa-instagram"></i>Instagram</a>
           </div>
           <p className="text-gray-500">&copy; {new Date().getFullYear()} SmashLabs. All rights reserved.</p>
         </div>
