@@ -36,7 +36,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
-      <body className="min-h-screen bg-white font-sans text-gray-900 antialiased">
+      <body className="min-h-screen bg-white font-sans text-gray-900 antialiased text-base leading-relaxed">
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className="flex-grow">
