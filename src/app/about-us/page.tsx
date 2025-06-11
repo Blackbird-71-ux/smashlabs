@@ -1,7 +1,7 @@
 export default function AboutUsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24 text-center flex items-center justify-center">
-      <div className="container mx-auto px-4 max-w-3xl py-8">
+      <div className="container mx-auto px-4 max-w-3xl py-16">
         <h1 className="text-4xl font-bold text-white mb-4">About Us</h1>
         <div className="w-24 h-1 bg-pink-600 mx-auto mb-8"></div> {/* Underline */}
         <p className="text-lg text-gray-300 mb-8 leading-relaxed">

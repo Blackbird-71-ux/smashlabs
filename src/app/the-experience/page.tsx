@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function TheExperiencePage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24">
-      <div className="container mx-auto px-4 text-center py-8">
+      <div className="container mx-auto px-4 text-center py-16">
         <h1 className="text-4xl font-bold text-white mb-12">The SmashLabs Experience</h1>
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
           {/* Image Column */}
@@ -23,8 +23,8 @@ export default function TheExperiencePage() {
               {/* What to Expect */}
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
                 <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
-                  {/* Placeholder Icon */}
-                  <span className="mr-3 text-3xl">&#128172;</span> 
+                  {/* Placeholder Icon - could be replaced with SVG/Image if provided */}
+                  <span className="mr-3 text-3xl">💡</span> 
                   What to Expect
                 </h3>
                 <p className="text-gray-300">
@@ -36,7 +36,7 @@ export default function TheExperiencePage() {
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
                 <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
                   {/* Placeholder Icon */}
-                  <span className="mr-3 text-3xl">&#9889;</span>
+                  <span className="mr-3 text-3xl">⚙️</span>
                   The Process
                 </h3>
                 <p className="text-gray-300">
@@ -48,7 +48,7 @@ export default function TheExperiencePage() {
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
                 <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
                   {/* Placeholder Icon */}
-                  <span className="mr-3 text-3xl">&#128101;</span>
+                  <span className="mr-3 text-3xl">🤝</span>
                   Team Building Elements
                 </h3>
                 <p className="text-gray-300">
@@ -60,7 +60,7 @@ export default function TheExperiencePage() {
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
                 <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
                   {/* Placeholder Icon */}
-                  <span className="mr-3 text-3xl">&#129504;</span>
+                  <span className="mr-3 text-3xl">🧘</span>
                   Therapeutic Benefits
                 </h3>
                 <p className="text-gray-300">

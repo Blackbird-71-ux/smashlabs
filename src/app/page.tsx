@@ -10,19 +10,19 @@ import StatsSection from '../components/StatsSection'
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white pt-24">
-      <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center text-center">
+      <div className="container mx-auto px-4 py-16 flex flex-col items-center justify-center text-center">
         {/* Hexagonal Logo/Icon */}
-        <div className="mb-8">
-          <Image src="/logo.png" alt="Smashlabs Hex Logo" width={100} height={100} />
+        <div className="mb-12">
+          <Image src="/logo.png" alt="Smashlabs Hex Logo" width={120} height={120} />
         </div>
 
         {/* Headline */}
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 text-pink-500 tracking-wide leading-tight">
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-8 text-pink-500 tracking-wide leading-tight">
           Transform Your Corporate Wellness
         </h1>
 
         {/* Video Player Placeholder */}
-        <div className="w-full max-w-4xl mb-12 rounded-lg overflow-hidden shadow-xl">
+        <div className="w-full max-w-4xl mb-16 rounded-lg overflow-hidden shadow-2xl">
           <video controls className="w-full h-auto">
             <source src="/smashlabs-room.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -30,13 +30,13 @@ export default function Home() {
         </div>
 
         {/* Descriptive Text */}
-        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl leading-relaxed">
+        <p className="text-lg md:text-xl text-gray-300 mb-16 max-w-3xl leading-relaxed">
           Step into a unique, aesthetic space where corporate visitors can smash, release, and rejuvenate.
           Transform your workplace stress into cathartic release.
         </p>
 
         {/* Call-to-Action Buttons */}
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-20">
           <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
             Explore Packages
           </button>
