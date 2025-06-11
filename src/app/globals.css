@@ -9,7 +9,7 @@
   }
 
   body {
-    @apply text-base leading-relaxed;
+    @apply leading-relaxed;
   }
 
   h1, h2, h3, h4, h5, h6 {

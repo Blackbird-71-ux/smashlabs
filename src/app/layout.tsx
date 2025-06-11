@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Montserrat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
@@ -21,8 +21,12 @@ export const metadata: Metadata = {
   description: 'SmashLabs offers unique corporate entertainment and team building experiences through rage rooms and interactive activities.',
   keywords: 'corporate entertainment, team building, rage room, corporate events, stress relief, team activities',
   authors: [{ name: 'SmashLabs' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
