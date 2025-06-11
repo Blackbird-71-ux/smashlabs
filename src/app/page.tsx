@@ -1,4 +1,11 @@
 import Image from 'next/image'
+import StatsSection from '../components/StatsSection'
+import WhySmashLabsSection from '../components/WhySmashLabsSection'
+import TheExperienceSection from '../components/TheExperienceSection'
+import CorporatePackagesSection from '../components/CorporatePackagesSection'
+import TestimonialsSection from '../components/TestimonialsSection'
+import CallToActionSection from '../components/CallToActionSection'
+import AboutUsSection from '../components/AboutUsSection'
 
 export default function Home() {
   return (
@@ -38,6 +45,16 @@ export default function Home() {
           </button>
         </div>
       </div>
+      
+      {/* New Sections */}
+      <StatsSection />
+      <WhySmashLabsSection />
+      <TheExperienceSection />
+      <CorporatePackagesSection />
+      <TestimonialsSection />
+      <CallToActionSection />
+      <AboutUsSection />
+
     </main>
   );
 } 
