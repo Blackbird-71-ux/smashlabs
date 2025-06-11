@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Background Video */}
         <div className="absolute inset-0 z-0">
           <video
@@ -30,20 +30,20 @@ export default function Home() {
         </div>
 
         {/* Content */}
-        <div className="container mx-auto px-4 z-10">
+        <div className="container mx-auto px-4 z-10 relative">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-8"
+              className="mb-6"
             >
               <Image
                 src="/logo.png"
                 alt="SmashLabs Logo"
-                width={120}
-                height={120}
-                className="mx-auto"
+                width={150}
+                height={150}
+                className="mx-auto drop-shadow-lg"
               />
             </motion.div>
 
@@ -51,7 +51,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text"
+              className="text-6xl md:text-8xl font-extrabold mb-8 leading-tight bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text drop-shadow-xl"
             >
               SMASHLABS™
             </motion.h1>
@@ -60,28 +60,28 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-300 mb-12"
+              className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
             >
-              Experience the future of stress relief and entertainment
+              Experience the future of stress relief and entertainment through immersive destruction and creative expression.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col md:flex-row gap-4 justify-center"
+              className="flex flex-col md:flex-row gap-6 justify-center"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-4 rounded-full text-lg font-semibold"
+                className="bg-gradient-to-r from-pink-600 to-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform"
               >
                 Book Your Session
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white bg-opacity-10 text-white px-8 py-4 rounded-full text-lg font-semibold backdrop-blur-sm"
+                className="bg-white bg-opacity-15 text-white px-10 py-4 rounded-full text-lg font-semibold backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 transform border border-gray-700"
               >
                 Learn More
               </motion.button>
