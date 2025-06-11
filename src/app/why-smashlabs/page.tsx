@@ -41,10 +41,10 @@ export default function WhySmashLabsPage() {
             whileHover={{ scale: 1.03 }}
             className="bg-gray-900 p-8 rounded-xl text-left border border-gray-700 shadow-xl flex flex-col items-start"
           >
-            <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-pink-500 to-red-500 text-transparent bg-clip-text">
+            <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-pink-500 to-red-500 text-transparent bg-clip-text">
               Effective Stress Release
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-300 text-base leading-relaxed">
               Release workplace tension through controlled, cathartic activities in a safe environment.
             </p>
           </motion.div>
@@ -54,10 +54,10 @@ export default function WhySmashLabsPage() {
             whileHover={{ scale: 1.03 }}
             className="bg-gray-900 p-8 rounded-xl text-left border border-gray-700 shadow-xl flex flex-col items-start"
           >
-            <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text">
+            <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-transparent bg-clip-text">
               Unique Team Building
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-300 text-base leading-relaxed">
               Strengthen team bonds, boost morale, and improve communication through shared, exhilarating experiences.
             </p>
           </motion.div>
@@ -67,10 +67,10 @@ export default function WhySmashLabsPage() {
             whileHover={{ scale: 1.03 }}
             className="bg-gray-900 p-8 rounded-xl text-left border border-gray-700 shadow-xl flex flex-col items-start"
           >
-            <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-purple-500 to-indigo-600 text-transparent bg-clip-text">
+            <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-purple-500 to-indigo-600 text-transparent bg-clip-text">
               Safe & Professional Environment
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-300 text-base leading-relaxed">
               Enjoy a secure and well-supervised experience with comprehensive safety protocols.
             </p>
           </motion.div>
@@ -80,10 +80,10 @@ export default function WhySmashLabsPage() {
             whileHover={{ scale: 1.03 }}
             className="bg-gray-900 p-8 rounded-xl text-left border border-gray-700 shadow-xl flex flex-col items-start"
           >
-            <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-cyan-500 text-transparent bg-clip-text">
+            <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-cyan-500 text-transparent bg-clip-text">
               Tailored Corporate Programs
             </h3>
-            <p className="text-gray-300">
+            <p className="text-gray-300 text-base leading-relaxed">
               Customized packages and events designed specifically for corporate clients and their unique needs.
             </p>
           </motion.div>
