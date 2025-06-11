@@ -40,8 +40,8 @@ export default function Home() {
             <Image
               src="/logo.png"
               alt="SmashLabs Logo"
-              width={120}
-              height={120}
+              width={150}
+              height={150}
               className="mx-auto drop-shadow-lg"
             />
           </motion.div>
@@ -50,7 +50,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-extrabold mb-8 leading-tight bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text drop-shadow-xl"
+            className="text-6xl md:text-8xl font-extrabold mb-8 leading-tight bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text drop-shadow-xl"
           >
             Transform Your Corporate Wellness
           </motion.h1>
@@ -59,7 +59,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full max-w-2xl mb-12 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-black bg-opacity-30 backdrop-blur-sm"
+            className="w-full max-w-4xl mb-12 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-black bg-opacity-30 backdrop-blur-sm"
           >
             <video
               controls 
