@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 // Cosmetic change to trigger Vercel rebuild if cache clear fails.
 
@@ -262,8 +261,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 } 
