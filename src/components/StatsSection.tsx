@@ -55,7 +55,7 @@ export default function StatsSection() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text"
+                className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text"
               >
                 {stat.number}
               </motion.div>
@@ -64,7 +64,7 @@ export default function StatsSection() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                className="text-gray-400"
+                className="text-gray-400 text-lg"
               >
                 {stat.label}
               </motion.p>
