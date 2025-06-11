@@ -58,10 +58,9 @@ export default function Home() {
             </h1>
             <div className="w-full max-w-4xl aspect-video mb-8">
               <video 
-                src="/smashlabs-video.mp4" 
+                src="/smashlabs-room.mp4" 
                 controls 
                 className="w-full h-full rounded-lg shadow-xl"
-                poster="/video-poster.jpg"
               />
             </div>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl">
