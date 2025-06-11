@@ -59,7 +59,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full max-w-md mb-12 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-black bg-opacity-30 backdrop-blur-sm"
+            className="w-full max-w-4xl mb-12 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 bg-black bg-opacity-30 backdrop-blur-sm"
           >
             <video
               controls 
@@ -89,16 +89,16 @@ export default function Home() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-pink-600 to-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform"
+              className="bg-gradient-to-r from-pink-600 to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg transform transition-all duration-300 hover:scale-105"
             >
-              Book Your Session
+              Explore Packages
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white bg-opacity-15 text-white px-10 py-4 rounded-full text-lg font-semibold backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 transform border border-gray-700"
+              className="bg-transparent border-2 border-pink-500 hover:border-pink-600 text-pink-500 hover:text-pink-600 font-bold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105"
             >
-              Learn More
+              Book a Demo
             </motion.button>
           </motion.div>
         </div>
