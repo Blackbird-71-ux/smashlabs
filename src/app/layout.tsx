@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-gradient-to-b from-white to-gray-50 min-h-screen`}>
+      <body className={`${inter.className} bg-white antialiased`}>
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow">

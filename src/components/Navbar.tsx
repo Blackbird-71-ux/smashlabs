@@ -20,10 +20,10 @@ export default function Navbar() {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-24">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -31,7 +31,7 @@ export default function Navbar() {
             className="flex items-center"
           >
             <Link href="/" className="flex items-center">
-              <Image src="/logo.png" alt="SmashLabs Logo" width={40} height={40} className="mr-2" />
+              <Image src="/logo.png" alt="SmashLabs Logo" width={45} height={45} className="mr-3" />
               <span className="text-2xl font-bold text-gray-900">SmashLabs</span>
             </Link>
           </motion.div>
@@ -40,7 +40,7 @@ export default function Navbar() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="hidden md:flex items-center space-x-8"
+            className="hidden md:flex items-center space-x-10"
           >
             {navLinks.map((link) => (
               <Link
@@ -55,7 +55,7 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2.5 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Book Now
               </motion.button>
@@ -80,9 +80,9 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden bg-white border-t border-gray-200"
+            className="md:hidden bg-white border-t border-gray-100"
           >
-            <div className="px-4 py-4 space-y-4">
+            <div className="px-6 py-4 space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -97,7 +97,7 @@ export default function Navbar() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2.5 rounded-full font-semibold text-base shadow-md hover:shadow-lg transition-all duration-300"
                 >
                   Book Now
                 </motion.button>
