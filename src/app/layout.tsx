@@ -1,5 +1,5 @@
 // This is a cosmetic change to trigger a new Vercel deployment
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from '@/components/Navbar'
@@ -8,6 +8,12 @@ import BackToTop from '@/components/BackToTop'
 import ErrorBoundary from '@/components/ErrorBoundary'
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://smashlabs.in'),
@@ -59,11 +65,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
   },
   icons: {
     icon: "/favicon.ico",
