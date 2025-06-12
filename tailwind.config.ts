@@ -61,10 +61,24 @@ const config: Config = {
           900: '#0f172a',
           950: '#020617',
         },
+        rage: {
+          50: '#fff1f2',
+          100: '#ffe4e6',
+          200: '#fecdd3',
+          300: '#fda4af',
+          400: '#fb7185',
+          500: '#f43f5e',
+          600: '#e11d48',
+          700: '#be123c',
+          800: '#9f1239',
+          900: '#881337',
+          950: '#4c0519',
+        },
       },
       fontFamily: {
         sans: ['var(--font-inter)'],
         display: ['var(--font-cabinet-grotesk)'],
+        mono: ['var(--font-jetbrains-mono)'],
       },
       spacing: {
         '128': '32rem',
@@ -84,6 +98,9 @@ const config: Config = {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'scale-in': 'scale-in 0.5s ease-out',
         'gradient-move': 'gradient-move 10s ease infinite alternate',
+        'float': 'float 6s ease-in-out infinite',
+        'glow': 'glow 2s ease-in-out infinite alternate',
+        'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
       },
       keyframes: {
         'fade-in': {
@@ -106,6 +123,20 @@ const config: Config = {
           '0%': { backgroundPosition: '0% 50%' },
           '100%': { backgroundPosition: '100% 50%' },
         },
+        'float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        'glow': {
+          '0%': { boxShadow: '0 0 5px rgba(244, 63, 94, 0.5), 0 0 10px rgba(244, 63, 94, 0.3)' },
+          '100%': { boxShadow: '0 0 20px rgba(244, 63, 94, 0.8), 0 0 30px rgba(244, 63, 94, 0.6)' },
+        },
+        'shake': {
+          '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+          '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+          '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+          '40%, 60%': { transform: 'translate3d(4px, 0, 0)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -113,19 +144,31 @@ const config: Config = {
         'hero-pattern': 'linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.6))',
         'rage-gradient': 'linear-gradient(135deg, #f43f5e 0%, #e11d48 50%, #be123c 100%)',
         'noise-pattern': 'url(\'/images/noise.png\')',
+        'smash-gradient': 'linear-gradient(135deg, #f43f5e 0%, #e11d48 50%, #be123c 100%)',
+        'glass-effect': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
       },
       transitionProperty: {
         'height': 'height',
         'spacing': 'margin, padding',
         'colors': 'background-color, border-color, color, fill, stroke',
+        'transform': 'transform',
+        'opacity': 'opacity',
+        'box-shadow': 'box-shadow',
       },
       transitionTimingFunction: {
         'ease-in-out-expo': 'cubic-bezier(0.87, 0, 0.13, 1)',
+        'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
       },
       transitionDuration: {
         '400': '400ms',
         '600': '600ms',
         '800': '800ms',
+        '1000': '1000ms',
+      },
+      boxShadow: {
+        'glow': '0 0 20px rgba(244, 63, 94, 0.5)',
+        'glow-lg': '0 0 30px rgba(244, 63, 94, 0.7)',
+        'inner-glow': 'inset 0 0 20px rgba(244, 63, 94, 0.3)',
       },
     },
   },

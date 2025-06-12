@@ -2,12 +2,22 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock } from 'react-icons/fa'
+import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock, FaTools, FaChevronDown, FaUserShield, FaUserTie, FaArrowUp, FaStar, FaQuoteLeft, FaInstagram, FaTwitter, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'
 import { useEffect, useState, useRef } from 'react'
 import { trackButtonClick, trackFormSubmit, trackVideoInteraction } from '@/lib/analytics'
 import { GridSkeleton, TextSkeleton, Skeleton } from '@/components/Skeleton'
 import { useCounter } from '@/hooks/useCounter'
 import Counter from '@/components/Counter'
+import CustomCursor from '@/components/CustomCursor'
+import SmashAnimation from '@/components/SmashAnimation'
+import { motion, useScroll, useTransform } from 'framer-motion'
+
+// Add tracking function
+const trackEvent = (eventName: string, properties?: Record<string, any>) => {
+  // You can implement your analytics tracking here
+  // For now, we'll just console.log for development
+  console.log('Event tracked:', eventName, properties)
+}
 
 export default function Home() {
   const { count: customers, isAnimating: customersAnimating } = useCounter(10000);
@@ -41,6 +51,13 @@ export default function Home() {
   const animationRef = useRef<number>();
 
   const [showStats, setShowStats] = useState(false);
+  const [showSmashAnimation, setShowSmashAnimation] = useState(false);
+  const [smashType, setSmashType] = useState<'glass' | 'wood' | 'metal'>('glass');
+
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -168,548 +185,916 @@ export default function Home() {
     setContactFormErrors(prev => ({ ...prev, [name]: '' }));
   };
 
+  const handleSmash = (type: 'glass' | 'wood' | 'metal') => {
+    setSmashType(type);
+    setShowSmashAnimation(true);
+    setTimeout(() => setShowSmashAnimation(false), 1000);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-dark-950">
-      {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+    <main className="min-h-screen bg-dark-950 text-white">
+      <CustomCursor />
+      <SmashAnimation isVisible={showSmashAnimation} type={smashType} />
+      
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-rage-500 origin-left z-50"
+        style={{ scaleX: scrollYProgress }}
+      />
+
+      {/* Hero Section with Parallax */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <motion.div 
+          className="absolute inset-0 w-full h-full"
+          style={{ y, scale }}
+        >
           <video
             autoPlay
-            loop
             muted
+            loop
             playsInline
-            className="w-full h-full object-cover"
-            poster="/smashlabs-experience-room.png"
-            aria-label="Background video showing SmashLabs experience"
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="/images/hero-poster.jpg"
             preload="auto"
-            onPlay={() => trackVideoInteraction('play', 'SmashLabs Room Video')}
-            onPause={() => trackVideoInteraction('pause', 'SmashLabs Room Video')}
-            onEnded={() => trackVideoInteraction('complete', 'SmashLabs Room Video')}
+            onPlay={() => trackVideoInteraction('play', 'hero-background')}
+            onPause={() => trackVideoInteraction('pause', 'hero-background')}
+            onEnded={() => trackVideoInteraction('complete', 'hero-background')}
           >
-            <source src="/smashlabs-room.mp4" type="video/mp4" />
-            <Image
-              src="/smashlabs-experience-room.png"
-              alt="SmashLabs Experience Room"
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+            <source src="/videos/smashlabs-bg.mp4.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-dark-950/80 to-dark-950/60" />
-          <div className="absolute inset-0 bg-noise-pattern opacity-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-900/70 to-dark-950/90"></div>
+        </motion.div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center relative z-10"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
+              Unleash Your Inner Beast
+            </h1>
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
+              Smash. Destroy. Conquer.
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Dive into the ultimate stress-relief experience. Break free from your worries and unleash your rage in a safe, exhilarating environment.
+            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('booknow')}
+                className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300"
+              >
+                Book Your Smash Session
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('experience')}
+                className="btn btn-outline text-lg px-8 py-4 rounded-full border-2 border-white text-white hover:bg-white/10 font-bold transition-all duration-300"
+              >
+                Learn More
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </div>
-        <div className="relative z-10 text-center px-4 py-16">
-          <h1 className="text-white mb-6 animate-fade-in animate-delay-100">
-            Unleash Your Inner Beast.
-            <span className="block text-primary-500 text-gradient">Smash. Destroy. Conquer.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto animate-slide-up animate-delay-200">
-            Dive into the ultimate stress-relief experience. Break free from your worries and unleash your rage in a safe, exhilarating environment.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale-in animate-delay-300">
-            <Link href="#booking" className="btn btn-primary group"
-              onClick={() => trackButtonClick('Book Your Session - Hero')}>
-              Book Your Session <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link href="#packages" className="btn btn-outline group"
-              onClick={() => trackButtonClick('View Packages - Hero')}>
-              View Packages <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-            </Link>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="text-white text-center"
+          >
+            <span className="block text-sm mb-2">Scroll to Explore</span>
+            <FaChevronDown className="w-6 h-6 mx-auto" />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Floating Action Button */}
+      <motion.button
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => scrollToSection('booknow')}
+        className="fixed bottom-8 right-8 z-50 bg-rage-500 text-white p-4 rounded-full shadow-lg hover:shadow-rage-500/50 transition-all duration-300"
+      >
+        <FaCalendarAlt className="w-6 h-6" />
+      </motion.button>
+
+      {/* Back to Top Button */}
+      <motion.button
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: scrollYProgress.get() > 0.2 ? 1 : 0, scale: scrollYProgress.get() > 0.2 ? 1 : 0 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-8 left-8 z-50 bg-dark-800 text-white p-4 rounded-full shadow-lg hover:shadow-dark-800/50 transition-all duration-300"
+      >
+        <FaArrowUp className="w-6 h-6" />
+      </motion.button>
+
+      {/* Enhanced Stats Section */}
+      <section id="stats" className="section bg-gradient-to-b from-dark-900 to-dark-950 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            {[
+              { value: customers.toLocaleString() + '+', label: 'Happy Customers', icon: FaUsers },
+              { value: satisfaction + '%', label: 'Satisfaction Rate', icon: FaStar },
+              { value: events.toLocaleString() + '+', label: 'Corporate Events', icon: FaCalendarAlt },
+              { value: '24/7', label: 'Adrenaline Rush', icon: FaClock }
+            ].map((stat, index) => (
+              <motion.div 
+                key={index}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="glass-card p-8 text-center rounded-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className="text-4xl md:text-5xl font-bold text-rage-500 mb-2"
+                >
+                  {stat.value}
+                </motion.div>
+                <p className="text-gray-300 text-lg">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Enhanced Why Choose SmashLabs Section */}
+      <section id="why-choose" className="py-24 bg-gradient-to-b from-dark-950 to-dark-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+              Why Choose SmashLabs?
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Experience the perfect blend of adrenaline, safety, and premium service.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: FaTools,
+                title: 'Premium Arsenal',
+                description: 'State-of-the-art equipment and tools for maximum destruction.'
+              },
+              {
+                icon: FaShieldAlt,
+                title: 'Controlled Chaos',
+                description: 'Expertly designed spaces for safe yet exhilarating experiences.'
+              },
+              {
+                icon: FaUserShield,
+                title: 'Full Protective Gear',
+                description: 'Top-quality safety equipment for worry-free smashing.'
+              },
+              {
+                icon: FaUserTie,
+                title: 'Expert Guidance',
+                description: 'Professional staff ensuring your experience is both safe and satisfying.'
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-rage-500/10 rounded-lg flex items-center justify-center mb-6">
+                  <feature.icon className="w-6 h-6 text-rage-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section id="stats" className="section bg-gradient-to-b from-dark-950 to-dark-900 border-b border-dark-800">
-        <div className="container">
-          {!showStats ? (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
-                <Skeleton className="w-32 h-6 mx-auto" />
-              </div>
-              <div className="text-center">
-                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
-                <Skeleton className="w-32 h-6 mx-auto" />
-              </div>
-              <div className="text-center">
-                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
-                <Skeleton className="w-32 h-6 mx-auto" />
-              </div>
-              <div className="text-center">
-                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
-                <Skeleton className="w-32 h-6 mx-auto" />
-              </div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <Counter end={10000} suffix="+" />
-                <p className="stat-label">Happy Customers</p>
-              </div>
-              <div className="text-center">
-                <Counter end={95} suffix="%" />
-                <p className="stat-label">Satisfaction Rate</p>
-              </div>
-              <div className="text-center">
-                <Counter end={500} suffix="+" />
-                <p className="stat-label">Events Hosted</p>
-              </div>
-              <div className="text-center">
-                <div className="stat-number">24/7</div>
-                <p className="stat-label">Adrenaline Rush</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="section bg-dark-900 border-b border-dark-800">
-        <div className="container">
-          <div className="section-title animate-slide-up">
-            <h2 className="text-white mb-4">Why Choose <span className="text-gradient">SmashLabs?</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">The ultimate destination for stress relief, team building, and unforgettable experiences.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            <div className="card group animate-scale-in animate-delay-100">
-              <div className="icon-feature"><FaHammer /></div>
-              <h3 className="text-white mb-2">Premium Arsenal</h3>
-              <p className="text-gray-400">Equip yourself with an array of heavy-duty tools designed for maximum destruction.</p>
-            </div>
-            <div className="card group animate-scale-in animate-delay-200">
-              <div className="icon-feature"><FaGlassMartiniAlt /></div>
-              <h3 className="text-white mb-2">Controlled Chaos</h3>
-              <p className="text-gray-400">Our state-of-the-art rooms are built for safety, ensuring an exhilarating yet secure smashing experience.</p>
-            </div>
-            <div className="card group animate-scale-in animate-delay-300">
-              <div className="icon-feature"><FaTshirt /></div>
-              <h3 className="text-white mb-2">Full Protective Gear</h3>
-              <p className="text-gray-400">We provide all necessary safety equipment, so you can focus on the smash.</p>
-            </div>
-            <div className="card group animate-scale-in animate-delay-400">
-              <div className="icon-feature"><FaShieldAlt /></div>
-              <h3 className="text-white mb-2">Expert Guidance</h3>
-              <p className="text-gray-400">Our trained staff ensures your experience is safe, fun, and truly cathartic.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section id="experience" className="section bg-gradient-to-b from-dark-900 to-dark-950 border-b border-dark-800">
-        <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-in">
-              <h2 className="text-white mb-6">The <span className="text-gradient">SmashLabs</span> Experience</h2>
-              <p className="text-gray-300 mb-6">
+      {/* The SmashLabs Experience Section */}
+      <section id="experience" className="py-24 bg-gradient-to-b from-dark-950 to-dark-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            {/* Text/Features Column */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex-1"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+                The SmashLabs Experience
+              </h2>
+              <p className="text-lg text-gray-300 mb-8 max-w-xl">
                 At SmashLabs, we don't just offer a service; we offer a transformation. Step into our world of controlled chaos, where every swing, every shatter, and every crash is a step towards liberation.
               </p>
-              <ul className="space-y-4">
-                <li className="flex items-center text-gray-300">
-                  <FaArrowRight className="text-primary-500 mr-3" />
-                  State-of-the-art smash rooms designed for exhilarating experiences.
+              <ul className="space-y-6 mb-10">
+                <li className="flex items-start gap-4">
+                  <FaTools className="w-7 h-7 text-rage-400 mt-1" />
+                  <div>
+                    <span className="font-semibold text-white">State-of-the-art Facilities</span>
+                    <p className="text-gray-400 text-sm">State-of-the-art smash rooms designed for exhilarating experiences.</p>
+                  </div>
                 </li>
-                <li className="flex items-center text-gray-300">
-                  <FaArrowRight className="text-primary-500 mr-3" />
-                  A diverse selection of items to smash, from electronics to glass.
+                <li className="flex items-start gap-4">
+                  <FaShieldAlt className="w-7 h-7 text-rage-400 mt-1" />
+                  <div>
+                    <span className="font-semibold text-white">Diverse Selection</span>
+                    <p className="text-gray-400 text-sm">A diverse selection of items to smash, from electronics to glass.</p>
+                  </div>
                 </li>
-                <li className="flex items-center text-gray-300">
-                  <FaArrowRight className="text-primary-500 mr-3" />
-                  Customizable packages for individuals, groups, and corporate events.
-                </li>
-                <li className="flex items-center text-gray-300">
-                  <FaArrowRight className="text-primary-500 mr-3" />
-                  Unmatched stress relief and a powerful sense of accomplishment.
+                <li className="flex items-start gap-4">
+                  <FaUserTie className="w-7 h-7 text-rage-400 mt-1" />
+                  <div>
+                    <span className="font-semibold text-white">Customizable Packages</span>
+                    <p className="text-gray-400 text-sm">Customizable packages for individuals, groups, and corporate events.</p>
+                  </div>
                 </li>
               </ul>
-            </div>
-            <div className="relative h-[450px] rounded-xl overflow-hidden shadow-custom animate-scale-in">
-              <Image
-                src="/smashlabs-experience-room.png"
-                alt="SmashLabs Experience"
-                fill
-                className="object-cover transition-transform duration-500 hover:scale-105"
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  trackEvent('experience_book_click');
+                  scrollToSection('booknow');
+                }}
+                className="px-8 py-4 bg-gradient-to-r from-rage-500 to-rage-600 text-white rounded-lg font-semibold hover:from-rage-600 hover:to-rage-700 transition-all duration-300 shadow-lg hover:shadow-rage-500/20"
+              >
+                Book Your Experience
+              </motion.button>
+            </motion.div>
+            {/* Image Column */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex-1"
+            >
+              <div className="relative aspect-video rounded-xl overflow-hidden group">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full h-full"
+                >
+                  <Image
+                    src="/smashlabs-experience-room.png"
+                    alt="SmashLabs Experience"
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent" />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Corporate Packages */}
-      <section id="packages" className="section bg-dark-950 border-b border-dark-800">
-        <div className="container">
-          <div className="section-title animate-slide-up">
-            <h2 className="text-white mb-4">Unleash Team Power with <span className="text-gradient">Corporate Smash</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Boost morale, reduce stress, and strengthen bonds with our unique team-building packages.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <div className="card animate-scale-in animate-delay-100 group transform hover:scale-105 transition-transform duration-300">
-              <h3 className="text-white mb-4 text-gradient">Team Cohesion</h3>
-              <p className="text-gray-400 mb-6">
-                Foster stronger teamwork and communication through a shared exhilarating experience.
+      {/* RedBull of India Section */}
+      <section id="lifestyle" className="section bg-gradient-to-b from-dark-900 to-dark-950 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
+              The Crackhead Version of RedBull
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Where stress relief meets pure adrenaline. SmashLabs is your ultimate destination for controlled chaos and therapeutic destruction.
+            </p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-12"
+            >
+              <button
+                onClick={() => scrollToSection('booknow')}
+                className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300 transform hover:scale-105"
+              >
+                Book Your Experience
+              </button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Packages Section */}
+      <section id="packages" className="section bg-gradient-to-b from-dark-950 to-dark-900 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
+              Corporate Packages
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="glass-card p-8 rounded-xl hover:shadow-2xl transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold mb-6 text-white">Unleash Team Power</h3>
+              <p className="text-gray-300 mb-8 leading-relaxed">
+                Boost morale, reduce stress, and strengthen bonds with our unique team-building packages.
               </p>
-              <Link href="#booking" className="btn btn-primary w-full group"
-                onClick={() => trackButtonClick('Book Now - Team Cohesion')}>
-                Book Now <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-            <div className="card animate-scale-in animate-delay-200 group transform hover:scale-105 transition-transform duration-300">
-              <h3 className="text-white mb-4 text-gradient">Stress Buster</h3>
-              <p className="text-gray-400 mb-6">
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center text-gray-300">
+                  <FaUsers className="w-5 h-5 text-rage-400 mr-3" />
+                  <span>Team Cohesion</span>
+                </div>
+                <p className="text-gray-400 text-sm">
+                  Foster stronger teamwork and communication through a shared exhilarating experience.
+                </p>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  trackButtonClick('book_now_package_1');
+                  scrollToSection('booknow');
+                }}
+                className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                Book Now
+              </motion.button>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="glass-card p-8 rounded-xl hover:shadow-2xl transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold mb-6 text-white">Stress Buster</h3>
+              <p className="text-gray-300 mb-8 leading-relaxed">
                 A unique way to de-stress and re-energize your team, leaving them refreshed and focused.
               </p>
-              <Link href="#booking" className="btn btn-primary w-full group"
-                onClick={() => trackButtonClick('Book Now - Stress Buster')}>
-                Book Now <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-            <div className="card animate-scale-in animate-delay-300 group transform hover:scale-105 transition-transform duration-300">
-              <h3 className="text-white mb-4 text-gradient">Unforgettable Fun</h3>
-              <p className="text-gray-400 mb-6">
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center text-gray-300">
+                  <FaGlassMartiniAlt className="w-5 h-5 text-rage-400 mr-3" />
+                  <span>Team Refresh</span>
+                </div>
+                <p className="text-gray-400 text-sm">
+                  Create lasting memories and stories with an activity unlike any other corporate outing.
+                </p>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  trackButtonClick('book_now_package_2');
+                  scrollToSection('booknow');
+                }}
+                className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                Book Now
+              </motion.button>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ y: -10, scale: 1.02 }}
+              className="glass-card p-8 rounded-xl hover:shadow-2xl transition-all duration-300"
+            >
+              <h3 className="text-2xl font-bold mb-6 text-white">Unforgettable Fun</h3>
+              <p className="text-gray-300 mb-8 leading-relaxed">
                 Create lasting memories and stories with an activity unlike any other corporate outing.
               </p>
-              <Link href="#booking" className="btn btn-primary w-full group"
-                onClick={() => trackButtonClick('Book Now - Unforgettable Fun')}>
-                Book Now <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="section bg-dark-900 border-b border-dark-800">
-        <div className="container">
-          <div className="section-title animate-slide-up">
-            <h2 className="text-white mb-4">Hear From Our <span className="text-gradient">Happy Smashers</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Don't just take our word for it. Our customers love the SmashLabs experience!</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 mt-12">
-            <div className="card animate-scale-in animate-delay-100 transform hover:scale-105 transition-transform duration-300">
-              <p className="text-lg text-gray-300 mb-4 leading-relaxed">
-                "SmashLabs was an incredible experience! So much fun and truly cathartic. I left feeling completely refreshed and stress-free. Highly recommend for anyone needing to let loose!"
-              </p>
-              <p className="font-semibold text-primary-400">- Jane Doe</p>
-              <p className="text-gray-500 text-sm">Individual Smashing Session</p>
-            </div>
-            <div className="card animate-scale-in animate-delay-200 transform hover:scale-105 transition-transform duration-300">
-              <p className="text-lg text-gray-300 mb-4 leading-relaxed">
-                "We brought our team here for a corporate event, and it was a huge hit! Everyone had a blast, and it was a fantastic way to bond and blow off some steam. We'll definitely be back."
-              </p>
-              <p className="font-semibold text-primary-400">- John Smith</p>
-              <p className="text-gray-500 text-sm">Corporate Team Building</p>
-            </div>
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center text-gray-300">
+                  <FaCalendarAlt className="w-5 h-5 text-rage-400 mr-3" />
+                  <span>Custom Events</span>
+                </div>
+                <p className="text-gray-400 text-sm">
+                  Tailored experiences for your team's specific needs and goals.
+                </p>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  trackButtonClick('book_now_package_3');
+                  scrollToSection('booknow');
+                }}
+                className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                Book Now
+              </motion.button>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Booking Section */}
-      <section id="booking" className="section bg-gradient-to-b from-dark-950 to-dark-900 border-b border-dark-800">
-        <div className="container">
-          <div className="section-title animate-slide-up">
-            <h2 className="text-white mb-4">Book Your <span className="text-gradient">Smash Session</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Reserve your spot for an unforgettable experience. Choose your package, date, and time.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-12 mt-12">
-            {/* Booking Form */}
-            <div className="card animate-scale-in">
-              <form onSubmit={handleBookingSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="label">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleBookingChange}
-                    required
-                    className={`input ${errors.name ? 'border-red-500' : ''}`}
-                    placeholder="Enter your full name"
-                    aria-required="true"
-                    aria-invalid={!!errors.name}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
-                  />
-                  {errors.name && <p id="name-error" className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                </div>
-                <div>
-                  <label htmlFor="email" className="label">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleBookingChange}
-                    required
-                    className={`input ${errors.email ? 'border-red-500' : ''}`}
-                    placeholder="your@example.com"
-                    aria-required="true"
-                    aria-invalid={!!errors.email}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
-                  />
-                  {errors.email && <p id="email-error" className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                </div>
-                <div>
-                  <label htmlFor="phone" className="label">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleBookingChange}
-                    required
-                    className={`input ${errors.phone ? 'border-red-500' : ''}`}
-                    placeholder="e.g., +1234567890"
-                    aria-required="true"
-                    aria-invalid={!!errors.phone}
-                    aria-describedby={errors.phone ? 'phone-error' : undefined}
-                  />
-                  {errors.phone && <p id="phone-error" className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-                </div>
+      <section id="booknow" className="section bg-gradient-to-b from-dark-950 to-dark-900 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+              Book Your Smash Session
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Ready to unleash your inner beast? Book your session now and prepare for an unforgettable experience.
+            </p>
+          </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="date" className="label">Preferred Date</label>
-                    <input
-                      type="date"
-                      id="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleBookingChange}
-                      required
-                      className={`input ${errors.date ? 'border-red-500' : ''}`}
-                      min={new Date().toISOString().split('T')[0]}
-                      aria-required="true"
-                      aria-invalid={!!errors.date}
-                      aria-describedby={errors.date ? 'date-error' : undefined}
-                    />
-                    {errors.date && <p id="date-error" className="text-red-500 text-sm mt-1">{errors.date}</p>}
-                  </div>
-                  <div>
-                    <label htmlFor="time" className="label">Preferred Time</label>
-                    <input
-                      type="time"
-                      id="time"
-                      name="time"
-                      value={formData.time}
-                      onChange={handleBookingChange}
-                      required
-                      className={`input ${errors.time ? 'border-red-500' : ''}`}
-                      aria-required="true"
-                      aria-invalid={!!errors.time}
-                      aria-describedby={errors.time ? 'time-error' : undefined}
-                    />
-                    {errors.time && <p id="time-error" className="text-red-500 text-sm mt-1">{errors.time}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="guests" className="label">Number of Guests</label>
-                  <select
-                    id="guests"
-                    name="guests"
-                    value={formData.guests}
-                    onChange={handleBookingChange}
-                    required
-                    className={`input ${errors.guests ? 'border-red-500' : ''}`}
-                    aria-required="true"
-                    aria-invalid={!!errors.guests}
-                    aria-describedby={errors.guests ? 'guests-error' : undefined}
-                  >
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
-                      <option key={num} value={num}>{num}</option>
-                    ))}
-                  </select>
-                  {errors.guests && <p id="guests-error" className="text-red-500 text-sm mt-1">{errors.guests}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="package" className="label">Select Package</label>
-                  <select
-                    id="package"
-                    name="package"
-                    value={formData.package}
-                    onChange={handleBookingChange}
-                    required
-                    className={`input ${errors.package ? 'border-red-500' : ''}`}
-                    aria-required="true"
-                    aria-invalid={!!errors.package}
-                    aria-describedby={errors.package ? 'package-error' : undefined}
-                  >
-                    <option value="standard">Standard Smash (1 Room, 30 Mins)</option>
-                    <option value="premium">Premium Smash (2 Rooms, 60 Mins)</option>
-                    <option value="ultimate">Ultimate Smash (3 Rooms, 90 Mins)</option>
-                    <option value="corporate">Corporate Event (Custom)</option>
-                  </select>
-                  {errors.package && <p id="package-error" className="text-red-500 text-sm mt-1">{errors.package}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="label">Additional Notes (Optional)</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleBookingChange}
-                    className="input"
-                    placeholder="Any specific requests or details?"
-                    aria-label="Additional Notes"
-                  ></textarea>
-                </div>
-
-                <button type="submit" className="btn btn-primary w-full group">
-                  Submit Booking <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-                </button>
-              </form>
+          <form onSubmit={handleBookingSubmit} className="max-w-3xl mx-auto space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <label htmlFor="name" className="label text-lg mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleBookingChange}
+                  className="input text-lg py-4"
+                  placeholder="Your name"
+                />
+                {errors.name && (
+                  <p className="mt-2 text-rage-500 text-sm">{errors.name}</p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="email" className="label text-lg mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleBookingChange}
+                  className="input text-lg py-4"
+                  placeholder="your@email.com"
+                />
+                {errors.email && (
+                  <p className="mt-2 text-rage-500 text-sm">{errors.email}</p>
+                )}
+              </div>
             </div>
-
-            {/* Booking Info Cards */}
-            <div className="space-y-8">
-              <div className="card animate-scale-in animate-delay-100 transform hover:scale-105 transition-transform duration-300">
-                <div className="flex items-center text-primary-500 mb-3">
-                  <FaCalendarAlt size={24} className="mr-3" />
-                  <h3 className="text-white text-xl font-semibold">Availability</h3>
-                </div>
-                <p className="text-gray-400 mb-4">Our smash rooms are available 7 days a week, from 10 AM to 10 PM. Please select your preferred date and time on the form.</p>
-                <Link href="#contact" className="text-primary-400 hover:underline"
-                  onClick={() => trackButtonClick('Contact us for special requests - Booking Info')}>
-                  Contact us for special requests &gt;
-                </Link>
+            <div>
+              <label htmlFor="phone" className="label text-lg mb-2">Phone</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleBookingChange}
+                className="input text-lg py-4"
+                placeholder="Your phone number"
+              />
+              {errors.phone && (
+                <p className="mt-2 text-rage-500 text-sm">{errors.phone}</p>
+              )}
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <label htmlFor="date" className="label text-lg mb-2">Date</label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleBookingChange}
+                  className="input text-lg py-4"
+                  min={new Date().toISOString().split('T')[0]}
+                />
+                {errors.date && (
+                  <p className="mt-2 text-rage-500 text-sm">{errors.date}</p>
+                )}
               </div>
-
-              <div className="card animate-scale-in animate-delay-200 transform hover:scale-105 transition-transform duration-300">
-                <div className="flex items-center text-primary-500 mb-3">
-                  <FaUsers size={24} className="mr-3" />
-                  <h3 className="text-white text-xl font-semibold">Group Bookings</h3>
-                </div>
-                <p className="text-gray-400 mb-4">Planning a group event? We offer custom packages for birthdays, team-building, and corporate outings. Get ready for an epic group smash!</p>
-                <Link href="#packages" className="text-primary-400 hover:underline"
-                  onClick={() => trackButtonClick('View Corporate Packages - Booking Info')}>
-                  View Corporate Packages &gt;
-                </Link>
+              <div>
+                <label htmlFor="time" className="label text-lg mb-2">Time</label>
+                <input
+                  type="time"
+                  id="time"
+                  name="time"
+                  value={formData.time}
+                  onChange={handleBookingChange}
+                  className="input text-lg py-4"
+                />
+                {errors.time && (
+                  <p className="mt-2 text-rage-500 text-sm">{errors.time}</p>
+                )}
               </div>
-
-              <div className="card animate-scale-in animate-delay-300 transform hover:scale-105 transition-transform duration-300">
-                <div className="flex items-center text-primary-500 mb-3">
-                  <FaClock size={24} className="mr-3" />
-                  <h3 className="text-white text-xl font-semibold">Session Duration</h3>
-                </div>
-                <p className="text-gray-400 mb-4">Standard sessions are 30 minutes, with options to extend up to 90 minutes for ultimate destruction. Arrive 15 minutes early for safety briefing.</p>
-                <Link href="#packages" className="text-primary-400 hover:underline"
-                  onClick={() => trackButtonClick('Explore Packages - Booking Info')}>
-                  Explore Packages &gt;
-                </Link>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <label htmlFor="guests" className="label text-lg mb-2">Number of Guests</label>
+                <input
+                  type="number"
+                  id="guests"
+                  name="guests"
+                  value={formData.guests}
+                  onChange={handleBookingChange}
+                  className="input text-lg py-4"
+                  min="1"
+                  max="20"
+                />
+                {errors.guests && (
+                  <p className="mt-2 text-rage-500 text-sm">{errors.guests}</p>
+                )}
               </div>
+              <div>
+                <label htmlFor="package" className="label text-lg mb-2">Package</label>
+                <select
+                  id="package"
+                  name="package"
+                  value={formData.package}
+                  onChange={handleBookingChange}
+                  className="input text-lg py-4"
+                >
+                  <option value="basic">Basic Smash</option>
+                  <option value="group">Group Smash</option>
+                  <option value="corporate">Corporate Experience</option>
+                </select>
+                {errors.package && (
+                  <p className="mt-2 text-rage-500 text-sm">{errors.package}</p>
+                )}
+              </div>
+            </div>
+            <div>
+              <label htmlFor="message" className="label text-lg mb-2">Additional Notes</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleBookingChange}
+                className="input text-lg h-40 py-4"
+                placeholder="Tell us anything else we should know..."
+              />
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              className="btn btn-primary w-full text-lg py-5 shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Book Now
+            </motion.button>
+          </form>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-24 bg-gradient-to-b from-dark-900 to-dark-950 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+              What Our Customers Say
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Don't just take our word for it. Here's what our satisfied customers have to say about their SmashLabs experience.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((_, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar key={i} className="w-5 h-5 text-rage-400" />
+                  ))}
+                </div>
+                <FaQuoteLeft className="w-8 h-8 text-rage-400/50 mb-4" />
+                <p className="text-gray-300 mb-6">
+                  "The most exhilarating experience I've ever had! The staff was professional, the facilities were top-notch, and the catharsis was real."
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-rage-500/20 flex items-center justify-center">
+                    <span className="text-rage-400 font-bold">JD</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white">John Doe</h4>
+                    <p className="text-sm text-gray-400">Corporate Event</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Social Media Section */}
+      <section className="py-16 bg-dark-950 relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center gap-8">
+            <h3 className="text-2xl font-bold text-white">Follow Us on Social Media</h3>
+            <div className="flex gap-6">
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                href="#"
+                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-rage-500 transition-colors"
+              >
+                <FaInstagram className="w-6 h-6" />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                href="#"
+                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-rage-500 transition-colors"
+              >
+                <FaTwitter className="w-6 h-6" />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                href="#"
+                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-rage-500 transition-colors"
+              >
+                <FaFacebook className="w-6 h-6" />
+              </motion.a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="section bg-dark-900">
-        <div className="container">
-          <div className="section-title animate-slide-up">
-            <h2 className="text-white mb-4">Get in <span className="text-gradient">Touch</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Have questions or need assistance? Reach out to us!</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-12 mt-12">
-            <div className="card animate-scale-in animate-delay-100">
-              <h3 className="text-white mb-4 text-gradient">Contact Information</h3>
-              <p className="text-gray-300 mb-2"><strong className="text-primary-400">Address:</strong> 123 Smash Street, Rage City, SM 98765</p>
-              <p className="text-gray-300 mb-2"><strong className="text-primary-400">Phone:</strong> +1 (555) 123-4567</p>
-              <p className="text-gray-300 mb-4"><strong className="text-primary-400">Email:</strong> info@smashlabs.com</p>
-              
-              <h3 className="text-white mb-4 text-gradient">Follow Us</h3>
-              <div className="flex space-x-4 text-2xl">
-                <a href="https://www.facebook.com/SmashLabsOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-500 transition-colors" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/smashlabs_official" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-500 transition-colors" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/smashlabs_hq" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-500 transition-colors" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
-                <a href="https://www.youtube.com/user/smashlabs-official" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-500 transition-colors" aria-label="YouTube"><i className="fab fa-youtube"></i></a>
-                <a href="https://www.linkedin.com/company/smashlabs-inc" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-500 transition-colors" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
+      <section id="contact" className="section bg-gradient-to-b from-dark-950 to-dark-900 py-24 relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
+              Get in Touch
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Have questions? Want to book a custom event? We're here to help!
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="space-y-8"
+            >
+              <div>
+                <h3 className="text-2xl font-bold mb-4 text-white">Contact Information</h3>
+                <div className="space-y-4">
+                  <p className="flex items-center text-gray-300">
+                    <FaMapMarkerAlt className="w-5 h-5 text-rage-400 mr-3" />
+                    <span>123 Smash Street, City, Country</span>
+                  </p>
+                  <p className="flex items-center text-gray-300">
+                    <FaPhone className="w-5 h-5 text-rage-400 mr-3" />
+                    <span>+1 234 567 890</span>
+                  </p>
+                  <p className="flex items-center text-gray-300">
+                    <FaEnvelope className="w-5 h-5 text-rage-400 mr-3" />
+                    <span>info@smashlabs.com</span>
+                  </p>
+                </div>
               </div>
-            </div>
-            
-            <div className="card animate-scale-in animate-delay-200">
-              <h3 className="text-white mb-4 text-gradient">Send Us a Message</h3>
-              <form onSubmit={handleContactSubmit} className="space-y-4">
+
+              <div>
+                <h3 className="text-2xl font-bold mb-4 text-white">Business Hours</h3>
+                <div className="space-y-2 text-gray-300">
+                  <p>Monday - Friday: 10:00 AM - 10:00 PM</p>
+                  <p>Saturday - Sunday: 9:00 AM - 11:00 PM</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <form className="space-y-6">
                 <div>
-                  <label htmlFor="contact-name" className="label">Your Name</label>
-                  {contactFormLoading ? (
-                    <TextSkeleton />
-                  ) : (
-                    <input
-                      type="text"
-                      id="contact-name"
-                      name="name"
-                      value={contactFormData.name}
-                      onChange={handleContactChange}
-                      required
-                      className={`input ${contactFormErrors.name ? 'border-red-500' : ''}`}
-                      placeholder="Your Name"
-                      aria-required="true"
-                      aria-invalid={!!contactFormErrors.name}
-                      aria-describedby={contactFormErrors.name ? 'contact-name-error' : undefined}
-                    />
-                  )}
-                  {contactFormErrors.name && <p id="contact-name-error" className="text-red-500 text-sm mt-1">{contactFormErrors.name}</p>}
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="w-full px-4 py-3 bg-dark-800/50 border border-dark-700/50 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent"
+                    placeholder="Your name"
+                  />
                 </div>
                 <div>
-                  <label htmlFor="contact-email" className="label">Your Email</label>
-                  {contactFormLoading ? (
-                    <TextSkeleton />
-                  ) : (
-                    <input
-                      type="email"
-                      id="contact-email"
-                      name="email"
-                      value={contactFormData.email}
-                      onChange={handleContactChange}
-                      required
-                      className={`input ${contactFormErrors.email ? 'border-red-500' : ''}`}
-                      placeholder="your@example.com"
-                      aria-required="true"
-                      aria-invalid={!!contactFormErrors.email}
-                      aria-describedby={contactFormErrors.email ? 'contact-email-error' : undefined}
-                    />
-                  )}
-                  {contactFormErrors.email && <p id="contact-email-error" className="text-red-500 text-sm mt-1">{contactFormErrors.email}</p>}
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="w-full px-4 py-3 bg-dark-800/50 border border-dark-700/50 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent"
+                    placeholder="Your email"
+                  />
                 </div>
                 <div>
-                  <label htmlFor="contact-message" className="label">Message</label>
-                  {contactFormLoading ? (
-                    <TextSkeleton className="h-20" />
-                  ) : (
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      rows={5}
-                      value={contactFormData.message}
-                      onChange={handleContactChange}
-                      required
-                      className={`input ${contactFormErrors.message ? 'border-red-500' : ''}`}
-                      placeholder="Your message"
-                      aria-required="true"
-                      aria-invalid={!!contactFormErrors.message}
-                      aria-describedby={contactFormErrors.message ? 'contact-message-error' : undefined}
-                    ></textarea>
-                  )}
-                  {contactFormErrors.message && <p id="contact-message-error" className="text-red-500 text-sm mt-1">{contactFormErrors.message}</p>}
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="w-full px-4 py-3 bg-dark-800/50 border border-dark-700/50 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent"
+                    placeholder="Your message"
+                  />
                 </div>
-                <button type="submit" className="btn btn-primary w-full group" disabled={contactFormLoading}>
-                  {contactFormLoading ? 'Sending...' : 'Send Message'} <FaArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-                </button>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+                >
+                  Send Message
+                </motion.button>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
+      {/* Enhanced Gallery Section */}
+      <section id="gallery" className="py-24 bg-gradient-to-b from-dark-900 to-dark-950 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+              SmashLabs Gallery
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Take a look at our state-of-the-art facilities and the exhilarating experiences we offer.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((_, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="relative aspect-square rounded-xl overflow-hidden group"
+              >
+                <Image
+                  src={`/images/gallery-${index + 1}.jpg`}
+                  alt={`SmashLabs Gallery Image ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white font-semibold">SmashLabs Experience</h3>
+                    <p className="text-gray-300 text-sm">View Details</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced FAQ Section */}
+      <section id="faq" className="py-24 bg-gradient-to-b from-dark-950 to-dark-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Everything you need to know about your SmashLabs experience.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {[
+              {
+                question: 'What safety measures are in place?',
+                answer: 'We provide full protective gear and have trained staff supervising all sessions. Our rooms are specially designed for safe destruction.'
+              },
+              {
+                question: 'What items can I smash?',
+                answer: 'We offer a variety of items including electronics, glass, and furniture. All items are pre-approved for safe destruction.'
+              },
+              {
+                question: 'How long is each session?',
+                answer: 'Standard sessions are 30 minutes, with options for extended sessions. Corporate events can be customized to your needs.'
+              },
+              {
+                question: 'Do I need to bring anything?',
+                answer: 'Just yourself and comfortable clothes. We provide all necessary safety equipment and tools.'
+              }
+            ].map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-dark-800/50 p-6 rounded-xl backdrop-blur-sm border border-dark-700/50"
+              >
+                <h3 className="text-xl font-semibold text-white mb-3">{faq.question}</h3>
+                <p className="text-gray-300">{faq.answer}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
-  )
+  );
 } 

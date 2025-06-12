@@ -1,142 +1,134 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Image from 'next/image';
+import { FaHammer, FaMusic, FaGlassMartiniAlt, FaUsers } from 'react-icons/fa';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
+const packages = [
+  {
+    id: 'solo',
+    name: 'Solo Smash',
+    price: '₹1,999',
+    duration: '30 minutes',
+    description: 'Perfect for individual stress relief',
+    features: [
+      'One smash room (30 mins)',
+      'Sledgehammer & baseball bat',
+      'Choice of music or rock playlist',
+      'Chill zone with healthy juice',
+      'Perfect for stressed professionals',
+    ],
+    icon: FaHammer,
   },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
+  {
+    id: 'group',
+    name: 'Group Smash',
+    price: '₹3,999',
+    duration: '60 minutes',
+    description: 'Great for friends and small groups',
+    features: [
+      'Two smash rooms (60 mins)',
+      'Multiple sledgehammers & bats',
+      'Custom playlist or rock music',
+      'Extended chill zone time',
+      'Healthy juices & snacks for group',
+      'Perfect for friend groups',
+    ],
+    icon: FaUsers,
+  },
+  {
+    id: 'corporate',
+    name: 'Corporate Experience',
+    price: 'Contact Us',
+    duration: 'Custom',
+    description: 'Team building and stress relief for companies',
+    features: [
+      'Multiple smash rooms (custom duration)',
+      'Professional sledgehammers & equipment',
+      'Custom corporate playlists',
+      'Private chill zone with healthy menu',
+      'Stress relief program for teams',
+      'Perfect for burnt-out professionals',
+      'Team bonding through catharsis',
+    ],
+    icon: FaGlassMartiniAlt,
+  },
+];
 
 export default function PackagesPage() {
+  const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
+
   return (
-    <main className="min-h-screen bg-black text-white pt-24">
-      <motion.div
-        className="container mx-auto px-4 py-16 text-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.h1
-          variants={cardVariants}
-          className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-red-500 to-yellow-500 text-transparent bg-clip-text drop-shadow-lg"
-        >
-          Our Corporate Packages
-        </motion.h1>
-        <motion.p
-          variants={cardVariants}
-          className="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed"
-        >
-          Choose from our tailored packages designed to meet the unique needs of your team, ensuring maximum stress relief and team cohesion.
-        </motion.p>
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Package 1: Team Express */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.03 }}
-            className="bg-gray-900 p-8 rounded-xl shadow-xl border border-gray-800 flex flex-col justify-between items-center text-center transition-colors duration-300"
-          >
-            <div>
-              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">
-                Team Express
-              </h3>
-              <p className="text-gray-400 mb-6 text-lg">
-                Ideal for quick team rejuvenation
-              </p>
-              <ul className="list-none space-y-3 text-gray-300 text-left mb-8 text-base">
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> 2-hour stress relief session</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Up to 10 team members</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Basic safety equipment</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Refreshments included</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Basic wellness consultation</li>
-              </ul>
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-pink-600 to-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform"
-            >
-              Request Quote
-            </motion.button>
-          </motion.div>
+    <main className="min-h-screen bg-dark-950 py-20">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16 animate-fade-in">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Choose Your Cathartic Experience</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Perfect for stressed professionals - from solo sledgehammer sessions to corporate team stress relief with our chill zone experience.
+          </p>
+        </div>
 
-          {/* Package 2: Corporate Catalyst */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.03 }}
-            className="bg-gray-900 p-8 rounded-xl shadow-xl border border-gray-800 flex flex-col justify-between items-center text-center transition-colors duration-300 relative overflow-hidden group"
-          >
-            <span className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">Popular</span>
-            <div>
-              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
-                Corporate Catalyst
-              </h3>
-              <p className="text-gray-400 mb-6 text-lg">Comprehensive solution for growing teams</p>
-              <ul className="list-none space-y-3 text-gray-300 text-left mb-8 text-base">
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> 4-hour premium experience</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Up to 25 team members</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Premium safety equipment</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Gourmet refreshments</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Wellness workshop included</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Personalized team feedback</li>
-              </ul>
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-blue-600 to-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform"
+        <div className="grid md:grid-cols-3 gap-8">
+          {packages.map((pkg, index) => (
+            <div
+              key={pkg.id}
+              className={`bg-dark-800 rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 ${
+                selectedPackage === pkg.id ? 'ring-2 ring-red-500' : ''
+              }`}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              Request Quote
-            </motion.button>
-          </motion.div>
+              <div className="p-6">
+                <div className="flex items-center justify-center w-16 h-16 bg-red-500 rounded-full mx-auto mb-6">
+                  <pkg.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-center mb-2">{pkg.name}</h3>
+                <p className="text-gray-400 text-center mb-4">{pkg.description}</p>
+                <div className="text-3xl font-bold text-center mb-6">{pkg.price}</div>
+                <div className="text-gray-400 text-center mb-6">{pkg.duration}</div>
+                <ul className="space-y-3 mb-8">
+                  {pkg.features.map((feature, i) => (
+                    <li key={i} className="flex items-center">
+                      <span className="text-red-500 mr-2">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => setSelectedPackage(pkg.id)}
+                  className="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
 
-          {/* Package 3: Executive Edge */}
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.03 }}
-            className="bg-gray-900 p-8 rounded-xl shadow-xl border border-gray-800 flex flex-col justify-between items-center text-center transition-colors duration-300"
-          >
-            <div>
-              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-transparent bg-clip-text">
-                Executive Edge
-              </h3>
-              <p className="text-gray-400 mb-6 text-lg">Ultimate experience for leadership teams</p>
-              <ul className="list-none space-y-3 text-gray-300 text-left mb-8 text-base">
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Full-day premium experience</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Up to 50 team members</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Advanced safety equipment</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Executive catering</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Bespoke wellness program</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Strategic team building</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Leadership coaching session</li>
-                <li className="flex items-center"><span className="text-green-400 mr-2">✔</span> Dedicated event coordinator</li>
-              </ul>
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform"
-            >
-              Request Quote
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+        <div className="mt-16 text-center animate-fade-in-delayed">
+          <h2 className="text-2xl font-bold mb-4">Need a Custom Package?</h2>
+          <p className="text-gray-300 mb-6">
+            Contact us to create a tailored experience for your specific needs.
+          </p>
+          <button className="px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors">
+            Contact Us
+          </button>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 0.5s ease-out;
+        }
+        
+        .animate-fade-in-delayed {
+          animation: fadeIn 0.5s ease-out 0.5s both;
+        }
+      `}</style>
     </main>
   );
 } 
