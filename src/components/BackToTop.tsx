@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react'
+import { FaArrowUp } from 'react-icons/fa'
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false)
@@ -28,22 +29,12 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 p-3 rounded-full bg-primary-600 text-white shadow-lg transition-all duration-300 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+      className={`fixed bottom-8 right-8 p-3 rounded-full bg-primary-500 text-white shadow-xl transition-all duration-300 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-dark-900 transform hover:scale-110 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
       }`}
       aria-label="Back to top"
     >
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path d="M5 10l7-7m0 0l7 7m-7-7v18" />
-      </svg>
+      <FaArrowUp size={24} />
     </button>
   )
 } 

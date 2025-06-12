@@ -8,22 +8,22 @@ export default function Footer() {
 
   const footerLinks = {
     company: [
-      { label: 'About Us', href: '#about' },
-      { label: 'Services', href: '#services' },
-      { label: 'Packages', href: '#packages' },
-      { label: 'Testimonials', href: '#testimonials' },
+      { label: 'About SmashLabs', href: '#about' },
+      { label: 'Our Approach', href: '#approach' },
+      { label: 'Smash Packages', href: '#packages' },
+      { label: 'Customer Stories', href: '#testimonials' },
     ],
     support: [
-      { label: 'Contact', href: '#contact' },
-      { label: 'FAQ', href: '#faq' },
+      { label: 'Contact Us', href: '#contact' },
+      { label: 'FAQs', href: '#faq' },
       { label: 'Privacy Policy', href: '/privacy' },
       { label: 'Terms of Service', href: '/terms' },
     ],
     social: [
-      { label: 'Facebook', href: 'https://facebook.com/smashlabs', icon: 'facebook' },
-      { label: 'Instagram', href: 'https://instagram.com/smashlabs', icon: 'instagram' },
-      { label: 'Twitter', href: 'https://twitter.com/smashlabs', icon: 'twitter' },
-      { label: 'LinkedIn', href: 'https://linkedin.com/company/smashlabs', icon: 'linkedin' },
+      { label: 'Facebook', href: 'https://facebook.com/smashlabs.official', icon: 'facebook' },
+      { label: 'Instagram', href: 'https://instagram.com/smashlabs.official', icon: 'instagram' },
+      { label: 'Twitter', href: 'https://twitter.com/smashlabs_hq', icon: 'twitter' },
+      { label: 'LinkedIn', href: 'https://linkedin.com/company/smashlabs_inc', icon: 'linkedin' },
     ],
   };
 
@@ -51,23 +51,24 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-dark-950 text-gray-400 py-12 md:py-16 border-t border-dark-800">
+      <div className="container">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-3 group" aria-label="SmashLabs Home" rel="noopener noreferrer">
               <Image
                 src="/logo.png"
                 alt="SmashLabs Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10"
+                width={48}
+                height={48}
+                className="transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
               />
-              <span className="text-xl font-bold">SmashLabs</span>
+              <span className="text-3xl font-extrabold tracking-tight text-primary-500 group-hover:text-primary-400 transition-colors">SMASHLABS</span>
             </Link>
-            <p className="text-gray-400">
-              Experience the ultimate stress relief and team building activity at SmashLabs.
+            <p className="text-gray-400 leading-relaxed">
+              Experience the ultimate stress relief and team building activity at SmashLabs. Unleash your inner beast!
             </p>
             <div className="flex space-x-4">
               {footerLinks.social.map((link) => (
@@ -76,7 +77,7 @@ export default function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-primary-400 transition-colors transform hover:scale-110"
                   aria-label={link.label}
                 >
                   {socialIcons[link.icon as keyof typeof socialIcons]}
@@ -87,13 +88,13 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Company</h3>
-            <ul className="space-y-2">
+            <h3 className="text-xl font-semibold text-white mb-4">Company</h3>
+            <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-primary-400 transition-colors hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -104,13 +105,13 @@ export default function Footer() {
 
           {/* Support Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Support</h3>
-            <ul className="space-y-2">
+            <h3 className="text-xl font-semibold text-white mb-4">Support</h3>
+            <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-primary-400 transition-colors hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -121,19 +122,20 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li>123 Smash Street</li>
-              <li>City, State 12345</li>
-              <li>Phone: (123) 456-7890</li>
-              <li>Email: info@smashlabs.com</li>
-            </ul>
+            <h3 className="text-xl font-semibold text-white mb-4">Contact</h3>
+            <address className="not-italic space-y-3 text-gray-400">
+              <p>123 Catharsis Lane</p>
+              <p>Rage City, CA 90210, USA</p>
+              <p>Phone: <a href="tel:+1800SMASHNOW" className="hover:text-primary-400 transition-colors">+1 (800) SMASH-NOW</a></p>
+              <p>Email: <a href="mailto:info@smashlabs.com" className="hover:text-primary-400 transition-colors">info@smashlabs.com</a></p>
+            </address>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} SmashLabs. All rights reserved.</p>
+        <div className="border-t border-dark-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+          <p>&copy; {currentYear} SmashLabs Inc. All rights reserved.</p>
+          <p className="mt-2">Built with passion and a lot of smashing.</p>
         </div>
       </div>
     </footer>
