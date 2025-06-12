@@ -313,59 +313,42 @@ export default function Home() {
         <FaArrowUp className="w-6 h-6" />
       </motion.button>
 
-      {/* Stats Section */}
-      <section id="stats" className="py-16 sm:py-24 bg-dark-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                {customers.toLocaleString()}+
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Happy Customers</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                {satisfaction}%
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Satisfaction Rate</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                {events.toLocaleString()}+
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Corporate Events</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                24/7
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Adrenaline Rush</div>
-            </motion.div>
-          </div>
+      {/* Enhanced Stats Section */}
+      <section id="stats" className="section bg-gradient-to-b from-dark-900 to-dark-950 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            {[
+              { value: customers.toLocaleString() + '+', label: 'Happy Customers', icon: FaUsers },
+              { value: satisfaction + '%', label: 'Satisfaction Rate', icon: FaStar },
+              { value: events.toLocaleString() + '+', label: 'Corporate Events', icon: FaCalendarAlt },
+              { value: '24/7', label: 'Adrenaline Rush', icon: FaClock }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="glass-card p-8 text-center rounded-xl hover:shadow-2xl transition-all duration-300"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className="text-4xl md:text-5xl font-bold text-rage-500 mb-2"
+                >
+                  {stat.value}
+                </motion.div>
+                <p className="text-gray-300 text-lg">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
