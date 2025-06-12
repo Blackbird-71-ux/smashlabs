@@ -19,6 +19,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://smashlabs.vercel.app'),
   title: 'SmashLabs - Corporate Entertainment & Team Building',
   description: 'SmashLabs offers unique corporate entertainment and team building experiences through rage rooms and interactive activities.',
   keywords: 'corporate entertainment, team building, rage room, corporate events, stress relief, team activities',
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://smashlabs.com',
+    url: 'https://smashlabs.vercel.app',
     title: 'SmashLabs - Corporate Entertainment & Team Building',
     description: 'Experience the ultimate stress relief and team building activity at SmashLabs.',
     siteName: 'SmashLabs',
