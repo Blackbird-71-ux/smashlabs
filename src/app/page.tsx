@@ -44,7 +44,10 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section 
+        className="relative h-screen flex items-center justify-center overflow-hidden"
+        aria-label="Hero section"
+      >
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -52,10 +55,13 @@ export default function Home() {
             muted
             playsInline
             className="w-full h-full object-cover"
+            poster="/hero-poster.jpg"
+            aria-label="Background video showing SmashLabs experience"
           >
             <source src="/hero-video.mp4" type="video/mp4" />
+            <track kind="captions" src="/captions.vtt" label="English" default />
           </video>
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
         </div>
         
         <div className="container relative z-10 text-center text-white">
@@ -67,10 +73,18 @@ export default function Home() {
             Perfect for corporate events, team outings, and private parties.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-            <Link href="#contact" className="btn btn-primary">
+            <Link 
+              href="#contact" 
+              className="btn btn-primary"
+              aria-label="Book your session at SmashLabs"
+            >
               Book Your Session
             </Link>
-            <Link href="#about" className="btn btn-outline text-white border-white hover:bg-white/10">
+            <Link 
+              href="#about" 
+              className="btn btn-outline text-white border-white hover:bg-white/10"
+              aria-label="Learn more about SmashLabs"
+            >
               Learn More
             </Link>
           </div>
@@ -314,10 +328,10 @@ export default function Home() {
                 </div>
                 <div className="ml-4">
                   <h4 className="font-bold">Jane Smith</h4>
-                  <p className="text-gray-600">HR Manager, Design Co</p>
+                  <p className="text-gray-600">"The perfect stress relief activity for our team. Highly recommended for corporate events!"</p>
                 </div>
               </div>
-              <p className="text-gray-600">"The perfect stress relief activity for our team. Highly recommended for corporate events!"</p>
+              <p className="text-gray-600">"Great facility and amazing staff. Our team had a blast and can't wait to come back!"</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-center mb-4">
