@@ -1,61 +1,54 @@
 // This is a cosmetic change to trigger a new Vercel deployment
-import type { Metadata, Viewport } from 'next'
-import { Inter, Montserrat } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-  display: 'swap',
-})
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://smashlabs.vercel.app'),
-  title: 'SmashLabs - Corporate Entertainment & Team Building',
-  description: 'SmashLabs offers unique corporate entertainment and team building experiences through rage rooms and interactive activities.',
-  keywords: 'corporate entertainment, team building, rage room, corporate events, stress relief, team activities',
-  authors: [{ name: 'SmashLabs' }],
-  robots: 'index, follow',
-  icons: {
-    icon: '/favicon.ico',
-  },
+  title: "SmashLabs - Break Free. Smash Stress.",
+  description: "Experience the ultimate stress relief and team building activity at SmashLabs. Perfect for corporate events, team outings, and private parties.",
+  keywords: ["rage room", "stress relief", "team building", "corporate events", "smash room", "break room"],
+  authors: [{ name: "SmashLabs Team" }],
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://smashlabs.vercel.app',
-    title: 'SmashLabs - Corporate Entertainment & Team Building',
-    description: 'Experience the ultimate stress relief and team building activity at SmashLabs.',
-    siteName: 'SmashLabs',
+    title: "SmashLabs - Break Free. Smash Stress.",
+    description: "Experience the ultimate stress relief and team building activity at SmashLabs.",
+    url: "https://smashlabs.in",
+    siteName: "SmashLabs",
     images: [
       {
-        url: '/og-image.jpg',
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'SmashLabs Experience',
+        alt: "SmashLabs Experience",
       },
     ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'SmashLabs - Corporate Entertainment & Team Building',
-    description: 'Experience the ultimate stress relief and team building activity at SmashLabs.',
-    images: ['/og-image.jpg'],
+    card: "summary_large_image",
+    title: "SmashLabs - Break Free. Smash Stress.",
+    description: "Experience the ultimate stress relief and team building activity at SmashLabs.",
+    images: ["/og-image.jpg"],
   },
-}
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-}
+  robots: {
+    index: true,
+    follow: true,
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
+};
 
 // Add structured data
 const jsonLd = {
@@ -90,11 +83,11 @@ const jsonLd = {
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
+    <html lang="en" className={inter.variable}>
       <head>
         <script
           type="application/ld+json"
@@ -112,5 +105,5 @@ export default function RootLayout({
         </div>
       </body>
     </html>
-  )
+  );
 } 

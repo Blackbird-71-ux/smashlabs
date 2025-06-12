@@ -302,7 +302,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="section bg-gray-50">
+      <section id="testimonials" className="section bg-gray-50">
         <div className="container">
           <div className="section-title">
             <h2>What Our Clients Say</h2>
@@ -311,8 +311,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
-                  <span className="text-primary-600 font-bold">JD</span>
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold">
+                  JD
                 </div>
                 <div className="ml-4">
                   <h4 className="font-bold">John Doe</h4>
@@ -323,20 +323,20 @@ export default function Home() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
-                  <span className="text-primary-600 font-bold">JS</span>
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold">
+                  JS
                 </div>
                 <div className="ml-4">
                   <h4 className="font-bold">Jane Smith</h4>
-                  <p className="text-gray-600">"The perfect stress relief activity for our team. Highly recommended for corporate events!"</p>
+                  <p className="text-gray-600">HR Manager, Design Co</p>
                 </div>
               </div>
-              <p className="text-gray-600">"Great facility and amazing staff. Our team had a blast and can't wait to come back!"</p>
+              <p className="text-gray-600">"The perfect stress relief activity for our team. Highly recommended for corporate events!"</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
-                  <span className="text-primary-600 font-bold">RJ</span>
+                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 font-bold">
+                  RJ
                 </div>
                 <div className="ml-4">
                   <h4 className="font-bold">Robert Johnson</h4>
@@ -349,74 +349,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section bg-primary-600 text-white">
-        <div className="container text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Smash Stress?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Book your session today and experience the ultimate stress relief and team building activity.
-          </p>
-          <Link href="#contact" className="btn bg-white text-primary-600 hover:bg-gray-100">
-            Book Now
-          </Link>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section id="contact" className="section">
         <div className="container">
           <div className="section-title">
-            <h2>Contact Us</h2>
-            <p>Get in touch to book your session</p>
+            <h2>Ready to Smash Stress?</h2>
+            <p>Book your session today and experience the ultimate stress relief and team building activity.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <form className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                  ></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary w-full">
+          <div className="max-w-2xl mx-auto">
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="w-full btn btn-primary"
+                >
                   Send Message
                 </button>
-              </form>
-            </div>
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-bold mb-2">Location</h3>
-                <p className="text-gray-600">123 Smash Street, City, State 12345</p>
               </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Contact Info</h3>
-                <p className="text-gray-600">Phone: (123) 456-7890</p>
-                <p className="text-gray-600">Email: info@smashlabs.com</p>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Hours</h3>
-                <p className="text-gray-600">Monday - Friday: 9:00 AM - 9:00 PM</p>
-                <p className="text-gray-600">Saturday - Sunday: 10:00 AM - 8:00 PM</p>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </section>

@@ -20,6 +20,7 @@ const config: Config = {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
+          950: '#082f49',
         },
         secondary: {
           50: '#fdf4ff',
@@ -48,7 +49,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-inter)'],
-        display: ['var(--font-montserrat)'],
+        display: ['var(--font-display)'],
       },
       spacing: {
         '128': '32rem',
@@ -58,8 +59,9 @@ const config: Config = {
         '4xl': '2rem',
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.5s ease-out',
+        'fade-in': 'fadeIn 1s ease-out',
+        'slide-up': 'slideUp 0.8s ease-out',
+        'slide-in': 'slideIn 0.8s ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -69,6 +71,10 @@ const config: Config = {
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideIn: {
+          '0%': { transform: 'translateX(-20px)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
       },
     },

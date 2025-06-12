@@ -4,57 +4,57 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Gallery', href: '#gallery' },
-  { name: 'Contact', href: '#contact' },
-]
-
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      setIsScrolled(window.scrollY > 0)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const navLinks = [
+    { href: '#about', label: 'About' },
+    { href: '#services', label: 'Services' },
+    { href: '#packages', label: 'Packages' },
+    { href: '#testimonials', label: 'Testimonials' },
+    { href: '#contact', label: 'Contact' },
+  ]
+
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <Image
-                src="/logo.png"
-                alt="SmashLabs Logo"
-                width={40}
-                height={40}
-                className="w-10 h-10"
-              />
-              <span className="text-2xl font-display font-bold text-primary-600">
-                SmashLabs<sup className="text-sm">™</sup>
-              </span>
-            </Link>
-          </div>
+          <Link href="/" className="flex items-center space-x-2">
+            <Image
+              src="/logo.png"
+              alt="SmashLabs Logo"
+              width={40}
+              height={40}
+              className="w-10 h-10"
+            />
+            <span className={`text-xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
+              SmashLabs
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
-            {navigation.map((item) => (
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
               <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  isScrolled ? 'text-gray-600 hover:text-gray-900' : 'text-white hover:text-gray-200'
+                }`}
               >
-                {item.name}
+                {link.label}
               </Link>
             ))}
             <Link
@@ -65,50 +65,57 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            <svg
+              className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`}
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <span className="sr-only">Open main menu</span>
-              {!isMobileMenuOpen ? (
-                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+              {isMobileMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <path d="M4 6h16M4 12h16M4 18h16" />
               )}
-            </button>
-          </div>
+            </svg>
+          </button>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      <div className={`md:hidden transition-all duration-300 ease-in-out ${
-        isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-      } overflow-hidden bg-white shadow-lg`}>
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          {navigation.map((item) => (
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden transition-all duration-300 ease-in-out ${
+            isMobileMenuOpen
+              ? 'max-h-96 opacity-100 visible'
+              : 'max-h-0 opacity-0 invisible'
+          }`}
+        >
+          <div className="py-4 space-y-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block text-gray-600 hover:text-gray-900"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
             <Link
-              key={item.name}
-              href={item.href}
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50"
+              href="#contact"
+              className="block btn btn-primary w-full text-center"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              {item.name}
+              Book Now
             </Link>
-          ))}
-          <Link
-            href="#contact"
-            className="block w-full text-center btn btn-primary mt-4"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Book Now
-          </Link>
+          </div>
         </div>
       </div>
     </nav>

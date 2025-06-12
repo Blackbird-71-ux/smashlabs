@@ -1,8 +1,10 @@
+'use client';
+
 interface SkeletonProps {
   className?: string
 }
 
-export default function Skeleton({ className = '' }: SkeletonProps) {
+export function Skeleton({ className = '' }: SkeletonProps) {
   return (
     <div
       className={`animate-pulse bg-gray-200 rounded ${className}`}
@@ -12,31 +14,32 @@ export default function Skeleton({ className = '' }: SkeletonProps) {
   )
 }
 
-export function CardSkeleton() {
-  return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <Skeleton className="h-8 w-3/4 mb-4" />
-      <Skeleton className="h-4 w-full mb-2" />
-      <Skeleton className="h-4 w-5/6 mb-2" />
-      <Skeleton className="h-4 w-4/6" />
-    </div>
-  )
+export function TextSkeleton({ className = '' }: SkeletonProps) {
+  return <Skeleton className={`h-4 w-3/4 ${className}`} />;
 }
 
-export function ImageSkeleton() {
-  return (
-    <div className="relative aspect-video">
-      <Skeleton className="absolute inset-0" />
-    </div>
-  )
+export function ImageSkeleton({ className = '' }: SkeletonProps) {
+  return <Skeleton className={`aspect-video w-full ${className}`} />;
 }
 
-export function TextSkeleton() {
+export function CardSkeleton({ className = '' }: SkeletonProps) {
   return (
-    <div className="space-y-3">
-      <Skeleton className="h-4 w-3/4" />
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-5/6" />
+    <div className={`space-y-4 ${className}`}>
+      <ImageSkeleton />
+      <div className="space-y-2">
+        <TextSkeleton />
+        <TextSkeleton className="w-1/2" />
+      </div>
     </div>
-  )
+  );
+}
+
+export function GridSkeleton({ count = 3, className = '' }: SkeletonProps & { count?: number }) {
+  return (
+    <div className={`grid grid-cols-1 md:grid-cols-${count} gap-6 ${className}`}>
+      {Array.from({ length: count }).map((_, index) => (
+        <CardSkeleton key={index} />
+      ))}
+    </div>
+  );
 } 
