@@ -18,7 +18,7 @@ export default function Home() {
       events: 500
     }
 
-    const duration = 2000 // 2 seconds
+    const duration = 2000
     const steps = 60
     const stepDuration = duration / steps
 
@@ -44,10 +44,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section 
-        className="relative h-screen flex items-center justify-center overflow-hidden"
-        aria-label="Hero section"
-      >
+      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -55,20 +52,19 @@ export default function Home() {
             muted
             playsInline
             className="w-full h-full object-cover"
-            poster="/hero-poster.jpg"
+            poster="/smashlabs-experience-room.png"
             aria-label="Background video showing SmashLabs experience"
           >
-            <source src="/hero-video.mp4" type="video/mp4" />
-            <track kind="captions" src="/captions.vtt" label="English" default />
+            <source src="/smashlabs-room.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
+          <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
         </div>
         
-        <div className="container relative z-10 text-center text-white">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-in">
+        <div className="container relative z-10 text-center text-white px-4">
+          <h1 className="mb-6 animate-fade-in">
             Break Free. Smash Stress.
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-slide-up">
+          <p className="mb-8 max-w-2xl mx-auto animate-slide-up">
             Experience the ultimate stress relief and team building activity at SmashLabs.
             Perfect for corporate events, team outings, and private parties.
           </p>
@@ -96,19 +92,19 @@ export default function Home() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-display font-bold text-primary-600 mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-primary-600 mb-2">
                 {stats.customers.toLocaleString()}+
               </div>
               <div className="text-gray-600">Happy Customers</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-display font-bold text-primary-600 mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-primary-600 mb-2">
                 {stats.satisfaction}%
               </div>
               <div className="text-gray-600">Customer Satisfaction</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-display font-bold text-primary-600 mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-primary-600 mb-2">
                 {stats.events}+
               </div>
               <div className="text-gray-600">Corporate Events</div>
@@ -166,7 +162,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="relative h-[400px] rounded-lg overflow-hidden">
               <Image
-                src="/experience.jpg"
+                src="/smashlabs-experience-room.png"
                 alt="SmashLabs Experience"
                 fill
                 className="object-cover"

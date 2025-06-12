@@ -24,17 +24,39 @@ body {
     rgb(var(--background-end-rgb))
   );
   min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+
+  h1 {
+    @apply text-4xl md:text-5xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold leading-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-bold leading-tight;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold leading-tight;
+  }
+
+  p {
+    @apply text-base md:text-lg leading-relaxed;
+  }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-all duration-200 text-sm;
   }
 
   .btn-primary {
@@ -46,19 +68,19 @@ body {
   }
 
   .section {
-    @apply py-20;
+    @apply py-12 md:py-16;
   }
 
   .section-title {
-    @apply text-center mb-12;
+    @apply text-center mb-8 md:mb-12;
   }
 
   .section-title h2 {
-    @apply text-3xl md:text-4xl font-bold mb-4;
+    @apply text-3xl md:text-4xl font-bold mb-3;
   }
 
   .section-title p {
-    @apply text-gray-600 text-lg;
+    @apply text-gray-600 text-base md:text-lg;
   }
 
   .container {

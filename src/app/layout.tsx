@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "SmashLabs",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/smashlabs-experience-room.png",
         width: 1200,
         height: 630,
         alt: "SmashLabs Experience",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SmashLabs - Break Free. Smash Stress.",
     description: "Experience the ultimate stress relief and team building activity at SmashLabs.",
-    images: ["/og-image.jpg"],
+    images: ["/smashlabs-experience-room.png"],
   },
   robots: {
     index: true,
@@ -45,7 +45,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
 };
@@ -56,8 +55,8 @@ const jsonLd = {
   '@type': 'LocalBusiness',
   name: 'SmashLabs',
   description: 'Corporate entertainment and team building experiences through rage rooms and interactive activities.',
-  url: 'https://smashlabs.com',
-  logo: 'https://smashlabs.com/logo.png',
+  url: 'https://smashlabs.in',
+  logo: 'https://smashlabs.in/logo.png',
   address: {
     '@type': 'PostalAddress',
     streetAddress: '123 Main Street',

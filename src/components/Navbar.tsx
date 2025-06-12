@@ -29,23 +29,24 @@ export default function Navbar() {
       isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src="/logo.png"
               alt="SmashLabs Logo"
-              width={40}
-              height={40}
-              className="w-10 h-10"
+              width={32}
+              height={32}
+              className="w-8 h-8"
+              priority
             />
-            <span className={`text-xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
+            <span className={`text-lg font-semibold ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
               SmashLabs
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -59,7 +60,7 @@ export default function Navbar() {
             ))}
             <Link
               href="#contact"
-              className="btn btn-primary"
+              className="btn btn-primary text-sm px-4 py-2"
             >
               Book Now
             </Link>
