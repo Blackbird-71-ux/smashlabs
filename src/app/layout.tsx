@@ -1,3 +1,4 @@
+// This is a cosmetic change to trigger a new Vercel deployment
 import type { Metadata, Viewport } from 'next'
 import { Inter, Montserrat } from 'next/font/google'
 import './globals.css'
