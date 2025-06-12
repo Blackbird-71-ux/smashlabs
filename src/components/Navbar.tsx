@@ -134,36 +134,43 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden fixed inset-0 bg-dark-950/95 backdrop-blur-lg transition-all duration-300 ease-in-out transform ${
-          isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+        className={`fixed inset-0 bg-dark-950/95 backdrop-blur-lg z-50 transition-all duration-300 ${
+          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 h-full flex flex-col">
-          <div className="flex justify-end py-6">
+        <div className="container mx-auto px-4 h-full flex flex-col">
+          <div className="flex justify-between items-center py-6">
+            <div className="text-2xl font-bold bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+              SmashLabs
+            </div>
             <button
-              onClick={toggleMenu}
-              className="text-white hover:text-primary-400 transition-colors duration-300"
+              onClick={() => setIsOpen(false)}
+              className="p-2 text-gray-400 hover:text-white transition-colors"
               aria-label="Close menu"
             >
-              <FaTimes size={24} />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
-          <div className="flex-1 flex flex-col justify-center">
-            <div className="space-y-6">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={(e) => scrollToSection(link.id, e)}
-                  className={`block w-full text-xl font-medium text-center transition-colors duration-300 ${
-                    activeSection === link.id ? 'text-primary-400' : 'text-white hover:text-primary-400'
-                  }`}
-                  aria-current={activeSection === link.id ? 'page' : undefined}
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </div>
+          <nav className="flex-1 flex flex-col justify-center items-center space-y-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => {
+                  scrollToSection(link.id);
+                  setIsOpen(false);
+                }}
+                className={`text-2xl font-medium transition-colors ${
+                  activeSection === link.id
+                    ? 'text-rage-400'
+                    : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+          </nav>
         </div>
       </div>
     </nav>

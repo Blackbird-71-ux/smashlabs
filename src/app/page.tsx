@@ -210,7 +210,7 @@ export default function Home() {
       />
 
       {/* Hero Section with Parallax */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="absolute inset-0 w-full h-full"
           style={{ y, scale }}
@@ -231,20 +231,20 @@ export default function Home() {
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-dark-900/70 to-dark-950/90"></div>
         </motion.div>
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center relative z-10"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
               Unleash Your Inner Beast
             </h1>
-            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">
               Smash. Destroy. Conquer.
             </h2>
-            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Dive into the ultimate stress-relief experience. Break free from your worries and unleash your rage in a safe, exhilarating environment.
             </p>
             <motion.div
@@ -313,111 +313,118 @@ export default function Home() {
         <FaArrowUp className="w-6 h-6" />
       </motion.button>
 
-      {/* Enhanced Stats Section */}
-      <section id="stats" className="section bg-gradient-to-b from-dark-900 to-dark-950 py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            {[
-              { value: customers.toLocaleString() + '+', label: 'Happy Customers', icon: FaUsers },
-              { value: satisfaction + '%', label: 'Satisfaction Rate', icon: FaStar },
-              { value: events.toLocaleString() + '+', label: 'Corporate Events', icon: FaCalendarAlt },
-              { value: '24/7', label: 'Adrenaline Rush', icon: FaClock }
-            ].map((stat, index) => (
-              <motion.div 
-                key={index}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="glass-card p-8 text-center rounded-xl hover:shadow-2xl transition-all duration-300"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="text-4xl md:text-5xl font-bold text-rage-500 mb-2"
-                >
-                  {stat.value}
-                </motion.div>
-                <p className="text-gray-300 text-lg">{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Enhanced Why Choose SmashLabs Section */}
-      <section id="why-choose" className="py-24 bg-gradient-to-b from-dark-950 to-dark-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise opacity-5" />
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Why Choose SmashLabs?
-            </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Experience the perfect blend of adrenaline, safety, and premium service.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: FaTools,
-                title: 'Premium Arsenal',
-                description: 'State-of-the-art equipment and tools for maximum destruction.'
-              },
-              {
-                icon: FaShieldAlt,
-                title: 'Controlled Chaos',
-                description: 'Expertly designed spaces for safe yet exhilarating experiences.'
-              },
-              {
-                icon: FaUserShield,
-                title: 'Full Protective Gear',
-                description: 'Top-quality safety equipment for worry-free smashing.'
-              },
-              {
-                icon: FaUserTie,
-                title: 'Expert Guidance',
-                description: 'Professional staff ensuring your experience is both safe and satisfying.'
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-rage-500/10 rounded-lg flex items-center justify-center mb-6">
-                  <feature.icon className="w-6 h-6 text-rage-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
-              </motion.div>
-            ))}
+      {/* Stats Section */}
+      <section id="stats" className="py-16 sm:py-24 bg-dark-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                {customers.toLocaleString()}+
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Happy Customers</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                {satisfaction}%
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Satisfaction Rate</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                {events.toLocaleString()}+
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Corporate Events</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                24/7
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Adrenaline Rush</div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* The SmashLabs Experience Section */}
-      <section id="experience" className="py-24 bg-gradient-to-b from-dark-950 to-dark-900 relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise opacity-5" />
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            {/* Text/Features Column */}
+      {/* Why Choose Us Section */}
+      <section id="why-choose" className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                {customers.toLocaleString()}+
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Happy Customers</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                {satisfaction}%
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Satisfaction Rate</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                {events.toLocaleString()}+
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Corporate Events</div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
+                24/7
+              </div>
+              <div className="text-sm sm:text-base text-gray-400">Adrenaline Rush</div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-16 sm:py-24 bg-dark-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -465,7 +472,6 @@ export default function Home() {
                 Book Your Experience
               </motion.button>
             </motion.div>
-            {/* Image Column */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -893,24 +899,9 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="section bg-gradient-to-b from-dark-950 to-dark-900 py-24 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
-              Get in Touch
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Have questions? Want to book a custom event? We're here to help!
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+      <section id="contact" className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
