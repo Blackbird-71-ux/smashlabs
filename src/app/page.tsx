@@ -355,51 +355,58 @@ export default function Home() {
       {/* Why Choose Us Section */}
       <section id="why-choose" className="py-16 sm:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
+              Why Choose SmashLabs?
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Experience the perfect blend of adrenaline, safety, and premium service.
+            </p>
+          </motion.div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                {customers.toLocaleString()}+
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Happy Customers</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                {satisfaction}%
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Satisfaction Rate</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                {events.toLocaleString()}+
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Corporate Events</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <div className="text-4xl sm:text-5xl font-bold text-rage-400 mb-2">
-                24/7
-              </div>
-              <div className="text-sm sm:text-base text-gray-400">Adrenaline Rush</div>
-            </motion.div>
+            {[
+              {
+                icon: FaTools,
+                title: 'Premium Arsenal',
+                description: 'State-of-the-art equipment and tools for maximum destruction.'
+              },
+              {
+                icon: FaShieldAlt,
+                title: 'Controlled Chaos',
+                description: 'Expertly designed spaces for safe yet exhilarating experiences.'
+              },
+              {
+                icon: FaUserShield,
+                title: 'Full Protective Gear',
+                description: 'Top-quality safety equipment for worry-free smashing.'
+              },
+              {
+                icon: FaUserTie,
+                title: 'Expert Guidance',
+                description: 'Professional staff ensuring your experience is both safe and satisfying.'
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-rage-500/10 rounded-lg flex items-center justify-center mb-6">
+                  <feature.icon className="w-6 h-6 text-rage-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
