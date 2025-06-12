@@ -3,18 +3,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock } from 'react-icons/fa'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { trackButtonClick, trackFormSubmit, trackVideoInteraction } from '@/lib/analytics'
-import { GridSkeleton, TextSkeleton } from '@/components/Skeleton'
+import { GridSkeleton, TextSkeleton, Skeleton } from '@/components/Skeleton'
+import { useCounter } from '@/hooks/useCounter'
+import Counter from '@/components/Counter'
 
 export default function Home() {
-  const [stats, setStats] = useState({
-    customers: 0,
-    satisfaction: 0,
-    events: 0
-  });
+  const { count: customers, isAnimating: customersAnimating } = useCounter(10000);
+  const { count: satisfaction, isAnimating: satisfactionAnimating } = useCounter(95);
+  const { count: events, isAnimating: eventsAnimating } = useCounter(500);
 
-  const [statsLoading, setStatsLoading] = useState(true);
+  const statsLoading = customersAnimating || satisfactionAnimating || eventsAnimating;
+
   const [contactFormLoading, setContactFormLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -36,6 +37,18 @@ export default function Home() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [contactFormErrors, setContactFormErrors] = useState<Record<string, string>>({});
+
+  const animationRef = useRef<number>();
+
+  const [showStats, setShowStats] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowStats(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Set minimum date after component mount
   useEffect(() => {
@@ -155,43 +168,6 @@ export default function Home() {
     setContactFormErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  useEffect(() => {
-    // Simulate fetching stats data
-    setStatsLoading(true);
-    const timer = setTimeout(() => {
-      const targetStats = {
-        customers: 10000,
-        satisfaction: 95,
-        events: 500
-      };
-
-      const duration = 2000;
-      const steps = 60;
-      const stepDuration = duration / steps;
-
-      let currentStep = 0;
-      const interval = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
-
-        setStats({
-          customers: Math.floor(targetStats.customers * progress),
-          satisfaction: Math.floor(targetStats.satisfaction * progress),
-          events: Math.floor(targetStats.events * progress)
-        });
-
-        if (currentStep === steps) {
-          clearInterval(interval);
-          setStatsLoading(false);
-        }
-      }, stepDuration);
-
-      return () => clearInterval(interval);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <main className="min-h-screen bg-dark-950">
       {/* Hero Section */}
@@ -247,25 +223,42 @@ export default function Home() {
       {/* Stats Section */}
       <section id="stats" className="section bg-gradient-to-b from-dark-950 to-dark-900 border-b border-dark-800">
         <div className="container">
-          {statsLoading ? (
-            <GridSkeleton count={4} className="animate-fade-in" />
+          {!showStats ? (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
+                <Skeleton className="w-32 h-6 mx-auto" />
+              </div>
+              <div className="text-center">
+                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
+                <Skeleton className="w-32 h-6 mx-auto" />
+              </div>
+              <div className="text-center">
+                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
+                <Skeleton className="w-32 h-6 mx-auto" />
+              </div>
+              <div className="text-center">
+                <Skeleton className="w-24 h-24 mx-auto mb-4 rounded-full" />
+                <Skeleton className="w-32 h-6 mx-auto" />
+              </div>
+            </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in animate-delay-400">
-              <div className="card text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="text-4xl font-bold text-primary-500 mb-2"><span className="text-gradient">{stats.customers.toLocaleString()}+</span></div>
-                <div className="text-gray-400">Happy Customers</div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <Counter end={10000} suffix="+" />
+                <p className="stat-label">Happy Customers</p>
               </div>
-              <div className="card text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="text-4xl font-bold text-primary-500 mb-2"><span className="text-gradient">{stats.satisfaction}%</span></div>
-                <div className="text-gray-400">Satisfaction Rate</div>
+              <div className="text-center">
+                <Counter end={95} suffix="%" />
+                <p className="stat-label">Satisfaction Rate</p>
               </div>
-              <div className="card text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="text-4xl font-bold text-primary-500 mb-2"><span className="text-gradient">{stats.events}+</span></div>
-                <div className="text-gray-400">Events Hosted</div>
+              <div className="text-center">
+                <Counter end={500} suffix="+" />
+                <p className="stat-label">Events Hosted</p>
               </div>
-              <div className="card text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="text-4xl font-bold text-primary-500 mb-2"><span className="text-gradient">24/7</span></div>
-                <div className="text-gray-400">Adrenaline Rush</div>
+              <div className="text-center">
+                <div className="stat-number">24/7</div>
+                <p className="stat-label">Adrenaline Rush</p>
               </div>
             </div>
           )}
