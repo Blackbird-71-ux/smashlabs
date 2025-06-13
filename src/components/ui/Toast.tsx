@@ -2,8 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaCheckCircle, FaExclamationCircle, FaInfoCircle, FaTimes, FaExclamationTriangle } from 'react-icons/fa';
-import { Toast } from '@/types';
+import { FaCheckCircle, FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaTimes } from 'react-icons/fa';
+
+export interface Toast {
+  id: string;
+  type: 'success' | 'error' | 'warning' | 'info';
+  title: string;
+  message?: string;
+  duration?: number;
+}
 
 interface ToastProps {
   toast: Toast;
@@ -22,81 +29,84 @@ const ToastComponent = ({ toast, onRemove }: ToastProps) => {
   const getIcon = () => {
     switch (toast.type) {
       case 'success':
-        return <FaCheckCircle className="w-5 h-5 text-green-500" />;
+        return <FaCheckCircle className="w-5 h-5 text-green-400" />;
       case 'error':
-        return <FaExclamationCircle className="w-5 h-5 text-red-500" />;
+        return <FaExclamationCircle className="w-5 h-5 text-red-400" />;
       case 'warning':
-        return <FaExclamationTriangle className="w-5 h-5 text-yellow-500" />;
+        return <FaExclamationTriangle className="w-5 h-5 text-yellow-400" />;
       case 'info':
-        return <FaInfoCircle className="w-5 h-5 text-blue-500" />;
+        return <FaInfoCircle className="w-5 h-5 text-blue-400" />;
       default:
-        return <FaInfoCircle className="w-5 h-5 text-gray-500" />;
+        return <FaInfoCircle className="w-5 h-5 text-gray-400" />;
     }
   };
 
   const getBgColor = () => {
     switch (toast.type) {
       case 'success':
-        return 'bg-green-50 border-green-200';
+        return 'bg-dark-800/95 border-green-500/50';
       case 'error':
-        return 'bg-red-50 border-red-200';
+        return 'bg-dark-800/95 border-red-500/50';
       case 'warning':
-        return 'bg-yellow-50 border-yellow-200';
+        return 'bg-dark-800/95 border-yellow-500/50';
       case 'info':
-        return 'bg-blue-50 border-blue-200';
+        return 'bg-dark-800/95 border-blue-500/50';
       default:
-        return 'bg-gray-50 border-gray-200';
+        return 'bg-dark-800/95 border-gray-500/50';
     }
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.3 }}
+      initial={{ opacity: 0, y: -50, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-      className={`max-w-sm w-full ${getBgColor()} border rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden`}
+      exit={{ opacity: 0, y: -50, scale: 0.9 }}
+      className={`
+        ${getBgColor()}
+        backdrop-blur-lg border rounded-lg shadow-2xl p-4 mb-3 max-w-md w-full
+        flex items-start gap-3
+      `}
+      role="alert"
+      aria-live="polite"
     >
-      <div className="p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0">
-            {getIcon()}
-          </div>
-          <div className="ml-3 w-0 flex-1 pt-0.5">
-            <p className="text-sm font-medium text-gray-900">{toast.title}</p>
-            {toast.message && (
-              <p className="mt-1 text-sm text-gray-500">{toast.message}</p>
-            )}
-          </div>
-          <div className="ml-4 flex-shrink-0 flex">
-            <button
-              className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={() => onRemove(toast.id)}
-            >
-              <span className="sr-only">Close</span>
-              <FaTimes className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
+      <div className="flex-shrink-0 mt-0.5">
+        {getIcon()}
       </div>
+      <div className="flex-1 min-w-0">
+        <h4 className="text-sm font-semibold text-white mb-1">
+          {toast.title}
+        </h4>
+        {toast.message && (
+          <p className="text-sm text-gray-300">
+            {toast.message}
+          </p>
+        )}
+      </div>
+      <button
+        onClick={() => onRemove(toast.id)}
+        className="flex-shrink-0 text-gray-400 hover:text-white transition-colors duration-200 p-1"
+        aria-label="Close notification"
+      >
+        <FaTimes className="w-4 h-4" />
+      </button>
     </motion.div>
   );
 };
 
-interface ToastContainerProps {
-  toasts: Toast[];
-  onRemove: (id: string) => void;
-}
+// Toast Container Component
+export const ToastContainer = () => {
+  const { toasts, removeToast } = useToast();
 
-export const ToastContainer = ({ toasts, onRemove }: ToastContainerProps) => {
   return (
-    <div
-      aria-live="assertive"
-      className="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end z-50"
-    >
-      <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
+    <div className="fixed top-4 right-4 z-50 pointer-events-none">
+      <div className="pointer-events-auto">
         <AnimatePresence>
           {toasts.map((toast) => (
-            <ToastComponent key={toast.id} toast={toast} onRemove={onRemove} />
+            <ToastComponent
+              key={toast.id}
+              toast={toast}
+              onRemove={removeToast}
+            />
           ))}
         </AnimatePresence>
       </div>

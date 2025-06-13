@@ -1,19 +1,12 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { ToastContainer, useToast } from '@/components/ui/Toast';
+import { ToastContainer } from '@/components/ui/Toast';
 
-interface ToastProviderProps {
-  children: ReactNode;
-}
-
-export function ToastProvider({ children }: ToastProviderProps) {
-  const { toasts, removeToast } = useToast();
-
+export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {children}
-      <ToastContainer toasts={toasts} onRemove={removeToast} />
+      <ToastContainer />
     </>
   );
-} 
+}; 

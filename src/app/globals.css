@@ -209,6 +209,73 @@
   }
 }
 
+/* High Contrast Mode */
+.high-contrast {
+  --primary-500: #ffff00;
+  --primary-600: #ffff00;
+  --rage-400: #ffff00;
+  --rage-500: #ffff00;
+  --rage-600: #ffff00;
+  filter: contrast(150%) brightness(120%);
+}
+
+.high-contrast * {
+  border-color: #ffffff !important;
+  text-shadow: 1px 1px 1px #000000 !important;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 3px solid #f43f5e !important;
+  outline-offset: 2px !important;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.sr-only.focus:focus,
+.sr-only:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: inherit !important;
+  margin: inherit !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: inherit !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast media query */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-500: #ffff00;
+    --primary-600: #ffff00;
+    filter: contrast(150%);
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

@@ -9,13 +9,23 @@ import { trackButtonClick } from '@/lib/analytics'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const router = useRouter();
 
+  const navLinks = [
+    { id: 'home', label: 'Home' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'packages', label: 'Packages' },
+    { id: 'gallery', label: 'Gallery' },
+    { id: 'testimonials', label: 'Testimonials' },
+    { id: 'booknow', label: 'Book Now' },
+    { id: 'contact', label: 'Contact' }
+  ];
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
+      setIsScrolled(window.scrollY > 50);
 
       // Determine active section based on scroll position
       const sections = document.querySelectorAll('section[id]');
@@ -35,56 +45,54 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const scrollToSection = (sectionId: string, e?: React.MouseEvent) => {
+    e?.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offsetTop = element.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+      setActiveSection(sectionId);
+      setIsMobileMenuOpen(false);
+    }
   };
 
-  const scrollToSection = (id: string, event?: React.MouseEvent) => {
-    if (event) {
-      event.preventDefault(); // Prevent default Link behavior
+  const handleKeyDown = (e: React.KeyboardEvent, sectionId: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      scrollToSection(sectionId);
     }
-    trackButtonClick(`Nav Link - ${id}`);
-
-    const navbarHeight = 80; // Height of the fixed navbar
-
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.getElementById(id);
-      if (element) {
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-    setActiveSection(id); // Set active section on click
-    setIsOpen(false); // Close mobile menu after clicking a link
   };
 
-  const navLinks = [
-    { href: '#home', label: 'Home', id: 'home' },
-    { href: '#why-choose', label: 'Why Choose Us', id: 'why-choose' },
-    { href: '#experience', label: 'Experience', id: 'experience' },
-    { href: '#packages', label: 'Packages', id: 'packages' },
-    { href: '#booknow', label: 'Book Now', id: 'booknow' },
-    { href: '#testimonials', label: 'Testimonials', id: 'testimonials' },
-    { href: '#gallery', label: 'Gallery', id: 'gallery' },
-    { href: '#faq', label: 'FAQ', id: 'faq' },
-    { href: '#contact', label: 'Contact', id: 'contact' },
-  ];
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleMobileMenuKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-dark-900/90 shadow-lg backdrop-blur-lg border-b border-primary-500/20' : 'bg-transparent backdrop-blur-none border-b border-transparent'
-    }`}>
+    <nav 
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-dark-900/90 shadow-lg backdrop-blur-lg border-b border-primary-500/20' : 'bg-transparent backdrop-blur-none border-b border-transparent'
+      }`}
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo and Title */}
-          <Link href="/" className="flex items-center space-x-3 group" onClick={(e) => scrollToSection('home', e)} aria-label="SmashLabs Home">
+          <Link 
+            href="/" 
+            className="flex items-center space-x-3 group focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 rounded-lg p-2" 
+            onClick={(e) => scrollToSection('home', e)} 
+            aria-label="SmashLabs Home - Go to top of page"
+          >
             <Image
               src="/logo.png"
               alt="SmashLabs Logo"
@@ -101,15 +109,18 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-6" role="menubar">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={(e) => scrollToSection(link.id, e)}
-                className={`text-sm lg:text-base font-medium transition-colors duration-300 whitespace-nowrap px-2 ${
-                  activeSection === link.id ? 'text-primary-400 font-semibold' : (isScrolled ? 'text-gray-300 hover:text-primary-400' : 'text-gray-300 hover:text-primary-400')
+                onKeyDown={(e) => handleKeyDown(e, link.id)}
+                className={`text-sm lg:text-base font-medium transition-colors duration-300 whitespace-nowrap px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 ${
+                  activeSection === link.id ? 'text-primary-400 font-semibold bg-rage-500/10' : (isScrolled ? 'text-gray-300 hover:text-primary-400 hover:bg-rage-500/5' : 'text-gray-300 hover:text-primary-400 hover:bg-white/5')
                 }`}
                 aria-current={activeSection === link.id ? 'page' : undefined}
+                role="menuitem"
+                tabIndex={0}
               >
                 {link.label}
               </button>
@@ -117,61 +128,49 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className={`focus:outline-none transition-colors duration-300 ${
-                isScrolled ? 'text-primary-400' : 'text-white'
-              }`}
-              aria-expanded={isOpen}
-              aria-label="Toggle navigation menu"
-            >
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-            </button>
-          </div>
+          <button
+            onClick={toggleMobileMenu}
+            onKeyDown={handleMobileMenuKeyDown}
+            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-rage-500/10 focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 transition-colors duration-300"
+            aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMobileMenuOpen ? (
+              <FaTimes className="w-6 h-6" aria-hidden="true" />
+            ) : (
+              <FaBars className="w-6 h-6" aria-hidden="true" />
+            )}
+          </button>
         </div>
-      </div>
 
-      {/* Mobile Navigation */}
-      <div
-        className={`fixed inset-0 bg-dark-950/95 backdrop-blur-lg z-50 transition-all duration-300 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="container mx-auto px-4 h-full flex flex-col">
-          <div className="flex justify-between items-center py-6">
-            <div className="text-2xl font-bold bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              SmashLabs
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div 
+            id="mobile-menu"
+            className="md:hidden bg-dark-900/95 backdrop-blur-lg border-t border-rage-500/20 py-4"
+            role="menu"
+            aria-labelledby="mobile-menu-button"
+          >
+            <div className="flex flex-col space-y-2 px-4">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={(e) => scrollToSection(link.id, e)}
+                  onKeyDown={(e) => handleKeyDown(e, link.id)}
+                  className={`text-left px-4 py-3 rounded-lg font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 ${
+                    activeSection === link.id ? 'text-primary-400 font-semibold bg-rage-500/10' : 'text-gray-300 hover:text-primary-400 hover:bg-rage-500/5'
+                  }`}
+                  aria-current={activeSection === link.id ? 'page' : undefined}
+                  role="menuitem"
+                  tabIndex={0}
+                >
+                  {link.label}
+                </button>
+              ))}
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-2 text-gray-400 hover:text-white transition-colors"
-              aria-label="Close menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
           </div>
-          <nav className="flex-1 flex flex-col justify-center items-center space-y-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => {
-                  scrollToSection(link.id);
-                  setIsOpen(false);
-                }}
-                className={`text-2xl font-medium transition-colors ${
-                  activeSection === link.id
-                    ? 'text-rage-400'
-                    : 'text-gray-300 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
-          </nav>
-        </div>
+        )}
       </div>
     </nav>
   );

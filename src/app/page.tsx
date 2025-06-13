@@ -4,13 +4,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock, FaTools, FaChevronDown, FaUserShield, FaUserTie, FaArrowUp, FaStar, FaQuoteLeft, FaInstagram, FaTwitter, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'
 import { useEffect, useState, useRef } from 'react'
-import { trackButtonClick, trackFormSubmit, trackVideoInteraction } from '@/lib/analytics'
+import { trackButtonClick, trackFormSubmit, trackVideoInteraction, trackBookingAttempt, trackContactAttempt, trackError } from '@/lib/analytics'
 import { GridSkeleton, TextSkeleton, Skeleton } from '@/components/Skeleton'
 import { useCounter } from '@/hooks/useCounter'
 import Counter from '@/components/Counter'
 import CustomCursor from '@/components/CustomCursor'
 import SmashAnimation from '@/components/SmashAnimation'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useToast } from '@/components/ui/Toast'
+import { validateBookingForm, validateContactForm, sanitizeInput, type BookingFormData, type ContactFormData } from '@/lib/validation'
+import { LoadingSpinner } from '@/components/ui/LoadingSpinner'
+import { submitBooking, submitContact, APIError } from '@/lib/api'
 
 // Add tracking function
 const trackEvent = (eventName: string, properties?: Record<string, any>) => {
@@ -28,7 +32,10 @@ export default function Home() {
 
   const [contactFormLoading, setContactFormLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const { success, error: showError } = useToast();
+  const [isBookingLoading, setIsBookingLoading] = useState(false);
+
+  const [formData, setFormData] = useState<BookingFormData>({
     name: '',
     email: '',
     phone: '',
@@ -39,7 +46,7 @@ export default function Home() {
     message: ''
   });
 
-  const [contactFormData, setContactFormData] = useState({
+  const [contactFormData, setContactFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     message: ''
@@ -76,113 +83,157 @@ export default function Home() {
     }));
   }, []);
 
-  const validateBookingForm = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\+?\d{10,15}$/.test(formData.phone)) {
-      newErrors.phone = 'Invalid phone number format (e.g., +1234567890 or 1234567890)';
-    }
-    if (!formData.date) {
-      newErrors.date = 'Date is required';
-    }
-    if (!formData.time) {
-      newErrors.time = 'Time is required';
-    }
-    if (!formData.guests || parseInt(formData.guests) < 1) {
-      newErrors.guests = 'Number of guests must be at least 1';
-    }
-    if (!formData.package) {
-      newErrors.package = 'Package selection is required';
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const validateContactForm = () => {
-    const newErrors: Record<string, string> = {};
-    if (!contactFormData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-    if (!contactFormData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(contactFormData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
-    if (!contactFormData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
-    setContactFormErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateBookingForm()) {
-      alert('Please correct the errors in the booking form.');
-      return;
-    }
-    console.log('Booking Form submitted:', formData);
-    trackFormSubmit('Booking Form', formData);
-    const today = new Date().toISOString().split('T')[0];
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      date: today,
-      time: '',
-      guests: '',
-      package: 'standard',
-      message: ''
-    });
-    alert('Booking request submitted! We will contact you shortly.');
-  };
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateContactForm()) {
-      alert('Please correct the errors in the contact form.');
-      return;
-    }
-    setContactFormLoading(true);
-    console.log('Contact Form submitted:', contactFormData);
-    trackFormSubmit('Contact Form', contactFormData);
     
-    setTimeout(() => {
+    const validation = validateBookingForm(formData);
+    if (!validation.isValid) {
+      setErrors(validation.errors);
+      showError('Validation Error', 'Please correct the errors in the form.');
+      return;
+    }
+
+    setIsBookingLoading(true);
+    setErrors({});
+
+    try {
+      // Track booking attempt
+      trackBookingAttempt(formData.package, parseInt(formData.guests) || 1);
+      
+      // Submit to real API
+      const response = await submitBooking({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        date: formData.date,
+        time: formData.time,
+        guests: parseInt(formData.guests) || 1,
+        package: formData.package,
+        message: formData.message
+      });
+      
+      trackFormSubmit('Booking Form', {
+        bookingId: response.bookingId,
+        packageType: formData.package,
+        guestCount: parseInt(formData.guests) || 1
+      });
+      
+      // Reset form
+      const today = new Date().toISOString().split('T')[0];
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        date: today,
+        time: '',
+        guests: '',
+        package: 'standard',
+        message: ''
+      });
+      
+      success('Booking Submitted!', `Your booking has been confirmed! Booking ID: ${response.bookingId}. We will contact you shortly.`);
+    } catch (error) {
+      console.error('Booking submission error:', error);
+      
+      // Track error
+      trackError('booking_submission_failed', error instanceof Error ? error.message : 'Unknown error', 'booking_form');
+      
+      if (error instanceof APIError) {
+        if (error.status === 409) {
+          showError('Time Slot Unavailable', 'This time slot is already booked. Please select a different time.');
+        } else if (error.status === 400) {
+          showError('Invalid Booking Data', error.message);
+        } else {
+          showError('Booking Failed', error.message);
+        }
+      } else {
+        showError('Booking Failed', 'An unexpected error occurred. Please try again or contact support.');
+      }
+    } finally {
+      setIsBookingLoading(false);
+    }
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const validation = validateContactForm(contactFormData);
+    if (!validation.isValid) {
+      setContactFormErrors(validation.errors);
+      showError('Validation Error', 'Please correct the errors in the form.');
+      return;
+    }
+
+    setContactFormLoading(true);
+    setContactFormErrors({});
+
+    try {
+      // Track contact attempt
+      trackContactAttempt('contact_form');
+      
+      // Submit to real API
+      const response = await submitContact({
+        name: contactFormData.name,
+        email: contactFormData.email,
+        message: contactFormData.message,
+        source: 'website_contact_form'
+      });
+      
+      trackFormSubmit('Contact Form', {
+        ticketId: response.ticketId
+      });
+      
       setContactFormData({
         name: '',
         email: '',
         message: ''
       });
-      alert('Your message has been sent! We will get back to you soon.');
+      
+      success('Message Sent!', `Your message has been sent! Ticket ID: ${response.ticketId}. We will get back to you soon.`);
+    } catch (error) {
+      console.error('Contact submission error:', error);
+      
+      // Track error
+      trackError('contact_submission_failed', error instanceof Error ? error.message : 'Unknown error', 'contact_form');
+      
+      if (error instanceof APIError) {
+        showError('Send Failed', error.message);
+      } else {
+        showError('Send Failed', 'An unexpected error occurred. Please try again or contact support.');
+      }
+    } finally {
       setContactFormLoading(false);
-    }, 1500);
+    }
   };
 
   const handleBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    const sanitizedValue = sanitizeInput(value);
+    
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitizedValue
     }));
-    setErrors(prev => ({ ...prev, [name]: '' }));
+    
+    // Clear error for this field
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    const sanitizedValue = sanitizeInput(value);
+    
     setContactFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: sanitizedValue
     }));
-    setContactFormErrors(prev => ({ ...prev, [name]: '' }));
+    
+    // Clear error for this field
+    if (contactFormErrors[name]) {
+      setContactFormErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleSmash = (type: 'glass' | 'wood' | 'metal') => {
@@ -201,7 +252,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-dark-950 text-white">
       <CustomCursor />
-      <SmashAnimation isVisible={showSmashAnimation} type={smashType} />
+              <SmashAnimation isActive={showSmashAnimation} type={smashType} />
       
       {/* Progress Bar */}
       <motion.div
@@ -225,7 +276,7 @@ export default function Home() {
             preload="auto"
             onPlay={() => trackVideoInteraction('play', 'hero-background')}
             onPause={() => trackVideoInteraction('pause', 'hero-background')}
-            onEnded={() => trackVideoInteraction('complete', 'hero-background')}
+            onEnded={() => trackVideoInteraction('ended', 'hero-background')}
           >
             <source src="/videos/smashlabs-bg.mp4.mp4" type="video/mp4" />
           </video>
@@ -586,7 +637,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  trackButtonClick('book_now_package_1');
+                  trackButtonClick('book_now_package_1', 'packages_section');
                   scrollToSection('booknow');
                 }}
                 className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 mt-auto"
@@ -641,7 +692,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  trackButtonClick('book_now_package_2');
+                  trackButtonClick('book_now_package_2', 'packages_section');
                   scrollToSection('booknow');
                 }}
                 className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 mt-auto"
@@ -700,7 +751,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  trackButtonClick('book_now_package_3');
+                  trackButtonClick('book_now_package_3', 'packages_section');
                   scrollToSection('booknow');
                 }}
                 className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 mt-auto"
@@ -906,12 +957,14 @@ export default function Home() {
               />
             </div>
             <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={!isBookingLoading ? { scale: 1.02 } : {}}
+              whileTap={!isBookingLoading ? { scale: 0.98 } : {}}
               type="submit"
-              className="btn btn-primary w-full text-lg py-5 shadow-lg hover:shadow-xl transition-all duration-300"
+              disabled={isBookingLoading}
+              className="btn btn-primary w-full text-lg py-5 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
-              Book Now
+              {isBookingLoading && <LoadingSpinner size="sm" color="white" />}
+              {isBookingLoading ? 'Submitting...' : 'Book Now'}
             </motion.button>
           </form>
         </div>
@@ -1102,46 +1155,82 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <form className="space-y-6">
+              <form onSubmit={handleContactSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="contact-name" className="block text-sm font-medium text-gray-300 mb-2">
                     Name
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    className="w-full px-4 py-3 bg-dark-800/50 border border-dark-700/50 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent"
+                    id="contact-name"
+                    name="name"
+                    value={contactFormData.name}
+                    onChange={handleContactChange}
+                    className={`w-full px-4 py-3 bg-dark-800/50 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent transition-all duration-300 ${
+                      contactFormErrors.name ? 'border-red-500' : 'border-dark-700/50'
+                    }`}
                     placeholder="Your name"
+                    aria-describedby={contactFormErrors.name ? 'contact-name-error' : undefined}
                   />
+                  {contactFormErrors.name && (
+                    <p id="contact-name-error" className="text-red-400 text-sm mt-1" role="alert">
+                      {contactFormErrors.name}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-gray-300 mb-2">
                     Email
                   </label>
                   <input
                     type="email"
-                    id="email"
-                    className="w-full px-4 py-3 bg-dark-800/50 border border-dark-700/50 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent"
+                    id="contact-email"
+                    name="email"
+                    value={contactFormData.email}
+                    onChange={handleContactChange}
+                    className={`w-full px-4 py-3 bg-dark-800/50 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent transition-all duration-300 ${
+                      contactFormErrors.email ? 'border-red-500' : 'border-dark-700/50'
+                    }`}
                     placeholder="Your email"
+                    aria-describedby={contactFormErrors.email ? 'contact-email-error' : undefined}
                   />
+                  {contactFormErrors.email && (
+                    <p id="contact-email-error" className="text-red-400 text-sm mt-1" role="alert">
+                      {contactFormErrors.email}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label htmlFor="contact-message" className="block text-sm font-medium text-gray-300 mb-2">
                     Message
                   </label>
                   <textarea
-                    id="message"
+                    id="contact-message"
+                    name="message"
+                    value={contactFormData.message}
+                    onChange={handleContactChange}
                     rows={4}
-                    className="w-full px-4 py-3 bg-dark-800/50 border border-dark-700/50 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent"
+                    className={`w-full px-4 py-3 bg-dark-800/50 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent transition-all duration-300 ${
+                      contactFormErrors.message ? 'border-red-500' : 'border-dark-700/50'
+                    }`}
                     placeholder="Your message"
+                    aria-describedby={contactFormErrors.message ? 'contact-message-error' : undefined}
                   />
+                  {contactFormErrors.message && (
+                    <p id="contact-message-error" className="text-red-400 text-sm mt-1" role="alert">
+                      {contactFormErrors.message}
+                    </p>
+                  )}
                 </div>
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+                  whileHover={!contactFormLoading ? { scale: 1.02 } : {}}
+                  whileTap={!contactFormLoading ? { scale: 0.98 } : {}}
+                  type="submit"
+                  disabled={contactFormLoading}
+                  className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
-                  Send Message
+                  {contactFormLoading && <LoadingSpinner size="sm" color="white" />}
+                  {contactFormLoading ? 'Sending...' : 'Send Message'}
                 </motion.button>
               </form>
             </motion.div>

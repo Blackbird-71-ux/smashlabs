@@ -6,6 +6,9 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 import ErrorBoundary from '@/components/ErrorBoundary'
+import { ToastProvider } from '@/components/ToastProvider'
+import { AccessibilityProvider } from '@/components/AccessibilityProvider'
+import Script from 'next/script'
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -82,6 +85,9 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 // Add structured data
@@ -169,6 +175,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
@@ -176,18 +184,52 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
       </head>
       <body className="min-h-screen bg-dark-950 font-sans text-gray-300 antialiased text-base leading-relaxed">
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-grow">
-            <ErrorBoundary>
-              {children}
-            </ErrorBoundary>
-          </main>
-          <Footer />
-          <BackToTop />
-        </div>
+        {/* Google Analytics */}
+        {GA_TRACKING_ID && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_TRACKING_ID}', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
+        
+        <AccessibilityProvider>
+          <ToastProvider>
+            <div className="flex min-h-screen flex-col">
+              <Navbar />
+              <main id="main-content" className="flex-grow">
+                <ErrorBoundary>
+                  {children}
+                </ErrorBoundary>
+              </main>
+              <Footer />
+              <BackToTop />
+            </div>
+          </ToastProvider>
+        </AccessibilityProvider>
       </body>
     </html>
   );

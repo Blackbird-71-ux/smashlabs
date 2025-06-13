@@ -1,108 +1,193 @@
-import { BookingFormData, ContactFormData, ApiResponse, BookingResponse } from '@/types';
+import { BookingFormData, ContactFormData, ApiResponse } from '@/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
-// Generic API request function with error handling
-async function apiRequest<T>(
-  endpoint: string,
-  options: RequestInit = {}
-): Promise<ApiResponse<T>> {
-  try {
-    const url = `${API_BASE_URL}${endpoint}`;
-    const config: RequestInit = {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    };
-
-    const response = await fetch(url, config);
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || `HTTP error! status: ${response.status}`);
-    }
-
-    return {
-      success: true,
-      data,
-    };
-  } catch (error) {
-    console.error('API request failed:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'An unknown error occurred',
-    };
+// API error types
+export class APIError extends Error {
+  constructor(public status: number, message: string, public data?: any) {
+    super(message);
+    this.name = 'APIError';
   }
 }
 
-// Booking API functions
-export const bookingApi = {
-  // Submit booking form
-  async submitBooking(formData: BookingFormData): Promise<ApiResponse<BookingResponse>> {
-    return apiRequest<BookingResponse>('/bookings', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-    });
-  },
+// Generic API request handler
+async function apiRequest<T>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const url = `${API_BASE_URL}${endpoint}`;
+  
+  const config: RequestInit = {
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+    ...options,
+  };
 
-  // Check availability for a specific date/time
-  async checkAvailability(date: string, time: string): Promise<ApiResponse<{ available: boolean }>> {
-    return apiRequest<{ available: boolean }>(`/bookings/availability?date=${date}&time=${time}`);
-  },
+  try {
+    const response = await fetch(url, config);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new APIError(
+        response.status,
+        errorData.message || `HTTP ${response.status}: ${response.statusText}`,
+        errorData
+      );
+    }
 
-  // Get booking by confirmation number
-  async getBooking(confirmationNumber: string): Promise<ApiResponse<BookingResponse>> {
-    return apiRequest<BookingResponse>(`/bookings/${confirmationNumber}`);
-  },
+    return await response.json();
+  } catch (error) {
+    if (error instanceof APIError) {
+      throw error;
+    }
+    
+    // Network or other errors
+    throw new APIError(
+      0,
+      error instanceof Error ? error.message : 'Network error occurred'
+    );
+  }
+}
 
-  // Cancel booking
-  async cancelBooking(confirmationNumber: string): Promise<ApiResponse<{ success: boolean }>> {
-    return apiRequest<{ success: boolean }>(`/bookings/${confirmationNumber}`, {
-      method: 'DELETE',
-    });
-  },
-};
+// Booking submission
+export interface BookingSubmission {
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  time: string;
+  guests: number;
+  package: string;
+  message?: string;
+}
 
-// Contact API functions
-export const contactApi = {
-  // Submit contact form
-  async submitContact(formData: ContactFormData): Promise<ApiResponse<{ messageId: string }>> {
-    return apiRequest<{ messageId: string }>('/contact', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-    });
-  },
-};
+export interface BookingResponse {
+  success: boolean;
+  bookingId: string;
+  message: string;
+  estimatedPrice?: number;
+}
 
-// Package API functions
-export const packageApi = {
-  // Get all packages
-  async getPackages(): Promise<ApiResponse<any[]>> {
-    return apiRequest<any[]>('/packages');
-  },
+export async function submitBooking(data: BookingSubmission): Promise<BookingResponse> {
+  return apiRequest<BookingResponse>('/bookings', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
 
-  // Get package by ID
-  async getPackage(id: string): Promise<ApiResponse<any>> {
-    return apiRequest<any>(`/packages/${id}`);
-  },
-};
+// Contact form submission
+export interface ContactSubmission {
+  name: string;
+  email: string;
+  message: string;
+  source?: string;
+}
 
-// Analytics API functions
-export const analyticsApi = {
-  // Track event
-  async trackEvent(eventName: string, properties?: Record<string, any>): Promise<ApiResponse<void>> {
-    return apiRequest<void>('/analytics/track', {
-      method: 'POST',
-      body: JSON.stringify({
-        event: eventName,
-        properties,
-        timestamp: new Date().toISOString(),
-      }),
-    });
-  },
-};
+export interface ContactResponse {
+  success: boolean;
+  ticketId: string;
+  message: string;
+}
+
+export async function submitContact(data: ContactSubmission): Promise<ContactResponse> {
+  return apiRequest<ContactResponse>('/contact', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+// Newsletter subscription
+export interface NewsletterSubmission {
+  email: string;
+  source?: string;
+}
+
+export interface NewsletterResponse {
+  success: boolean;
+  message: string;
+}
+
+export async function subscribeNewsletter(data: NewsletterSubmission): Promise<NewsletterResponse> {
+  return apiRequest<NewsletterResponse>('/newsletter', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+// Package pricing retrieval
+export interface PackageInfo {
+  id: string;
+  name: string;
+  price: number;
+  duration: number;
+  features: string[];
+  maxGuests: number;
+  popular?: boolean;
+}
+
+export async function getPackages(): Promise<PackageInfo[]> {
+  return apiRequest<PackageInfo[]>('/packages');
+}
+
+// Availability check
+export interface AvailabilityCheck {
+  date: string;
+  time: string;
+  guests: number;
+  duration: number;
+}
+
+export interface AvailabilityResponse {
+  available: boolean;
+  alternatives?: {
+    date: string;
+    time: string;
+  }[];
+  message?: string;
+}
+
+export async function checkAvailability(data: AvailabilityCheck): Promise<AvailabilityResponse> {
+  return apiRequest<AvailabilityResponse>('/availability', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+// Testimonials retrieval
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  company?: string;
+  content: string;
+  rating: number;
+  avatar?: string;
+  date: string;
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  return apiRequest<Testimonial[]>('/testimonials');
+}
+
+// Gallery images retrieval
+export interface GalleryImage {
+  id: string;
+  url: string;
+  alt: string;
+  category: 'smash-room' | 'team-event' | 'corporate' | 'before-after';
+  caption?: string;
+}
+
+export async function getGalleryImages(): Promise<GalleryImage[]> {
+  return apiRequest<GalleryImage[]>('/gallery');
+}
+
+// Health check for API
+export async function healthCheck(): Promise<{ status: 'ok' | 'error'; timestamp: number }> {
+  return apiRequest<{ status: 'ok' | 'error'; timestamp: number }>('/health');
+}
 
 // Rate limiting helper
 class RateLimiter {

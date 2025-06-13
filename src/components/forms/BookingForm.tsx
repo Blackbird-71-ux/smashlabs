@@ -6,7 +6,8 @@ import { BookingFormData, LoadingState } from '@/types';
 import { FormField } from '@/components/ui/FormField';
 import { LoadingButton } from '@/components/ui/LoadingButton';
 import { useToast } from '@/components/ui/Toast';
-import { bookingApi, rateLimiter, sanitizeInput, isValidEmail, isValidPhone } from '@/lib/api';
+import { submitBooking, APIError } from '@/lib/api';
+import { sanitizeInput, isValidEmail, isValidPhone } from '@/lib/validation';
 
 export const BookingForm = () => {
   const [formData, setFormData] = useState<BookingFormData>({
@@ -111,12 +112,13 @@ export const BookingForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Rate limiting check
-    const clientId = `${formData.email}-booking`;
-    if (!rateLimiter.isAllowed(clientId)) {
+    // Basic client-side rate limiting
+    const lastSubmission = localStorage.getItem('lastBookingSubmission');
+    const now = Date.now();
+    if (lastSubmission && (now - parseInt(lastSubmission)) < 30000) { // 30 seconds
       showError(
         'Too Many Requests',
-        'Please wait before submitting another booking request.'
+        'Please wait 30 seconds before submitting another booking request.'
       );
       return;
     }
@@ -129,15 +131,24 @@ export const BookingForm = () => {
     setLoadingState('loading');
 
     try {
-      // For now, simulate API call since backend isn't ready
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Submit to real API
+      const response = await submitBooking({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        date: formData.date,
+        time: formData.time,
+        guests: parseInt(formData.guests) || 1,
+        package: formData.package,
+        message: formData.message
+      });
       
-      // Simulate success
-      const confirmationNumber = `SL${Date.now().toString().slice(-6)}`;
+      // Record successful submission for rate limiting
+      localStorage.setItem('lastBookingSubmission', now.toString());
       
       success(
         'Booking Submitted!',
-        `Your booking has been submitted. Confirmation number: ${confirmationNumber}`
+        `Your booking has been confirmed! Booking ID: ${response.bookingId}`
       );
       
       // Reset form
@@ -156,10 +167,19 @@ export const BookingForm = () => {
       setLoadingState('success');
     } catch (err) {
       console.error('Booking submission error:', err);
-      showError(
-        'Booking Failed',
-        'An unexpected error occurred. Please try again.'
-      );
+      
+      if (err instanceof APIError) {
+        if (err.status === 409) {
+          showError('Time Slot Unavailable', 'This time slot is already booked. Please select a different time.');
+        } else if (err.status === 400) {
+          showError('Invalid Booking Data', err.message);
+        } else {
+          showError('Booking Failed', err.message);
+        }
+      } else {
+        showError('Booking Failed', 'An unexpected error occurred. Please try again.');
+      }
+      
       setLoadingState('error');
     }
   };
