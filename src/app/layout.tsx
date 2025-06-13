@@ -123,7 +123,7 @@ const jsonLd = {
     'https://www.instagram.com/smashlabs_official',
     'https://twitter.com/smashlabs_hq',
     'https://www.youtube.com/user/smashlabs-official',
-    'https://www.linkedin.com/company/smashlabs-inc',
+    'https://www.linkedin.com/company/smashlabx',
   ],
   aggregateRating: {
     '@type': 'AggregateRating',

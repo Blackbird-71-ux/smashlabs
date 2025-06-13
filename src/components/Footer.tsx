@@ -23,7 +23,7 @@ export default function Footer() {
       { label: 'Facebook', href: 'https://facebook.com/smashlabs.official', icon: 'facebook' },
       { label: 'Instagram', href: 'https://instagram.com/smashlabs.official', icon: 'instagram' },
       { label: 'Twitter', href: 'https://twitter.com/smashlabs_hq', icon: 'twitter' },
-      { label: 'LinkedIn', href: 'https://linkedin.com/company/smashlabs_inc', icon: 'linkedin' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/smashlabx', icon: 'linkedin' },
     ],
   };
 
