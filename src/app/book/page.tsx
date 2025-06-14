@@ -52,23 +52,16 @@ export default function BookingPage() {
           <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
             Transform your team's wellness and boost morale with SmashLabs corporate packages.
           </p>
-          <div className="flex flex-col md:flex-row gap-6 justify-center mb-12">
+          <div className="flex justify-center mb-12">
             <Link href="/packages">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, rotateX: 5 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-pink-600 to-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform"
+                className="bg-gradient-to-r from-red-600 via-pink-600 to-purple-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
               >
-                Book Your Corporate Event
+                🏢 Book Corporate Event 💥
               </motion.button>
             </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-transparent border-2 border-pink-500 hover:border-pink-600 text-pink-500 hover:text-pink-600 font-bold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105"
-            >
-              Get a Custom Quote
-            </motion.button>
           </div>
         </motion.div>
 

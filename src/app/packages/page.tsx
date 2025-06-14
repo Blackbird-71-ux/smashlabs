@@ -6,9 +6,9 @@ import { FaHammer, FaMusic, FaGlassMartiniAlt, FaUsers } from 'react-icons/fa';
 
 const packages = [
   {
-    id: 'solo',
-    name: 'Solo Smash',
-    price: '₹1,999',
+    id: 'quick',
+    name: 'Quick Smash',
+    price: '₹2,500',
     duration: '30 minutes',
     description: 'Perfect for individual stress relief',
     features: [
@@ -21,9 +21,9 @@ const packages = [
     icon: FaHammer,
   },
   {
-    id: 'group',
-    name: 'Group Smash',
-    price: '₹3,999',
+    id: 'team',
+    name: 'Team Smash',
+    price: '₹4,500',
     duration: '60 minutes',
     description: 'Great for friends and small groups',
     features: [
@@ -38,12 +38,12 @@ const packages = [
   },
   {
     id: 'corporate',
-    name: 'Corporate Experience',
-    price: 'Contact Us',
-    duration: 'Custom',
+    name: 'Corporate Smash',
+    price: '₹6,500',
+    duration: '90 minutes',
     description: 'Team building and stress relief for companies',
     features: [
-      'Multiple smash rooms (custom duration)',
+      'Multiple smash rooms (90 mins)',
       'Professional sledgehammers & equipment',
       'Custom corporate playlists',
       'Private chill zone with healthy menu',

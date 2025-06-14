@@ -65,7 +65,7 @@ export default function Footer() {
                 className="transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
               />
-              <span className="text-3xl font-extrabold tracking-tight text-primary-500 group-hover:text-primary-400 transition-colors">SMASHLABS</span>
+              <span className="text-3xl font-extrabold tracking-tight text-primary-500 group-hover:text-primary-400 transition-colors"><span className="text-red-500">SMASH</span>LABS</span>
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Experience the ultimate stress relief and team building activity at SmashLabs. Unleash your inner beast!

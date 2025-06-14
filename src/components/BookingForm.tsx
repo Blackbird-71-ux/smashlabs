@@ -42,10 +42,9 @@ export default function BookingForm() {
   const [showSmashAnimation, setShowSmashAnimation] = useState(false);
 
   const packages = [
-    { value: 'standard', label: 'Standard Smash (30 min) - $49' },
-    { value: 'premium', label: 'Premium Smash (60 min) - $89' },
-    { value: 'ultimate', label: 'Ultimate Smash (90 min) - $129' },
-    { value: 'group', label: 'Group Package (2-6 people) - $199' }
+    { value: 'quick', label: 'Quick Smash (30 min) - ₹2,500' },
+    { value: 'team', label: 'Team Smash (60 min) - ₹4,500' },
+    { value: 'corporate', label: 'Corporate Smash (90 min) - ₹6,500' }
   ];
 
   const timeSlots = [

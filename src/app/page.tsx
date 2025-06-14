@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock, FaTools, FaChevronDown, FaUserShield, FaUserTie, FaArrowUp, FaStar, FaQuoteLeft, FaInstagram, FaTwitter, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'
+import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock, FaTools, FaChevronDown, FaUserShield, FaUserTie, FaArrowUp, FaStar, FaQuoteLeft, FaInstagram, FaTwitter, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope, FaCoffee } from 'react-icons/fa'
 import { useEffect, useState, useRef } from 'react'
 import { trackButtonClick, trackFormSubmit, trackVideoInteraction, trackBookingAttempt, trackContactAttempt, trackError } from '@/lib/analytics'
 import { GridSkeleton, TextSkeleton, Skeleton } from '@/components/Skeleton'
@@ -332,7 +332,7 @@ export default function Home() {
             className="text-center relative z-10"
           >
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
-              Unleash Your Inner Beast
+              Unleash Your Inner <span className="text-red-500">Beast</span>
             </h1>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">
               <span className="text-red-500">Smash</span>. Destroy. <span className="text-red-500">Conquer</span>.
@@ -455,7 +455,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Why Choose <span className="text-red-500">Smash</span>Labs?
+              Why Choose <span className="text-red-500">SmashLabs</span>?
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Experience the perfect blend of adrenaline, safety, and premium service.
@@ -542,6 +542,13 @@ export default function Home() {
                     <p className="text-gray-400 text-sm">Customizable packages for individuals, groups, and corporate events.</p>
                   </div>
                 </li>
+                <li className="flex items-start gap-4">
+                  <FaCoffee className="w-7 h-7 text-rage-400 mt-1" />
+                  <div>
+                    <span className="font-semibold text-white">Chill Zone</span>
+                    <p className="text-gray-400 text-sm">Relax after smashing with healthy juices, gourmet snacks, and beverages in our serene environment.</p>
+                  </div>
+                </li>
               </ul>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -594,7 +601,7 @@ export default function Home() {
             className="text-center max-w-4xl mx-auto"
           >
             <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
-              The Crackhead Version of RedBull
+              The Crackhead Version of <span className="text-red-500">RedBull</span>
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-6 max-w-4xl mx-auto">
               Red Bull gives you wings. SmashLabs gives you guts. We're here for the high-achievers, the risk-takers, and the game-changers who operate at 110% and need a release valve that matches their intensity. We're not just a 'rage room'; we are a brand that champions radical self-care and cathartic release.
@@ -622,55 +629,7 @@ export default function Home() {
 
 
 
-      {/* Chill Zone Section */}
-      <section className="py-24 bg-gradient-to-b from-dark-900 to-dark-950 relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise opacity-5" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-                The Complete Experience
-              </h2>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                The adrenaline rush is just the first half. After you've smashed it all, retreat to the Chill Zone. This is where you put the pieces back together—metaphorically, of course. Relax with healthy, refreshing juices, gourmet snacks, and beverages in a serene environment. Complete the experience from total chaos to total calm.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="glass-card p-8 rounded-xl">
-                <h3 className="text-2xl font-bold text-white mb-4">Chill Zone Features</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-rage-500 rounded-full"></div>
-                    <span>Healthy, refreshing juices</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-rage-500 rounded-full"></div>
-                    <span>Gourmet snacks & beverages</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-rage-500 rounded-full"></div>
-                    <span>Serene, calming environment</span>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-rage-500 rounded-full"></div>
-                    <span>Perfect for team debriefing</span>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Action Section */}
       <section id="booknow" className="section bg-black/40 backdrop-blur-md py-24 relative overflow-hidden">
@@ -761,7 +720,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              What Our Customers Say
+              What Our <span className="text-red-500">Customers</span> Say
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Don't just take our word for it. Here's what our satisfied customers have to say about their SmashLabs experience.
@@ -904,7 +863,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              SmashLabs Gallery
+              <span className="text-red-500">SmashLabs</span> Gallery
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Take a look at our state-of-the-art facilities and the exhilarating experiences we offer.
@@ -1019,7 +978,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Frequently Asked Questions
+              Frequently Asked <span className="text-red-500">Questions</span>
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Everything you need to know about your SmashLabs experience.
