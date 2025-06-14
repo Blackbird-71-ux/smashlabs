@@ -3,22 +3,28 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 export default function BookingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900">
+      {/* Navigation */}
+      <Navbar />
+      
       {/* Header */}
       <div className="bg-black/50 backdrop-blur-sm border-b border-red-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Book Your <span className="text-red-500">Smash Session</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+              Book Your <span className="text-red-500">Smash</span>
+              <br className="hidden sm:block" />
+              <span className="block sm:inline"> Session</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
               Ready to unleash your stress? Book your session now and experience the ultimate stress relief!
             </p>
           </motion.div>
@@ -55,17 +61,31 @@ export default function BookingPage() {
             
             <div className="text-gray-400">or</div>
             
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                href="/contact"
-                className="inline-block px-8 py-4 bg-white/10 border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 transition-all duration-200"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Contact Us Directly
-              </Link>
-            </motion.div>
+                <Link
+                  href="/contact"
+                  className="inline-block px-8 py-4 bg-white/10 border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 transition-all duration-200"
+                >
+                  Contact Us Directly
+                </Link>
+              </motion.div>
+              
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  href="/"
+                  className="inline-block px-8 py-4 bg-gray-600/20 border border-gray-500/20 text-gray-300 font-medium rounded-lg hover:bg-gray-500/20 transition-all duration-200"
+                >
+                  ← Back to Home
+                </Link>
+              </motion.div>
+            </div>
           </div>
 
           <div className="mt-12 p-6 bg-white/5 rounded-lg border border-white/10">
