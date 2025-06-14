@@ -129,6 +129,8 @@ export default function BookingForm() {
         participants: formData.participants === '6+' ? 6 : parseInt(formData.participants),
         specialRequests: formData.specialRequests || ''
       };
+
+      console.log('Sending booking data:', backendData);
       
       const response = await fetch('https://smashlabs-backend-production.up.railway.app/api/bookings', {
         method: 'POST',
@@ -145,7 +147,19 @@ export default function BookingForm() {
       } else {
         const errorData = await response.json();
         console.error('Booking failed:', errorData);
-        alert(`Booking failed: ${errorData.message || 'Please try again.'}`);
+        console.error('Response status:', response.status);
+        console.error('Response headers:', response.headers);
+        
+        let errorMessage = 'Please try again.';
+        if (errorData.message) {
+          errorMessage = errorData.message;
+        } else if (errorData.error) {
+          errorMessage = errorData.error;
+        } else if (errorData.errors && errorData.errors.length > 0) {
+          errorMessage = errorData.errors.map((err: any) => err.msg || err.message).join(', ');
+        }
+        
+        alert(`Booking failed: ${errorMessage}`);
       }
     } catch (error) {
       console.error('Booking error:', error);
