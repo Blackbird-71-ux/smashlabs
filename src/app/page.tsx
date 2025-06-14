@@ -350,7 +350,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection('booknow')}
-                className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
               >
                 Book Your Smash Session
               </motion.button>
@@ -358,7 +358,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection('experience')}
-                className="btn btn-outline text-lg px-8 py-4 rounded-full border-2 border-white text-white hover:bg-white/10 font-bold transition-all duration-300"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
               >
                 Learn More
               </motion.button>
@@ -474,7 +474,7 @@ export default function Home() {
             >
               <button
                 onClick={() => scrollToSection('booknow')}
-                className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300 transform hover:scale-105"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
               >
                 Book Your Experience
               </button>
@@ -536,7 +536,7 @@ export default function Home() {
                   trackEvent('experience_book_click');
                   scrollToSection('booknow');
                 }}
-                className="px-8 py-4 bg-gradient-to-r from-rage-500 to-rage-600 text-white rounded-lg font-semibold hover:from-rage-600 hover:to-rage-700 transition-all duration-300 shadow-lg hover:shadow-rage-500/20"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
               >
                 Book Your Experience
               </motion.button>
@@ -666,7 +666,7 @@ export default function Home() {
                   href="/book"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-block px-8 py-4 bg-gradient-to-r from-rage-500 to-rage-600 text-white rounded-lg font-semibold hover:from-rage-600 hover:to-rage-700 transition-all duration-300 shadow-lg hover:shadow-rage-500/20"
+                  className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm inline-block"
                 >
                   Book Now 🔥
                 </motion.a>
@@ -693,7 +693,7 @@ export default function Home() {
                   href="/register"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/20"
+                  className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm inline-block"
                 >
                   Register Interest 🚀
                 </motion.a>

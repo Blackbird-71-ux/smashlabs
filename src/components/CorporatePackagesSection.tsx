@@ -17,7 +17,7 @@ export default function CorporatePackagesSection() {
                 <li>• Basic wellness consultation</li>
               </ul>
             </div>
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm">
               Request Quote
             </button>
           </div>
@@ -28,15 +28,14 @@ export default function CorporatePackagesSection() {
               <h3 className="text-2xl font-semibold mb-4 text-red-400">Corporate Catalyst</h3>
               <p className="text-gray-300 mb-6">Comprehensive team solution</p>
               <ul className="list-none space-y-2 text-gray-300 text-left mb-8">
-                <li>• 4-hour premium experience</li>
-                <li>• Up to 25 team members</li>
-                <li>• Premium safety equipment</li>
-                <li>• Gourmet refreshments</li>
-                <li>• Wellness workshop included</li>
-                <li>• Credit or debit card</li>
+                <li>• 60-minute session</li>
+                <li>• Up to 10 participants</li>
+                <li>• Premium safety gear</li>
+                <li>• Team-building exercises</li>
+                <li>• Full meal included</li>
               </ul>
             </div>
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm">
               Request Quote
             </button>
           </div>
@@ -47,17 +46,15 @@ export default function CorporatePackagesSection() {
               <h3 className="text-2xl font-semibold mb-4 text-red-400">Executive Edge</h3>
               <p className="text-gray-300 mb-6">Full-scale corporate program</p>
               <ul className="list-none space-y-2 text-gray-300 text-left mb-8">
-                <li>• Full-day premium experience</li>
-                <li>• Up to 50 team members</li>
-                <li>• Premium safety equipment</li>
-                <li>• Gourmet refreshments</li>
-                <li>• Wellness workshop</li>
-                <li>• Team building activities</li>
+                <li>• 90-minute session</li>
+                <li>• Up to 15 participants</li>
+                <li>• VIP safety gear</li>
                 <li>• Executive coaching session</li>
-                <li>• Customized wellness program</li>
+                <li>• Gourmet catering</li>
+                <li>• Private lounge access</li>
               </ul>
             </div>
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm">
               Request Quote
             </button>
           </div>
