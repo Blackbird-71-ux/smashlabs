@@ -855,7 +855,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Booking Section */}
+      {/* Action Section */}
       <section id="booknow" className="section bg-gradient-to-b from-dark-950 to-dark-900 py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
@@ -866,201 +866,85 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Book Your Smash Session
+              Ready to Smash Your Stress?
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Ready to unleash your inner beast? Book your session now and prepare for an unforgettable experience.
+              Choose your path to stress relief and join the SmashLabs community today!
             </p>
           </motion.div>
 
-          <form onSubmit={handleBookingSubmit} className="max-w-3xl mx-auto space-y-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <label htmlFor="name" className="label text-lg mb-2">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleBookingChange}
-                  className="input text-lg py-4"
-                  placeholder="Your name"
-                />
-                {errors.name && (
-                  <p className="mt-2 text-rage-500 text-sm">{errors.name}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="email" className="label text-lg mb-2">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleBookingChange}
-                  className="input text-lg py-4"
-                  placeholder="your@email.com"
-                />
-                {errors.email && (
-                  <p className="mt-2 text-rage-500 text-sm">{errors.email}</p>
-                )}
-              </div>
-            </div>
-            <div>
-              <label htmlFor="phone" className="label text-lg mb-2">Phone Number</label>
-              <div className="flex">
-                <div className="flex items-center px-4 bg-dark-800/50 border border-r-0 border-dark-700/50 rounded-l-lg text-gray-300">
-                  +91
-                </div>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleBookingChange}
-                  className="input text-lg py-4 rounded-l-none flex-1"
-                  placeholder="9876543210"
-                  maxLength={10}
-                />
-              </div>
-              {errors.phone && (
-                <p className="mt-2 text-rage-500 text-sm">{errors.phone}</p>
-              )}
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <label htmlFor="date" className="label text-lg mb-2">Date</label>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleBookingChange}
-                  className="input text-lg py-4"
-                  min={new Date().toISOString().split('T')[0]}
-                />
-                {errors.date && (
-                  <p className="mt-2 text-rage-500 text-sm">{errors.date}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="time" className="label text-lg mb-2">Preferred Time</label>
-                <select
-                  id="time"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleBookingChange}
-                  className="input text-lg py-4"
-                >
-                  <option value="">Select a time</option>
-                  <option value="09:00">9:00 AM</option>
-                  <option value="09:15">9:15 AM</option>
-                  <option value="09:30">9:30 AM</option>
-                  <option value="09:45">9:45 AM</option>
-                  <option value="10:00">10:00 AM</option>
-                  <option value="10:15">10:15 AM</option>
-                  <option value="10:30">10:30 AM</option>
-                  <option value="10:45">10:45 AM</option>
-                  <option value="11:00">11:00 AM</option>
-                  <option value="11:15">11:15 AM</option>
-                  <option value="11:30">11:30 AM</option>
-                  <option value="11:45">11:45 AM</option>
-                  <option value="12:00">12:00 PM</option>
-                  <option value="12:15">12:15 PM</option>
-                  <option value="12:30">12:30 PM</option>
-                  <option value="12:45">12:45 PM</option>
-                  <option value="13:00">1:00 PM</option>
-                  <option value="13:15">1:15 PM</option>
-                  <option value="13:30">1:30 PM</option>
-                  <option value="13:45">1:45 PM</option>
-                  <option value="14:00">2:00 PM</option>
-                  <option value="14:15">2:15 PM</option>
-                  <option value="14:30">2:30 PM</option>
-                  <option value="14:45">2:45 PM</option>
-                  <option value="15:00">3:00 PM</option>
-                  <option value="15:15">3:15 PM</option>
-                  <option value="15:30">3:30 PM</option>
-                  <option value="15:45">3:45 PM</option>
-                  <option value="16:00">4:00 PM</option>
-                  <option value="16:15">4:15 PM</option>
-                  <option value="16:30">4:30 PM</option>
-                  <option value="16:45">4:45 PM</option>
-                  <option value="17:00">5:00 PM</option>
-                  <option value="17:15">5:15 PM</option>
-                  <option value="17:30">5:30 PM</option>
-                  <option value="17:45">5:45 PM</option>
-                  <option value="18:00">6:00 PM</option>
-                  <option value="18:15">6:15 PM</option>
-                  <option value="18:30">6:30 PM</option>
-                  <option value="18:45">6:45 PM</option>
-                  <option value="19:00">7:00 PM</option>
-                  <option value="19:15">7:15 PM</option>
-                  <option value="19:30">7:30 PM</option>
-                  <option value="19:45">7:45 PM</option>
-                  <option value="20:00">8:00 PM</option>
-                </select>
-                {errors.time && (
-                  <p className="mt-2 text-rage-500 text-sm">{errors.time}</p>
-                )}
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <label htmlFor="guests" className="label text-lg mb-2">Number of Guests</label>
-                <input
-                  type="number"
-                  id="guests"
-                  name="guests"
-                  value={formData.guests}
-                  onChange={handleBookingChange}
-                  className="input text-lg py-4"
-                  min="1"
-                  max="20"
-                />
-                {errors.guests && (
-                  <p className="mt-2 text-rage-500 text-sm">{errors.guests}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="package" className="label text-lg mb-2">Package</label>
-                <select
-                  id="package"
-                  name="package"
-                  value={formData.package}
-                  onChange={handleBookingChange}
-                  className="input text-lg py-4"
-                >
-                  <option value="basic">Quick Smash</option>
-                  <option value="group">Team Smash</option>
-                  <option value="corporate">Corporate Smash</option>
-                </select>
-                {errors.package && (
-                  <p className="mt-2 text-rage-500 text-sm">{errors.package}</p>
-                )}
-              </div>
-            </div>
-            <div>
-              <label htmlFor="message" className="label text-lg mb-2">Additional Notes</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleBookingChange}
-                className="input text-lg h-40 py-4"
-                placeholder="Tell us anything else we should know..."
-              />
-            </div>
-            <motion.button
-              whileHover={!isBookingLoading ? { scale: 1.02 } : {}}
-              whileTap={!isBookingLoading ? { scale: 0.98 } : {}}
-              type="submit"
-              disabled={isBookingLoading}
-              className="btn btn-primary w-full text-lg py-5 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Book Session Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
             >
-              {isBookingLoading && <LoadingSpinner size="sm" color="white" />}
-              {isBookingLoading ? 'Submitting...' : 'Book Now'}
-            </motion.button>
-          </form>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-rage-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <FaCalendarAlt className="w-8 h-8 text-rage-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Book Your Session</h3>
+                <p className="text-gray-300 mb-6">
+                  Ready to smash? Book your stress relief session now and experience the ultimate adrenaline rush!
+                </p>
+                <motion.a
+                  href="/book"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block px-8 py-4 bg-gradient-to-r from-rage-500 to-rage-600 text-white rounded-lg font-semibold hover:from-rage-600 hover:to-rage-700 transition-all duration-300 shadow-lg hover:shadow-rage-500/20"
+                >
+                  Book Now 🔥
+                </motion.a>
+              </div>
+            </motion.div>
+
+            {/* Join Community Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-blue-500/50 transition-all duration-300"
+            >
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <FaUsers className="w-8 h-8 text-blue-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Join Our Community</h3>
+                <p className="text-gray-300 mb-6">
+                  Be the first to know about our launch, exclusive offers, and stress-busting events!
+                </p>
+                <motion.a
+                  href="/register"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/20"
+                >
+                  Register Interest 🚀
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Admin Access */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center mt-12"
+          >
+            <motion.a
+              href="/admin"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-6 py-3 bg-dark-800/50 text-gray-300 rounded-lg font-medium hover:bg-dark-700/50 transition-all duration-300 border border-dark-700/50 hover:border-gray-500/50"
+            >
+              Admin Dashboard 📊
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 

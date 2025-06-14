@@ -45,15 +45,28 @@ export default function AdminDashboard() {
   const fetchBookings = async (page = 1) => {
     try {
       setLoading(true);
+      console.log('🔍 Fetching bookings from admin dashboard...');
+      
       const response = await fetch(
-        `https://smashlabs-backend-production.up.railway.app/api/bookings?page=${page}&limit=10`
+        `https://smashlabs-backend-production.up.railway.app/api/bookings?page=${page}&limit=10`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
       
+      console.log('📡 Response status:', response.status);
+      
       if (!response.ok) {
-        throw new Error('Failed to fetch bookings');
+        const errorText = await response.text();
+        console.error('❌ API Error:', errorText);
+        throw new Error(`Failed to fetch bookings: ${response.status}`);
       }
 
       const data: BookingResponse = await response.json();
+      console.log('📊 Bookings data:', data);
       
       if (data.success) {
         setBookings(data.data.bookings);
