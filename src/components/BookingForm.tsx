@@ -86,8 +86,16 @@ export default function BookingForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
+    console.log('=== BOOKING FORM DEBUG ===');
+    console.log('Form data before validation:', formData);
     
+    if (!validateForm()) {
+      console.log('❌ Form validation failed');
+      console.log('Validation errors:', errors);
+      return;
+    }
+    
+    console.log('✅ Form validation passed');
     setIsLoading(true);
     
     try {
@@ -116,6 +124,25 @@ export default function BookingForm() {
       const selectedPackage = packageMapping[formData.package];
       const mappedTime = timeMapping[formData.time];
 
+      console.log('Package mapping result:', selectedPackage);
+      console.log('Time mapping result:', mappedTime);
+
+      if (!selectedPackage) {
+        console.error('❌ Invalid package selected:', formData.package);
+        alert(`Invalid package selected: ${formData.package}`);
+        return;
+      }
+
+      if (!mappedTime) {
+        console.error('❌ Invalid time selected:', formData.time);
+        alert(`Invalid time selected: ${formData.time}`);
+        return;
+      }
+
+      // Convert date to ISO format for backend
+      const dateObj = new Date(formData.date + 'T10:00:00.000Z');
+      console.log('Date conversion:', formData.date, '→', dateObj.toISOString());
+
       const backendData = {
         customerName: formData.name,
         customerEmail: formData.email,
@@ -123,14 +150,15 @@ export default function BookingForm() {
         packageType: selectedPackage.type,
         packageName: selectedPackage.name,
         packagePrice: selectedPackage.price,
-        preferredDate: formData.date,
+        preferredDate: dateObj.toISOString(),
         preferredTime: mappedTime,
         duration: selectedPackage.duration,
         participants: formData.participants === '6+' ? 6 : parseInt(formData.participants),
         specialRequests: formData.specialRequests || ''
       };
 
-      console.log('Sending booking data:', backendData);
+      console.log('📤 Sending booking data to backend:', backendData);
+      console.log('📡 API URL:', 'https://smashlabs-backend-production.up.railway.app/api/bookings');
       
       const response = await fetch('https://smashlabs-backend-production.up.railway.app/api/bookings', {
         method: 'POST',
@@ -138,7 +166,12 @@ export default function BookingForm() {
         body: JSON.stringify(backendData)
       });
       
+      console.log('📥 Response status:', response.status);
+      console.log('📥 Response ok:', response.ok);
+      
       if (response.ok) {
+        const successData = await response.json();
+        console.log('✅ Booking successful:', successData);
         setShowSmashAnimation(true);
         setTimeout(() => {
           setShowSmashAnimation(false);
@@ -146,9 +179,9 @@ export default function BookingForm() {
         }, 2000);
       } else {
         const errorData = await response.json();
-        console.error('Booking failed:', errorData);
-        console.error('Response status:', response.status);
-        console.error('Response headers:', response.headers);
+        console.error('❌ Booking failed - Response data:', errorData);
+        console.error('❌ Response status:', response.status);
+        console.error('❌ Response headers:', Object.fromEntries(response.headers.entries()));
         
         let errorMessage = 'Please try again.';
         if (errorData.message) {
@@ -159,13 +192,15 @@ export default function BookingForm() {
           errorMessage = errorData.errors.map((err: any) => err.msg || err.message).join(', ');
         }
         
+        console.error('❌ Final error message:', errorMessage);
         alert(`Booking failed: ${errorMessage}`);
       }
     } catch (error) {
-      console.error('Booking error:', error);
+      console.error('❌ Network/JavaScript error:', error);
       alert('Booking failed. Please check your connection and try again.');
     } finally {
       setIsLoading(false);
+      console.log('=== END BOOKING DEBUG ===');
     }
   };
 
