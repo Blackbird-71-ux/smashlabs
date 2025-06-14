@@ -213,11 +213,12 @@ export default function Home() {
 
   const handleBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const sanitizedValue = sanitizeInput(value);
+    // Temporarily remove sanitization to test spacebar issue
+    // const sanitizedValue = sanitizeInput(value);
     
     setFormData(prev => ({
       ...prev,
-      [name]: sanitizedValue
+      [name]: value // Use raw value instead of sanitized
     }));
     
     // Clear error for this field
@@ -228,11 +229,12 @@ export default function Home() {
 
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const sanitizedValue = sanitizeInput(value);
+    // Temporarily remove sanitization to test spacebar issue
+    // const sanitizedValue = sanitizeInput(value);
     
     setContactFormData(prev => ({
       ...prev,
-      [name]: sanitizedValue
+      [name]: value // Use raw value instead of sanitized
     }));
     
     // Clear error for this field
