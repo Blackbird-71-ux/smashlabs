@@ -8,8 +8,8 @@ export default function CallToActionSection() {
         <p className="text-lg text-gray-300 mb-8">
           Schedule a demo and experience the SmashLabs difference
         </p>
-        <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
-          Book Your Session Now
+        <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600 uppercase tracking-wide">
+          Book Session Now
         </button>
       </div>
     </section>

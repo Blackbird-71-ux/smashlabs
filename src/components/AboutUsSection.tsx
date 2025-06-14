@@ -7,8 +7,8 @@ export default function AboutUsSection() {
         <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
           SmashLabs was born from the idea that stress relief should be as intense as the stress itself. We provide a safe, controlled environment where you can unleash your frustrations and emerge refreshed.
         </p>
-        <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
-          Learn More About Us
+        <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600 uppercase tracking-wide">
+          Learn More
         </button>
       </div>
     </section>

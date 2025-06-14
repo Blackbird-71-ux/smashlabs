@@ -17,7 +17,7 @@ export default function CorporatePackagesSection() {
                 <li>• Basic wellness consultation</li>
               </ul>
             </div>
-            <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600">
               Request Quote
             </button>
           </div>
@@ -35,7 +35,7 @@ export default function CorporatePackagesSection() {
                 <li>• Full meal included</li>
               </ul>
             </div>
-            <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600">
               Request Quote
             </button>
           </div>
@@ -54,7 +54,7 @@ export default function CorporatePackagesSection() {
                 <li>• Private lounge access</li>
               </ul>
             </div>
-            <button className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600">
               Request Quote
             </button>
           </div>

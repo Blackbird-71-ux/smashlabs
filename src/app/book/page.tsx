@@ -55,11 +55,11 @@ export default function BookingPage() {
           <div className="flex justify-center mb-12">
             <Link href="/packages">
               <motion.button
-                whileHover={{ scale: 1.05, rotateX: 5 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600 uppercase tracking-wide"
               >
-                🏢 Book Corporate Event 💥
+                Book Corporate Event
               </motion.button>
             </Link>
           </div>

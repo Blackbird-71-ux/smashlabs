@@ -137,12 +137,12 @@ export default function BookingForm() {
           Your stress relief session has been booked! We'll send you a confirmation email shortly.
         </p>
         <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={resetForm}
-          className="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm"
+          className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-gray-600 hover:border-gray-500 uppercase tracking-wide"
         >
-          Book Another Session
+          Book Another
         </motion.button>
       </motion.div>
     );
@@ -349,16 +349,16 @@ export default function BookingForm() {
           whileTap={!isLoading ? { scale: 0.98 } : {}}
           type="submit"
           disabled={isLoading}
-          className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600 uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isLoading ? (
             <>
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-              Booking Your Smash...
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+              Booking...
             </>
           ) : (
             <>
-              💥 Book My Smash Session
+              💥 Book Session
             </>
           )}
         </motion.button>
