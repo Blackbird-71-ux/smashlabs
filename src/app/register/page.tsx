@@ -195,16 +195,18 @@ Additional Message: ${formData.message || 'None'}
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900">
       {/* Header */}
       <div className="bg-black/50 backdrop-blur-sm border-b border-red-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Join the <span className="text-red-500">SmashLabs</span> Community
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
+              Join the <span className="text-red-500">SmashLabs</span>
+              <br className="hidden sm:block" />
+              <span className="block sm:inline"> Community</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
               Be the first to know about our launch, exclusive offers, and stress-busting events!
             </p>
           </motion.div>

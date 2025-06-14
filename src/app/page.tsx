@@ -292,7 +292,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-dark-950 text-white">
+    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900 text-white">
       <CustomCursor />
               <SmashAnimation isActive={showSmashAnimation} type={smashType} />
       
@@ -407,7 +407,7 @@ export default function Home() {
       </motion.button>
 
       {/* Enhanced Stats Section */}
-      <section id="stats" className="section bg-gradient-to-b from-dark-900 to-dark-950 py-24 relative overflow-hidden">
+      <section id="stats" className="section bg-black/20 backdrop-blur-sm py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise-pattern opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -505,7 +505,7 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-16 sm:py-24 bg-dark-900">
+      <section id="experience" className="py-16 sm:py-24 bg-black/10 backdrop-blur-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
             <motion.div
@@ -583,7 +583,7 @@ export default function Home() {
       </section>
 
       {/* RedBull of India Section */}
-      <section id="lifestyle" className="section bg-gradient-to-b from-dark-900 to-dark-950 py-24 relative overflow-hidden">
+      <section id="lifestyle" className="section bg-black/30 backdrop-blur-sm py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise-pattern opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -621,7 +621,7 @@ export default function Home() {
       </section>
 
       {/* Packages Section */}
-      <section id="packages" className="section bg-gradient-to-b from-dark-950 to-dark-900 py-24 relative overflow-hidden">
+      <section id="packages" className="section bg-black/30 backdrop-blur-sm py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise-pattern opacity-10" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -856,7 +856,7 @@ export default function Home() {
       </section>
 
       {/* Action Section */}
-      <section id="booknow" className="section bg-gradient-to-b from-dark-950 to-dark-900 py-24 relative overflow-hidden">
+      <section id="booknow" className="section bg-black/40 backdrop-blur-md py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -949,7 +949,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 bg-gradient-to-b from-dark-900 to-dark-950 relative overflow-hidden">
+      <section id="testimonials" className="py-24 bg-black/20 backdrop-blur-sm relative overflow-hidden">
         <div className="absolute inset-0 bg-noise opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -1055,7 +1055,7 @@ export default function Home() {
       </section>
 
       {/* Social Media Section */}
-      <section className="py-16 bg-dark-950 relative overflow-hidden">
+      <section className="py-16 bg-black/20 backdrop-blur-sm relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-8">
             <h3 className="text-2xl font-bold text-white">Follow Us on Social Media</h3>
