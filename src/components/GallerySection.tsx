@@ -152,23 +152,36 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle keyboard events when lightbox is open
       if (!selectedImage) return;
+      
+      // Don't handle keyboard events if user is typing in an input field
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+        return;
+      }
       
       switch (e.key) {
         case 'Escape':
+          e.preventDefault();
           closeLightbox();
           break;
         case 'ArrowLeft':
+          e.preventDefault();
           navigateLightbox('prev');
           break;
         case 'ArrowRight':
+          e.preventDefault();
           navigateLightbox('next');
           break;
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    // Only add event listener when lightbox is open
+    if (selectedImage) {
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }
   }, [selectedImage, currentIndex, filteredImages]);
 
   if (loading) {
