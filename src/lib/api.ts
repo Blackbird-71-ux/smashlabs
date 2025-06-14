@@ -1,20 +1,113 @@
-import { BookingFormData, ContactFormData, ApiResponse } from '@/types';
+import { ApiResponse } from '@/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://smashlabs-backend-production.up.railway.app/api';
 
-// API error types
-export class APIError extends Error {
-  constructor(public status: number, message: string, public data?: any) {
+// Backend-specific response type
+export interface BackendResponse<T = any> extends ApiResponse<T> {
+  errors?: string[];
+  pagination?: {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    itemsPerPage: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+  };
+}
+
+// Booking Types
+export interface SmashLabsBooking {
+  _id: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  packageType: 'basic' | 'premium' | 'ultimate';
+  packageName: string;
+  packagePrice: number;
+  preferredDate: string;
+  preferredTime: 'morning' | 'afternoon' | 'evening';
+  duration: number;
+  participants: number;
+  specialRequests?: string;
+  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  paymentStatus: 'pending' | 'partial' | 'paid' | 'refunded';
+  bookingId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateBookingRequest {
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  packageType: 'basic' | 'premium' | 'ultimate';
+  packageName: string;
+  packagePrice: number;
+  preferredDate: string;
+  preferredTime: 'morning' | 'afternoon' | 'evening';
+  duration: number;
+  participants: number;
+  specialRequests?: string;
+}
+
+// Contact Types
+export interface SmashLabsContact {
+  _id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  inquiryType: 'general' | 'booking' | 'support' | 'partnership' | 'feedback';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  status: 'new' | 'in_progress' | 'resolved' | 'closed';
+  createdAt: string;
+}
+
+export interface CreateContactRequest {
+  name: string;
+  email: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  inquiryType: 'general' | 'booking' | 'support' | 'partnership' | 'feedback';
+}
+
+// Newsletter Types
+export interface SmashLabsNewsletter {
+  _id: string;
+  email: string;
+  name?: string;
+  status: 'active' | 'unsubscribed' | 'bounced' | 'spam';
+  interests: ('packages' | 'events' | 'promotions' | 'tips' | 'news')[];
+  frequency: 'daily' | 'weekly' | 'monthly' | 'special';
+  subscriptionDate: string;
+}
+
+export interface CreateNewsletterRequest {
+  email: string;
+  name?: string;
+  interests?: ('packages' | 'events' | 'promotions' | 'tips' | 'news')[];
+  frequency?: 'daily' | 'weekly' | 'monthly' | 'special';
+}
+
+// API Error Class
+export class SmashLabsApiError extends Error {
+  constructor(
+    public status: number,
+    public message: string,
+    public errors?: string[]
+  ) {
     super(message);
-    this.name = 'APIError';
+    this.name = 'SmashLabsApiError';
   }
 }
 
-// Generic API request handler
-async function apiRequest<T>(
+// Base API request function
+async function makeApiRequest<T>(
   endpoint: string,
   options: RequestInit = {}
-): Promise<T> {
+): Promise<BackendResponse<T>> {
   const url = `${API_BASE_URL}${endpoint}`;
   
   const config: RequestInit = {
@@ -27,239 +120,167 @@ async function apiRequest<T>(
 
   try {
     const response = await fetch(url, config);
-    
+    const data: BackendResponse<T> = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new APIError(
+      throw new SmashLabsApiError(
         response.status,
-        errorData.message || `HTTP ${response.status}: ${response.statusText}`,
-        errorData
+        data.message || data.error || 'API request failed',
+        data.errors
       );
     }
 
-    return await response.json();
+    return data;
   } catch (error) {
-    if (error instanceof APIError) {
+    if (error instanceof SmashLabsApiError) {
       throw error;
     }
     
     // Network or other errors
-    throw new APIError(
-      0,
+    throw new SmashLabsApiError(
+      500,
       error instanceof Error ? error.message : 'Network error occurred'
     );
   }
 }
 
-// Booking submission
-export interface BookingSubmission {
-  name: string;
-  email: string;
-  phone: string;
-  date: string;
-  time: string;
-  guests: number;
-  package: string;
-  message?: string;
-}
+// Booking API functions
+export const bookingApi = {
+  // Create new booking
+  create: async (data: CreateBookingRequest): Promise<BackendResponse<{ booking: SmashLabsBooking; bookingId: string }>> => {
+    return makeApiRequest('/bookings', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
 
-export interface BookingResponse {
-  success: boolean;
-  bookingId: string;
-  message: string;
-  estimatedPrice?: number;
-}
+  // Get booking by ID
+  getById: async (id: string): Promise<BackendResponse<SmashLabsBooking>> => {
+    return makeApiRequest(`/bookings/${id}`);
+  },
 
-export async function submitBooking(data: BookingSubmission): Promise<BookingResponse> {
-  return apiRequest<BookingResponse>('/bookings', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
-}
+  // Get booking by booking ID (public reference)
+  getByBookingId: async (bookingId: string): Promise<BackendResponse<SmashLabsBooking>> => {
+    return makeApiRequest(`/bookings/booking-id/${bookingId}`);
+  },
 
-// Contact form submission
-export interface ContactSubmission {
-  name: string;
-  email: string;
-  message: string;
-  source?: string;
-}
-
-export interface ContactResponse {
-  success: boolean;
-  ticketId: string;
-  message: string;
-}
-
-export async function submitContact(data: ContactSubmission): Promise<ContactResponse> {
-  return apiRequest<ContactResponse>('/contact', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
-}
-
-// Newsletter subscription
-export interface NewsletterSubmission {
-  email: string;
-  source?: string;
-}
-
-export interface NewsletterResponse {
-  success: boolean;
-  message: string;
-}
-
-export async function subscribeNewsletter(data: NewsletterSubmission): Promise<NewsletterResponse> {
-  return apiRequest<NewsletterResponse>('/newsletter', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
-}
-
-// Package pricing retrieval
-export interface PackageInfo {
-  id: string;
-  name: string;
-  price: number;
-  duration: number;
-  features: string[];
-  maxGuests: number;
-  popular?: boolean;
-}
-
-export async function getPackages(): Promise<PackageInfo[]> {
-  return apiRequest<PackageInfo[]>('/packages');
-}
-
-// Availability check
-export interface AvailabilityCheck {
-  date: string;
-  time: string;
-  guests: number;
-  duration: number;
-}
-
-export interface AvailabilityResponse {
-  available: boolean;
-  alternatives?: {
-    date: string;
-    time: string;
-  }[];
-  message?: string;
-}
-
-export async function checkAvailability(data: AvailabilityCheck): Promise<AvailabilityResponse> {
-  return apiRequest<AvailabilityResponse>('/availability', {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
-}
-
-// Testimonials retrieval
-export interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  company?: string;
-  content: string;
-  rating: number;
-  avatar?: string;
-  date: string;
-}
-
-export async function getTestimonials(): Promise<Testimonial[]> {
-  return apiRequest<Testimonial[]>('/testimonials');
-}
-
-// Gallery images retrieval
-export interface GalleryImage {
-  id: string;
-  url: string;
-  alt: string;
-  category: 'smash-room' | 'team-event' | 'corporate' | 'before-after';
-  caption?: string;
-}
-
-export async function getGalleryImages(): Promise<GalleryImage[]> {
-  return apiRequest<GalleryImage[]>('/gallery');
-}
-
-// Health check for API
-export async function healthCheck(): Promise<{ status: 'ok' | 'error'; timestamp: number }> {
-  return apiRequest<{ status: 'ok' | 'error'; timestamp: number }>('/health');
-}
-
-// Rate limiting helper
-class RateLimiter {
-  private requests: Map<string, number[]> = new Map();
-  private maxRequests: number;
-  private windowMs: number;
-
-  constructor(maxRequests = 5, windowMs = 60000) {
-    this.maxRequests = maxRequests;
-    this.windowMs = windowMs;
-  }
-
-  isAllowed(key: string): boolean {
-    const now = Date.now();
-    const requests = this.requests.get(key) || [];
-    
-    // Remove old requests outside the window
-    const validRequests = requests.filter(time => now - time < this.windowMs);
-    
-    if (validRequests.length >= this.maxRequests) {
-      return false;
+  // Get all bookings with pagination
+  getAll: async (params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    packageType?: string;
+    dateFrom?: string;
+    dateTo?: string;
+  }): Promise<BackendResponse<{ bookings: SmashLabsBooking[]; pagination: any }>> => {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined) {
+          searchParams.append(key, value.toString());
+        }
+      });
     }
+    const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
+    return makeApiRequest(`/bookings${query}`);
+  },
+};
 
-    // Add current request
-    validRequests.push(now);
-    this.requests.set(key, validRequests);
-    
-    return true;
-  }
+// Contact API functions
+export const contactApi = {
+  // Create new contact
+  create: async (data: CreateContactRequest): Promise<BackendResponse<{ id: string; status: string; createdAt: string }>> => {
+    return makeApiRequest('/contact', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
 
-  getRemainingRequests(key: string): number {
-    const now = Date.now();
-    const requests = this.requests.get(key) || [];
-    const validRequests = requests.filter(time => now - time < this.windowMs);
-    
-    return Math.max(0, this.maxRequests - validRequests.length);
-  }
-}
+  // Get contact by ID
+  getById: async (id: string): Promise<BackendResponse<SmashLabsContact>> => {
+    return makeApiRequest(`/contact/${id}`);
+  },
 
-export const rateLimiter = new RateLimiter(
-  parseInt(process.env.RATE_LIMIT_MAX || '5'),
-  parseInt(process.env.RATE_LIMIT_WINDOW || '60000')
-);
+  // Get all contacts with pagination (admin)
+  getAll: async (params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    inquiryType?: string;
+    priority?: string;
+  }): Promise<BackendResponse<{ contacts: SmashLabsContact[]; pagination: any }>> => {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined) {
+          searchParams.append(key, value.toString());
+        }
+      });
+    }
+    const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
+    return makeApiRequest(`/contact${query}`);
+  },
+};
 
-// Input sanitization
+// Newsletter API functions
+export const newsletterApi = {
+  // Subscribe to newsletter
+  subscribe: async (data: CreateNewsletterRequest): Promise<BackendResponse<SmashLabsNewsletter>> => {
+    return makeApiRequest('/newsletter/subscribe', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  // Unsubscribe from newsletter
+  unsubscribe: async (email: string, reason?: string, feedback?: string): Promise<BackendResponse<any>> => {
+    return makeApiRequest('/newsletter/unsubscribe', {
+      method: 'POST',
+      body: JSON.stringify({ email, reason, feedback }),
+    });
+  },
+
+  // Update preferences
+  updatePreferences: async (id: string, data: Partial<CreateNewsletterRequest>): Promise<BackendResponse<SmashLabsNewsletter>> => {
+    return makeApiRequest(`/newsletter/${id}/preferences`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+};
+
+// Health check
+export const healthApi = {
+  check: async (): Promise<BackendResponse<{ status: string; timestamp: string; uptime: number; environment: string }>> => {
+    return makeApiRequest('/health', { method: 'GET' });
+  },
+};
+
+// Utility functions
 export function sanitizeInput(input: string): string {
-  return input
-    .trim()
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+\s*=/gi, '') // Remove event handlers
-    .replace(/[<>]/g, ''); // Remove < and > characters
+  return input.trim().replace(/[<>]/g, '');
 }
 
-// Validate email format
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-// Validate phone format
 export function isValidPhone(phone: string): boolean {
   const phoneRegex = /^\+?[\d\s\-\(\)]{10,}$/;
   return phoneRegex.test(phone);
 }
 
-// Format phone number
 export function formatPhoneNumber(phone: string): string {
-  const cleaned = phone.replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-  if (match) {
-    return `(${match[1]}) ${match[2]}-${match[3]}`;
-  }
-  return phone;
-} 
+  return phone.replace(/\D/g, '');
+}
+
+// Main API export
+export const smashLabsApi = {
+  booking: bookingApi,
+  contact: contactApi,
+  newsletter: newsletterApi,
+  health: healthApi,
+};
+
+export default smashLabsApi; 
