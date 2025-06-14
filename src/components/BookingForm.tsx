@@ -91,10 +91,49 @@ export default function BookingForm() {
     setIsLoading(true);
     
     try {
+      // Map frontend data to backend expected format
+      const packageMapping: { [key: string]: { type: string; name: string; price: number; duration: number } } = {
+        'quick': { type: 'basic', name: 'Quick Smash (30 min)', price: 2500, duration: 30 },
+        'team': { type: 'premium', name: 'Team Smash (60 min)', price: 4500, duration: 60 },
+        'corporate': { type: 'ultimate', name: 'Corporate Smash (90 min)', price: 6500, duration: 90 }
+      };
+
+      // Map time slots to time periods
+      const timeMapping: { [key: string]: string } = {
+        '10:00 AM': 'morning',
+        '11:00 AM': 'morning',
+        '12:00 PM': 'afternoon',
+        '1:00 PM': 'afternoon',
+        '2:00 PM': 'afternoon',
+        '3:00 PM': 'afternoon',
+        '4:00 PM': 'afternoon',
+        '5:00 PM': 'evening',
+        '6:00 PM': 'evening',
+        '7:00 PM': 'evening',
+        '8:00 PM': 'evening'
+      };
+
+      const selectedPackage = packageMapping[formData.package];
+      const mappedTime = timeMapping[formData.time];
+
+      const backendData = {
+        customerName: formData.name,
+        customerEmail: formData.email,
+        customerPhone: formData.phone,
+        packageType: selectedPackage.type,
+        packageName: selectedPackage.name,
+        packagePrice: selectedPackage.price,
+        preferredDate: formData.date,
+        preferredTime: mappedTime,
+        duration: selectedPackage.duration,
+        participants: formData.participants === '6+' ? 6 : parseInt(formData.participants),
+        specialRequests: formData.specialRequests || ''
+      };
+      
       const response = await fetch('https://smashlabs-backend-production.up.railway.app/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(backendData)
       });
       
       if (response.ok) {
@@ -104,11 +143,13 @@ export default function BookingForm() {
           setIsSuccess(true);
         }, 2000);
       } else {
-        alert('Booking failed. Please try again.');
+        const errorData = await response.json();
+        console.error('Booking failed:', errorData);
+        alert(`Booking failed: ${errorData.message || 'Please try again.'}`);
       }
     } catch (error) {
       console.error('Booking error:', error);
-      alert('Booking failed. Please try again.');
+      alert('Booking failed. Please check your connection and try again.');
     } finally {
       setIsLoading(false);
     }
