@@ -2,7 +2,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Navbar from '@/components/Navbar'
+import ConditionalNavbar from '@/components/ConditionalNavbar'
 import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 import ErrorBoundary from '@/components/ErrorBoundary'
@@ -219,7 +219,7 @@ export default function RootLayout({
         <AccessibilityProvider>
           <ToastProvider>
             <div className="flex min-h-screen flex-col">
-              <Navbar />
+              <ConditionalNavbar />
               <main id="main-content" className="flex-grow">
                 <ErrorBoundary>
                   {children}
