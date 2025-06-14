@@ -1,3 +1,5 @@
+import { FaStar } from 'react-icons/fa';
+
 export default function TestimonialsSection() {
   return (
     <section className="py-16 bg-black text-white text-center">
@@ -14,7 +16,7 @@ export default function TestimonialsSection() {
               "SmashLabs transformed our team's dynamics. The stress relief experience
               was exactly what we needed."
             </p>
-            <p className="font-semibold text-pink-400">- Sarah M., HR Director</p>
+            <p className="font-semibold text-red-400">- Sarah M., HR Director</p>
           </div>
 
           {/* Testimonial 2 */}
@@ -27,7 +29,12 @@ export default function TestimonialsSection() {
               "An innovative approach to corporate wellness. Our
               team left feeling refreshed and reconnected."
             </p>
-            <p className="font-semibold text-pink-400">- Michael R., CEO</p>
+            <div className="flex mb-4">
+              {[...Array(5)].map((_, i) => (
+                <FaStar key={i} className="text-yellow-400" />
+              ))}
+            </div>
+            <p className="font-semibold text-red-400">- Michael R., CEO</p>
           </div>
 
           {/* Testimonial 3 */}
@@ -41,7 +48,12 @@ export default function TestimonialsSection() {
               building. Highly recommended for any
               corporate team."
             </p>
-            <p className="font-semibold text-pink-400">- Lian K., Team Lead</p>
+            <div className="flex mb-4">
+              {[...Array(5)].map((_, i) => (
+                <FaStar key={i} className="text-yellow-400" />
+              ))}
+            </div>
+            <p className="font-semibold text-red-400">- Lian K., Team Lead</p>
           </div>
         </div>
       </div>

@@ -58,7 +58,7 @@ export default function TestimonialsPage() {
               "SmashLabs transformed our team's dynamics. The stress relief experience
               was exactly what we needed and exceeded our expectations."
             </p>
-            <p className="font-bold text-lg bg-gradient-to-r from-pink-400 to-red-400 text-transparent bg-clip-text">
+            <p className="font-bold text-lg bg-gradient-to-r from-red-400 to-red-600 text-transparent bg-clip-text">
               - Sarah M., HR Director
             </p>
           </motion.div>

@@ -7,7 +7,7 @@ export default function CorporatePackagesSection() {
           {/* Package 1: Team Express */}
           <div className="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col justify-between hover:bg-gray-700 transition-colors duration-300">
             <div>
-              <h3 className="text-2xl font-semibold mb-4 text-pink-400">Team Express</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-red-400">Team Express</h3>
               <p className="text-gray-300 mb-6">Perfect for small teams</p>
               <ul className="list-none space-y-2 text-gray-300 text-left mb-8">
                 <li>• 2-hour stress relief session</li>
@@ -17,7 +17,7 @@ export default function CorporatePackagesSection() {
                 <li>• Basic wellness consultation</li>
               </ul>
             </div>
-            <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
               Request Quote
             </button>
           </div>
@@ -25,7 +25,7 @@ export default function CorporatePackagesSection() {
           {/* Package 2: Corporate Catalyst */}
           <div className="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col justify-between hover:bg-gray-700 transition-colors duration-300">
             <div>
-              <h3 className="text-2xl font-semibold mb-4 text-pink-400">Corporate Catalyst</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-red-400">Corporate Catalyst</h3>
               <p className="text-gray-300 mb-6">Comprehensive team solution</p>
               <ul className="list-none space-y-2 text-gray-300 text-left mb-8">
                 <li>• 4-hour premium experience</li>
@@ -36,7 +36,7 @@ export default function CorporatePackagesSection() {
                 <li>• Credit or debit card</li>
               </ul>
             </div>
-            <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
               Request Quote
             </button>
           </div>
@@ -44,7 +44,7 @@ export default function CorporatePackagesSection() {
           {/* Package 3: Executive Edge */}
           <div className="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col justify-between hover:bg-gray-700 transition-colors duration-300">
             <div>
-              <h3 className="text-2xl font-semibold mb-4 text-pink-400">Executive Edge</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-red-400">Executive Edge</h3>
               <p className="text-gray-300 mb-6">Full-scale corporate program</p>
               <ul className="list-none space-y-2 text-gray-300 text-left mb-8">
                 <li>• Full-day premium experience</li>
@@ -57,7 +57,7 @@ export default function CorporatePackagesSection() {
                 <li>• Customized wellness program</li>
               </ul>
             </div>
-            <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-transform duration-200 hover:scale-105">
               Request Quote
             </button>
           </div>

@@ -109,7 +109,7 @@ export default function PackagesPage() {
           <p className="text-gray-300 mb-6">
             Contact us to create a tailored experience for your specific needs.
           </p>
-          <button className="px-12 py-5 bg-gradient-to-r from-red-600 via-pink-600 to-purple-700 hover:from-red-700 hover:via-pink-700 hover:to-purple-800 text-white rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 hover:rotate-1 border-2 border-white/20 backdrop-blur-sm">
+          <button className="px-12 py-5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 hover:rotate-1 border-2 border-white/20 backdrop-blur-sm">
             💬 Contact Us 🚀
           </button>
         </div>

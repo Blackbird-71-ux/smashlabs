@@ -57,7 +57,7 @@ export default function BookingPage() {
               <motion.button
                 whileHover={{ scale: 1.05, rotateX: 5 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-red-600 via-pink-600 to-purple-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
               >
                 🏢 Book Corporate Event 💥
               </motion.button>

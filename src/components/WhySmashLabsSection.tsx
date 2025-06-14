@@ -1,3 +1,5 @@
+import { FaHeart, FaUsers, FaShieldAlt, FaBriefcase } from 'react-icons/fa';
+
 export default function WhySmashLabsSection() {
   return (
     <section className="py-16 bg-black text-white text-center">
@@ -5,31 +7,35 @@ export default function WhySmashLabsSection() {
         <h2 className="text-4xl font-bold text-white mb-12">Why SmashLabs?</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="bg-gray-800 p-8 rounded-lg text-left shadow-lg hover:bg-gray-700 transition-colors duration-300">
-            <h3 className="text-2xl font-semibold mb-4 text-pink-400">Effective Stress Release</h3>
+          <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+            <FaHeart className="text-4xl text-red-400 mb-4 mx-auto" />
+            <h3 className="text-2xl font-semibold mb-4 text-red-400">Effective Stress Release</h3>
             <p className="text-gray-300">
-              Release workplace tension through controlled, cathartic activities
+              Physical activity combined with controlled destruction provides unparalleled stress relief.
             </p>
           </div>
           {/* Card 2 */}
-          <div className="bg-gray-800 p-8 rounded-lg text-left shadow-lg hover:bg-gray-700 transition-colors duration-300">
-            <h3 className="text-2xl font-semibold mb-4 text-pink-400">Unique Team Building</h3>
+          <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+            <FaUsers className="text-4xl text-red-400 mb-4 mx-auto" />
+            <h3 className="text-2xl font-semibold mb-4 text-red-400">Unique Team Building</h3>
             <p className="text-gray-300">
-              Strengthen team bonds through shared experiences
+              Bond with colleagues through shared cathartic experiences that traditional team building can't match.
             </p>
           </div>
           {/* Card 3 */}
-          <div className="bg-gray-800 p-8 rounded-lg text-left shadow-lg hover:bg-gray-700 transition-colors duration-300">
-            <h3 className="text-2xl font-semibold mb-4 text-pink-400">Safe & Professional</h3>
+          <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+            <FaShieldAlt className="text-4xl text-red-400 mb-4 mx-auto" />
+            <h3 className="text-2xl font-semibold mb-4 text-red-400">Safe & Professional</h3>
             <p className="text-gray-300">
-              Comprehensive approach to mental and physical wellbeing
+              All activities are conducted under professional supervision with top-tier safety equipment.
             </p>
           </div>
           {/* Card 4 */}
-          <div className="bg-gray-800 p-8 rounded-lg text-left shadow-lg hover:bg-gray-700 transition-colors duration-300 lg:col-start-2">
-            <h3 className="text-2xl font-semibold mb-4 text-pink-400">Tailored for Corporate</h3>
+          <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+            <FaBriefcase className="text-4xl text-red-400 mb-4 mx-auto" />
+            <h3 className="text-2xl font-semibold mb-4 text-red-400">Tailored for Corporate</h3>
             <p className="text-gray-300">
-              Customized programs designed for corporate clients and team needs
+              Customized packages designed specifically for corporate teams and professional environments.
             </p>
           </div>
         </div>

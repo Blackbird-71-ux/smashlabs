@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { FaHammer, FaUsers, FaShieldAlt, FaCoffee } from 'react-icons/fa'
 
 export default function TheExperienceSection() {
   return (
@@ -22,7 +23,7 @@ export default function TheExperienceSection() {
             <div className="space-y-8">
               {/* What to Expect */}
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
-                <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
                   {/* Placeholder Icon */}
                   <span className="mr-3 text-3xl">&#128172;</span> 
                   What to Expect
@@ -34,7 +35,7 @@ export default function TheExperienceSection() {
 
               {/* The Process */}
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
-                <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
                   {/* Placeholder Icon */}
                   <span className="mr-3 text-3xl">&#9889;</span>
                   The Process
@@ -46,7 +47,7 @@ export default function TheExperienceSection() {
 
               {/* Team Building Elements */}
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
-                <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
                   {/* Placeholder Icon */}
                   <span className="mr-3 text-3xl">&#128101;</span>
                   Team Building Elements
@@ -58,13 +59,53 @@ export default function TheExperienceSection() {
 
               {/* Therapeutic Benefits */}
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-colors duration-300">
-                <h3 className="text-2xl font-semibold mb-2 text-pink-400 flex items-center">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
                   {/* Placeholder Icon */}
                   <span className="mr-3 text-3xl">&#129504;</span>
                   Therapeutic Benefits
                 </h3>
                 <p className="text-gray-300">
                   Experience immediate stress relief and long-term wellness improvements.
+                </p>
+              </div>
+
+              <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
+                  <FaHammer className="mr-3" />
+                  Smash & Release
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Choose your weapon and target. From electronics to furniture, unleash your stress on objects designed to break safely.
+                </p>
+              </div>
+
+              <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
+                  <FaUsers className="mr-3" />
+                  Team Challenges
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Participate in group activities that build trust and communication while providing stress relief.
+                </p>
+              </div>
+
+              <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
+                  <FaShieldAlt className="mr-3" />
+                  Safety First
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Professional-grade safety equipment and trained supervisors ensure a secure environment for all participants.
+                </p>
+              </div>
+
+              <div className="bg-dark-800 p-8 rounded-lg shadow-lg">
+                <h3 className="text-2xl font-semibold mb-2 text-red-400 flex items-center">
+                  <FaCoffee className="mr-3" />
+                  Chill Zone
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Relax and reflect in our comfortable lounge area with refreshments and comfortable seating.
                 </p>
               </div>
             </div>

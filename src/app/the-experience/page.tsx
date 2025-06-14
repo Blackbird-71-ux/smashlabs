@@ -97,7 +97,7 @@ export default function TheExperiencePage() {
                 whileHover={{ scale: 1.02 }}
                 className="bg-gray-900 p-6 rounded-xl shadow-xl border border-gray-800 transition-colors duration-300 transform"
               >
-                <h3 className="text-3xl font-bold mb-2 text-pink-300 flex items-center">
+                <h3 className="text-3xl font-bold mb-2 text-red-300 flex items-center">
                   <span className="mr-3 text-3xl">🤝</span>
                   Team Building Elements
                 </h3>
