@@ -102,18 +102,21 @@ export default function Home() {
       
       // Submit to real API
       const response = await submitBooking({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        date: formData.date,
-        time: formData.time,
-        guests: parseInt(formData.guests) || 1,
-        package: formData.package,
-        message: formData.message
+        customerName: formData.name,
+        customerEmail: formData.email,
+        customerPhone: formData.phone,
+        packageType: formData.package as 'basic' | 'premium' | 'ultimate',
+        packageName: formData.package,
+        packagePrice: 100, // Default price, should be calculated
+        preferredDate: formData.date,
+        preferredTime: formData.time as 'morning' | 'afternoon' | 'evening',
+        duration: 60, // Default duration
+        participants: parseInt(formData.guests) || 1,
+        specialRequests: formData.message
       });
       
       trackFormSubmit('Booking Form', {
-        bookingId: response.bookingId,
+        bookingId: response.data?.bookingId,
         packageType: formData.package,
         guestCount: parseInt(formData.guests) || 1
       });
@@ -131,7 +134,7 @@ export default function Home() {
         message: ''
       });
       
-      success('Booking Submitted!', `Your booking has been confirmed! Booking ID: ${response.bookingId}. We will contact you shortly.`);
+      success('Booking Submitted!', `Your booking has been confirmed! Booking ID: ${response.data?.bookingId}. We will contact you shortly.`);
     } catch (error) {
       console.error('Booking submission error:', error);
       
@@ -175,12 +178,14 @@ export default function Home() {
       const response = await submitContact({
         name: contactFormData.name,
         email: contactFormData.email,
+        subject: 'Website Contact Form',
         message: contactFormData.message,
+        inquiryType: 'general',
         source: 'website_contact_form'
       });
       
       trackFormSubmit('Contact Form', {
-        ticketId: response.ticketId
+        ticketId: response.data?.id
       });
       
       setContactFormData({
@@ -189,7 +194,7 @@ export default function Home() {
         message: ''
       });
       
-      success('Message Sent!', `Your message has been sent! Ticket ID: ${response.ticketId}. We will get back to you soon.`);
+      success('Message Sent!', `Your message has been sent! Ticket ID: ${response.data?.id}. We will get back to you soon.`);
     } catch (error) {
       console.error('Contact submission error:', error);
       

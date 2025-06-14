@@ -93,10 +93,13 @@ export interface Testimonial {
 // Gallery Types
 export interface GalleryImage {
   id: string;
-  src: string;
+  src?: string;
+  url?: string; // Support both src and url for compatibility
   alt: string;
   title?: string;
   description?: string;
+  category?: string;
+  caption?: string;
 }
 
 // Error Types

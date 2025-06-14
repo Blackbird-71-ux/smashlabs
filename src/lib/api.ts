@@ -37,6 +37,7 @@ export interface SmashLabsBooking {
 }
 
 export interface CreateBookingRequest {
+  name?: string; // Alias for customerName
   customerName: string;
   customerEmail: string;
   customerPhone: string;
@@ -71,6 +72,7 @@ export interface CreateContactRequest {
   subject: string;
   message: string;
   inquiryType: 'general' | 'booking' | 'support' | 'partnership' | 'feedback';
+  source?: string; // Track where the contact came from
 }
 
 // Newsletter Types
@@ -274,6 +276,20 @@ export function isValidPhone(phone: string): boolean {
 export function formatPhoneNumber(phone: string): string {
   return phone.replace(/\D/g, '');
 }
+
+// Re-export GalleryImage type
+export type { GalleryImage } from '@/types';
+
+// Gallery API placeholder function  
+export const getGalleryImages = async (): Promise<any[]> => {
+  // Return empty array for now - this will use fallback images in the component
+  return [];
+};
+
+// Backward compatibility exports
+export const submitBooking = bookingApi.create;
+export const submitContact = contactApi.create;
+export const APIError = SmashLabsApiError;
 
 // Main API export
 export const smashLabsApi = {

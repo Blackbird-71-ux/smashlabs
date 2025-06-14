@@ -6,8 +6,42 @@ import { BookingFormData, LoadingState } from '@/types';
 import { FormField } from '@/components/ui/FormField';
 import { LoadingButton } from '@/components/ui/LoadingButton';
 import { useToast } from '@/components/ui/Toast';
-import { submitBooking, APIError } from '@/lib/api';
-import { sanitizeInput, isValidEmail, isValidPhone } from '@/lib/validation';
+import { bookingApi, SmashLabsApiError, sanitizeInput, isValidEmail, isValidPhone } from '@/lib/api';
+
+// Helper functions to map frontend form data to backend API format
+const getPackageName = (packageType: string): string => {
+  const packageNames = {
+    basic: 'Basic Smash Session',
+    premium: 'Premium Rage Package',
+    ultimate: 'Ultimate Destruction Experience'
+  };
+  return packageNames[packageType as keyof typeof packageNames] || 'Basic Smash Session';
+};
+
+const getPackagePrice = (packageType: string): number => {
+  const packagePrices = {
+    basic: 500,
+    premium: 800,
+    ultimate: 1200
+  };
+  return packagePrices[packageType as keyof typeof packagePrices] || 500;
+};
+
+const getPackageDuration = (packageType: string): number => {
+  const packageDurations = {
+    basic: 60,
+    premium: 90,
+    ultimate: 120
+  };
+  return packageDurations[packageType as keyof typeof packageDurations] || 60;
+};
+
+const getTimeSlot = (time: string): 'morning' | 'afternoon' | 'evening' => {
+  const hour = parseInt(time.split(':')[0]);
+  if (hour < 12) return 'morning';
+  if (hour < 17) return 'afternoon';  
+  return 'evening';
+};
 
 export const BookingForm = () => {
   const [formData, setFormData] = useState<BookingFormData>({
@@ -131,24 +165,30 @@ export const BookingForm = () => {
     setLoadingState('loading');
 
     try {
-      // Submit to real API
-      const response = await submitBooking({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        date: formData.date,
-        time: formData.time,
-        guests: parseInt(formData.guests) || 1,
-        package: formData.package,
-        message: formData.message
-      });
+      // Map frontend form data to backend API format
+      const bookingData = {
+        customerName: formData.name,
+        customerEmail: formData.email,
+        customerPhone: formData.phone,
+        packageType: formData.package as 'basic' | 'premium' | 'ultimate',
+        packageName: getPackageName(formData.package),
+        packagePrice: getPackagePrice(formData.package),
+        preferredDate: formData.date,
+        preferredTime: getTimeSlot(formData.time),
+        duration: getPackageDuration(formData.package),
+        participants: parseInt(formData.guests) || 1,
+        specialRequests: formData.message || undefined
+      };
+
+      // Submit to backend API
+      const response = await bookingApi.create(bookingData);
       
       // Record successful submission for rate limiting
       localStorage.setItem('lastBookingSubmission', now.toString());
       
       success(
         'Booking Submitted!',
-        `Your booking has been confirmed! Booking ID: ${response.bookingId}`
+        `Your booking has been confirmed! Booking ID: ${response.data?.bookingId}`
       );
       
       // Reset form
@@ -168,7 +208,7 @@ export const BookingForm = () => {
     } catch (err) {
       console.error('Booking submission error:', err);
       
-      if (err instanceof APIError) {
+      if (err instanceof SmashLabsApiError) {
         if (err.status === 409) {
           showError('Time Slot Unavailable', 'This time slot is already booked. Please select a different time.');
         } else if (err.status === 400) {

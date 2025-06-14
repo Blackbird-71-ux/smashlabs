@@ -270,7 +270,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                       </div>
                     )}
                     <Image
-                      src={image.url}
+                      src={image.url || image.src || '/images/placeholder.jpg'}
                       alt={image.alt}
                       fill
                       className={`object-cover transition-all duration-300 ${
@@ -367,7 +367,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <Image
-                  src={selectedImage.url}
+                  src={selectedImage.url || selectedImage.src || '/images/placeholder.jpg'}
                   alt={selectedImage.alt}
                   width={1200}
                   height={800}
