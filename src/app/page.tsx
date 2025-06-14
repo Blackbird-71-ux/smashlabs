@@ -331,8 +331,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center relative z-10"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
-              Unleash Your Inner <span className="text-red-500">Beast</span>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-red-500">
+              Unleash Your Inner Beast
             </h1>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">
               <span className="text-red-500">Smash</span>. Destroy. <span className="text-red-500">Conquer</span>.
@@ -454,8 +454,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Why Choose <span className="text-red-500">SmashLabs</span>?
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+              Why Choose SmashLabs?
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Experience the perfect blend of adrenaline, safety, and premium service.
@@ -514,8 +514,8 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="flex-1"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-                The <span className="text-red-500">Smash</span>Labs Experience
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+                The SmashLabs Experience
               </h2>
               <p className="text-lg text-gray-300 mb-8 max-w-xl">
                 At SmashLabs, we don't just offer a service; we offer a transformation. Step into our world of controlled chaos, where every swing, every shatter, and every crash is a step towards liberation.
@@ -600,8 +600,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
-              The Crackhead Version of <span className="text-red-500">RedBull</span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-red-500">
+              The Crackhead Version of RedBull
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-6 max-w-4xl mx-auto">
               Red Bull gives you wings. SmashLabs gives you guts. We're here for the high-achievers, the risk-takers, and the game-changers who operate at 110% and need a release valve that matches their intensity. We're not just a 'rage room'; we are a brand that champions radical self-care and cathartic release.
@@ -627,10 +627,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
-
-
       {/* Action Section */}
       <section id="booknow" className="section bg-black/40 backdrop-blur-md py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise opacity-5" />
@@ -641,8 +637,8 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Ready to <span className="text-red-500">Smash</span> Your Stress?
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+              Ready to Smash Your Stress?
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Choose your path to stress relief and join the SmashLabs community today!
@@ -704,8 +700,6 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-
-
         </div>
       </section>
 
@@ -719,8 +713,8 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              What Our <span className="text-red-500">Customers</span> Say
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+              What Our Customers Say
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Don't just take our word for it. Here's what our satisfied customers have to say about their SmashLabs experience.
@@ -850,8 +844,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
       {/* Enhanced Gallery Section */}
       <section id="gallery" className="py-24 bg-gradient-to-b from-dark-900 to-dark-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise opacity-5" />
@@ -862,8 +854,8 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              <span className="text-red-500">SmashLabs</span> Gallery
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+              SmashLabs Gallery
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Take a look at our state-of-the-art facilities and the exhilarating experiences we offer.
@@ -977,8 +969,8 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Frequently Asked <span className="text-red-500">Questions</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+              Frequently Asked Questions
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Everything you need to know about your SmashLabs experience.
