@@ -929,22 +929,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Admin Access */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center mt-12"
-          >
-            <motion.a
-              href="/admin"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block px-6 py-3 bg-dark-800/50 text-gray-300 rounded-lg font-medium hover:bg-dark-700/50 transition-all duration-300 border border-dark-700/50 hover:border-gray-500/50"
-            >
-              Admin Dashboard 📊
-            </motion.a>
-          </motion.div>
+
         </div>
       </section>
 
@@ -1089,132 +1074,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-16 sm:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-8"
-            >
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Contact Information</h3>
-                <div className="space-y-4">
-                  <p className="flex items-center text-gray-300">
-                    <FaMapMarkerAlt className="w-5 h-5 text-rage-400 mr-3" />
-                    <span>123 Smash Street, City, Country</span>
-                  </p>
-                  <p className="flex items-center text-gray-300">
-                    <FaPhone className="w-5 h-5 text-rage-400 mr-3" />
-                    <span>+1 234 567 890</span>
-                  </p>
-                  <p className="flex items-center text-gray-300">
-                    <FaEnvelope className="w-5 h-5 text-rage-400 mr-3" />
-                    <span>info@smashlabs.com</span>
-                  </p>
-                </div>
-              </div>
 
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-white">Business Hours</h3>
-                <div className="space-y-2 text-gray-300">
-                  <p>Monday - Friday: 10:00 AM - 10:00 PM</p>
-                  <p>Saturday - Sunday: 9:00 AM - 11:00 PM</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <form onSubmit={handleContactSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="contact-name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="contact-name"
-                    name="name"
-                    value={contactFormData.name}
-                    onChange={handleContactChange}
-                    className={`w-full px-4 py-3 bg-dark-800/50 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent transition-all duration-300 ${
-                      contactFormErrors.name ? 'border-red-500' : 'border-dark-700/50'
-                    }`}
-                    placeholder="Your name"
-                    aria-describedby={contactFormErrors.name ? 'contact-name-error' : undefined}
-                  />
-                  {contactFormErrors.name && (
-                    <p id="contact-name-error" className="text-red-400 text-sm mt-1" role="alert">
-                      {contactFormErrors.name}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="contact-email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="contact-email"
-                    name="email"
-                    value={contactFormData.email}
-                    onChange={handleContactChange}
-                    className={`w-full px-4 py-3 bg-dark-800/50 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent transition-all duration-300 ${
-                      contactFormErrors.email ? 'border-red-500' : 'border-dark-700/50'
-                    }`}
-                    placeholder="Your email"
-                    aria-describedby={contactFormErrors.email ? 'contact-email-error' : undefined}
-                  />
-                  {contactFormErrors.email && (
-                    <p id="contact-email-error" className="text-red-400 text-sm mt-1" role="alert">
-                      {contactFormErrors.email}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="contact-message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    value={contactFormData.message}
-                    onChange={handleContactChange}
-                    rows={4}
-                    className={`w-full px-4 py-3 bg-dark-800/50 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-rage-500 focus:border-transparent transition-all duration-300 ${
-                      contactFormErrors.message ? 'border-red-500' : 'border-dark-700/50'
-                    }`}
-                    placeholder="Your message"
-                    aria-describedby={contactFormErrors.message ? 'contact-message-error' : undefined}
-                  />
-                  {contactFormErrors.message && (
-                    <p id="contact-message-error" className="text-red-400 text-sm mt-1" role="alert">
-                      {contactFormErrors.message}
-                    </p>
-                  )}
-                </div>
-                <motion.button
-                  whileHover={!contactFormLoading ? { scale: 1.02 } : {}}
-                  whileTap={!contactFormLoading ? { scale: 0.98 } : {}}
-                  type="submit"
-                  disabled={contactFormLoading}
-                  className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-                >
-                  {contactFormLoading && <LoadingSpinner size="sm" color="white" />}
-                  {contactFormLoading ? 'Sending...' : 'Send Message'}
-                </motion.button>
-              </form>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Enhanced Gallery Section */}
       <section id="gallery" className="py-24 bg-gradient-to-b from-dark-900 to-dark-950 relative overflow-hidden">

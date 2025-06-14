@@ -3,17 +3,23 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
 
 export default function BookingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900">
-      {/* Navigation */}
-      <Navbar />
-      
-      {/* Header */}
+      {/* Header with Back Button */}
       <div className="bg-black/50 backdrop-blur-sm border-b border-red-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* Back to Home Button */}
+          <div className="flex justify-start mb-6">
+            <Link
+              href="/"
+              className="inline-flex items-center px-4 py-2 bg-white/10 border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 transition-all duration-200"
+            >
+              ← Back to Home
+            </Link>
+          </div>
+          
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -21,8 +27,8 @@ export default function BookingPage() {
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
               Book Your <span className="text-red-500">Smash</span>
-              <br className="hidden sm:block" />
-              <span className="block sm:inline"> Session</span>
+              <br className="sm:hidden" />
+              <span className="sm:inline"> Session</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
               Ready to unleash your stress? Book your session now and experience the ultimate stress relief!
@@ -31,78 +37,114 @@ export default function BookingPage() {
         </div>
       </div>
 
-      {/* Coming Soon Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 text-center"
-        >
-          <div className="text-6xl mb-6">🚧</div>
-          <h2 className="text-3xl font-bold text-white mb-4">Booking System Coming Soon!</h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            We're putting the finishing touches on our booking system. In the meantime, you can register your interest 
-            and we'll notify you as soon as bookings are available!
-          </p>
+      {/* Booking Options */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
-          <div className="space-y-4">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                href="/register"
-                className="inline-block px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200"
-              >
-                Register Your Interest 🚀
-              </Link>
-            </motion.div>
+          {/* Quick Booking Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
+          >
+            <div className="text-center mb-8">
+              <div className="text-5xl mb-4">⚡</div>
+              <h2 className="text-2xl font-bold text-white mb-4">Quick Booking</h2>
+              <p className="text-gray-300 mb-6">
+                Ready to smash right now? Contact us directly for immediate booking and availability.
+              </p>
+            </div>
             
-            <div className="text-gray-400">or</div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="space-y-4">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Link
                   href="/contact"
-                  className="inline-block px-8 py-4 bg-white/10 border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 transition-all duration-200"
+                  className="block w-full px-6 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 text-center"
                 >
-                  Contact Us Directly
+                  Contact for Immediate Booking 📞
                 </Link>
               </motion.div>
               
+              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+                <h4 className="font-semibold text-white mb-2">Perfect for:</h4>
+                <ul className="text-sm text-gray-300 space-y-1">
+                  <li>• Same-day bookings</li>
+                  <li>• Corporate events</li>
+                  <li>• Custom packages</li>
+                  <li>• Group sessions</li>
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Pre-Register Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
+          >
+            <div className="text-center mb-8">
+              <div className="text-5xl mb-4">🚀</div>
+              <h2 className="text-2xl font-bold text-white mb-4">Join the Waitlist</h2>
+              <p className="text-gray-300 mb-6">
+                Be the first to know when our online booking system launches. Get exclusive early access!
+              </p>
+            </div>
+            
+            <div className="space-y-4">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  href="/"
-                  className="inline-block px-8 py-4 bg-gray-600/20 border border-gray-500/20 text-gray-300 font-medium rounded-lg hover:bg-gray-500/20 transition-all duration-200"
+                  href="/register"
+                  className="block w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 text-center"
                 >
-                  ← Back to Home
+                  Join Waitlist 🎯
                 </Link>
               </motion.div>
+              
+              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
+                <h4 className="font-semibold text-white mb-2">Benefits:</h4>
+                <ul className="text-sm text-gray-300 space-y-1">
+                  <li>• Early access to booking</li>
+                  <li>• Exclusive launch offers</li>
+                  <li>• Priority notifications</li>
+                  <li>• Special member pricing</li>
+                </ul>
+              </div>
             </div>
-          </div>
+          </motion.div>
+        </div>
 
-          <div className="mt-12 p-6 bg-white/5 rounded-lg border border-white/10">
-            <h3 className="text-xl font-semibold text-white mb-4">What to Expect:</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-300">
-              <div>
-                <div className="font-medium text-white mb-2">📅 Easy Booking</div>
-                <p>Simple online booking system with real-time availability</p>
-              </div>
-              <div>
-                <div className="font-medium text-white mb-2">💳 Secure Payment</div>
-                <p>Safe and secure payment processing with multiple options</p>
-              </div>
-              <div>
-                <div className="font-medium text-white mb-2">📱 Instant Confirmation</div>
-                <p>Immediate booking confirmation and session details</p>
-              </div>
+        {/* Coming Soon Features */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 bg-black/20 backdrop-blur-sm rounded-2xl p-8 border border-white/10"
+        >
+          <h3 className="text-2xl font-bold text-white mb-6 text-center">Coming Soon: Full Online Booking</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="text-3xl mb-3">📅</div>
+              <h4 className="font-semibold text-white mb-2">Real-Time Availability</h4>
+              <p className="text-sm text-gray-300">See available slots and book instantly</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-3">💳</div>
+              <h4 className="font-semibold text-white mb-2">Secure Payments</h4>
+              <p className="text-sm text-gray-300">Safe online payment processing</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-3">📱</div>
+              <h4 className="font-semibold text-white mb-2">Instant Confirmation</h4>
+              <p className="text-sm text-gray-300">Immediate booking confirmation</p>
             </div>
           </div>
         </motion.div>
