@@ -140,7 +140,7 @@ export default function BookingForm() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={resetForm}
-          className="bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm"
+          className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-bold shadow-xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm"
         >
           Book Another Session
         </motion.button>
@@ -349,7 +349,7 @@ export default function BookingForm() {
           whileTap={!isLoading ? { scale: 0.98 } : {}}
           type="submit"
           disabled={isLoading}
-          className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-12 py-5 rounded-full text-xl font-bold shadow-2xl hover:shadow-red-500/25 transition-all duration-300 transform hover:rotate-1 border-2 border-white/20 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg font-bold shadow-xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
         >
           {isLoading ? (
             <>
