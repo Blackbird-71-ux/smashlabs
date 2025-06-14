@@ -16,11 +16,9 @@ const Navbar = () => {
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'experience', label: 'Experience' },
-    { id: 'packages', label: 'Packages' },
     { id: 'gallery', label: 'Gallery' },
     { id: 'testimonials', label: 'Testimonials' },
-    { id: 'booknow', label: 'Book Now' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'booknow', label: 'Book Now' }
   ];
 
   useEffect(() => {
@@ -104,7 +102,7 @@ const Navbar = () => {
             <span className={`text-2xl font-extrabold tracking-tight transition-colors duration-300 ${
               isScrolled ? 'text-primary-500 group-hover:text-primary-400' : 'text-white group-hover:text-primary-400'
             }`}>
-              SMASHLABS
+              <span className="text-red-500">SMASH</span>LABS
             </span>
           </Link>
 

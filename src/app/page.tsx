@@ -335,7 +335,7 @@ export default function Home() {
               Unleash Your Inner Beast
             </h1>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">
-              <span className="text-red-500">Smash</span>. Destroy. Conquer.
+              <span className="text-red-500">Smash</span>. Destroy. <span className="text-red-500">Conquer</span>.
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Dive into the ultimate stress-relief experience. Break free from your worries and unleash your rage in a safe, exhilarating environment.
@@ -352,7 +352,7 @@ export default function Home() {
                 onClick={() => scrollToSection('booknow')}
                 className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300"
               >
-                Book Your <span className="text-red-500">Smash</span> Session
+                Book Your Smash Session
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}

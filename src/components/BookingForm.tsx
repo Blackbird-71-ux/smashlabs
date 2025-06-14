@@ -92,7 +92,7 @@ export default function BookingForm() {
     setIsLoading(true);
     
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch('https://smashlabs-backend-production.up.railway.app/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -225,16 +225,21 @@ export default function BookingForm() {
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Phone Number *
             </label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className={`w-full px-4 py-3 bg-black/30 border rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-                errors.phone ? 'border-red-500' : 'border-white/20'
-              }`}
-              placeholder="Enter your phone number"
-            />
+            <div className="flex">
+              <span className="inline-flex items-center px-3 text-sm text-gray-300 bg-black/30 border border-r-0 border-white/20 rounded-l-lg">
+                +91
+              </span>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={`flex-1 px-4 py-3 bg-black/30 border rounded-r-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
+                  errors.phone ? 'border-red-500' : 'border-white/20'
+                }`}
+                placeholder="Enter 10-digit phone number"
+              />
+            </div>
             {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
           </div>
 
