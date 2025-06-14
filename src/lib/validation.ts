@@ -23,8 +23,8 @@ export interface ContactFormData {
 // Email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Phone validation regex (supports various formats)
-const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
+// Phone validation regex (supports Indian mobile numbers)
+const PHONE_REGEX = /^[6-9]\d{9}$/; // Indian mobile: starts with 6-9, exactly 10 digits
 
 // Sanitize input to prevent XSS
 export const sanitizeInput = (input: string): string => {
@@ -42,6 +42,7 @@ export const isValidEmail = (email: string): boolean => {
 // Validate phone format
 export const isValidPhone = (phone: string): boolean => {
   const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
+  console.log('📱 Validating phone:', phone, '→', cleanPhone, 'Valid:', PHONE_REGEX.test(cleanPhone));
   return PHONE_REGEX.test(cleanPhone);
 };
 

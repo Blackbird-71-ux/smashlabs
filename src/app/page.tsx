@@ -85,9 +85,13 @@ export default function Home() {
 
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('📝 Form submitted with data:', formData);
     
     const validation = validateBookingForm(formData);
+    console.log('🔍 Validation result:', validation);
+    
     if (!validation.isValid) {
+      console.log('❌ Validation failed:', validation.errors);
       setErrors(validation.errors);
       showError('Validation Error', 'Please correct the errors in the form.');
       return;
