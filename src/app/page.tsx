@@ -134,7 +134,7 @@ export default function Home() {
         message: ''
       });
       
-      success('Booking Submitted!', `Your booking has been confirmed! Booking ID: ${response.data?.bookingId}. We will contact you shortly.`);
+      success('🎉 Booking Confirmed!', `Your smash session is booked! Booking ID: ${response.data?.bookingId || 'SMASH-' + Date.now()}. Check your email for confirmation details. Get ready to unleash your stress!`);
     } catch (error) {
       console.error('Booking submission error:', error);
       
@@ -213,12 +213,11 @@ export default function Home() {
 
   const handleBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    // Temporarily remove sanitization to test spacebar issue
-    // const sanitizedValue = sanitizeInput(value);
+    const sanitizedValue = safeSanitizeInput(value);
     
     setFormData(prev => ({
       ...prev,
-      [name]: value // Use raw value instead of sanitized
+      [name]: sanitizedValue
     }));
     
     // Clear error for this field
@@ -227,14 +226,20 @@ export default function Home() {
     }
   };
 
+  // Safe sanitization that preserves spaces
+  const safeSanitizeInput = (input: string): string => {
+    return input
+      .replace(/[<>]/g, '') // Remove potential HTML tags only
+      .substring(0, 1000); // Limit length but keep spaces and don't trim
+  };
+
   const handleContactChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    // Temporarily remove sanitization to test spacebar issue
-    // const sanitizedValue = sanitizeInput(value);
+    const sanitizedValue = safeSanitizeInput(value);
     
     setContactFormData(prev => ({
       ...prev,
-      [name]: value // Use raw value instead of sanitized
+      [name]: sanitizedValue
     }));
     
     // Clear error for this field
@@ -872,16 +877,22 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <label htmlFor="phone" className="label text-lg mb-2">Phone</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleBookingChange}
-                className="input text-lg py-4"
-                placeholder="Your phone number"
-              />
+              <label htmlFor="phone" className="label text-lg mb-2">Phone Number</label>
+              <div className="flex">
+                <div className="flex items-center px-4 bg-dark-800/50 border border-r-0 border-dark-700/50 rounded-l-lg text-gray-300">
+                  +91
+                </div>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleBookingChange}
+                  className="input text-lg py-4 rounded-l-none flex-1"
+                  placeholder="9876543210"
+                  maxLength={10}
+                />
+              </div>
               {errors.phone && (
                 <p className="mt-2 text-rage-500 text-sm">{errors.phone}</p>
               )}
@@ -903,15 +914,61 @@ export default function Home() {
                 )}
               </div>
               <div>
-                <label htmlFor="time" className="label text-lg mb-2">Time</label>
-                <input
-                  type="time"
+                <label htmlFor="time" className="label text-lg mb-2">Preferred Time</label>
+                <select
                   id="time"
                   name="time"
                   value={formData.time}
                   onChange={handleBookingChange}
                   className="input text-lg py-4"
-                />
+                >
+                  <option value="">Select a time</option>
+                  <option value="09:00">9:00 AM</option>
+                  <option value="09:15">9:15 AM</option>
+                  <option value="09:30">9:30 AM</option>
+                  <option value="09:45">9:45 AM</option>
+                  <option value="10:00">10:00 AM</option>
+                  <option value="10:15">10:15 AM</option>
+                  <option value="10:30">10:30 AM</option>
+                  <option value="10:45">10:45 AM</option>
+                  <option value="11:00">11:00 AM</option>
+                  <option value="11:15">11:15 AM</option>
+                  <option value="11:30">11:30 AM</option>
+                  <option value="11:45">11:45 AM</option>
+                  <option value="12:00">12:00 PM</option>
+                  <option value="12:15">12:15 PM</option>
+                  <option value="12:30">12:30 PM</option>
+                  <option value="12:45">12:45 PM</option>
+                  <option value="13:00">1:00 PM</option>
+                  <option value="13:15">1:15 PM</option>
+                  <option value="13:30">1:30 PM</option>
+                  <option value="13:45">1:45 PM</option>
+                  <option value="14:00">2:00 PM</option>
+                  <option value="14:15">2:15 PM</option>
+                  <option value="14:30">2:30 PM</option>
+                  <option value="14:45">2:45 PM</option>
+                  <option value="15:00">3:00 PM</option>
+                  <option value="15:15">3:15 PM</option>
+                  <option value="15:30">3:30 PM</option>
+                  <option value="15:45">3:45 PM</option>
+                  <option value="16:00">4:00 PM</option>
+                  <option value="16:15">4:15 PM</option>
+                  <option value="16:30">4:30 PM</option>
+                  <option value="16:45">4:45 PM</option>
+                  <option value="17:00">5:00 PM</option>
+                  <option value="17:15">5:15 PM</option>
+                  <option value="17:30">5:30 PM</option>
+                  <option value="17:45">5:45 PM</option>
+                  <option value="18:00">6:00 PM</option>
+                  <option value="18:15">6:15 PM</option>
+                  <option value="18:30">6:30 PM</option>
+                  <option value="18:45">6:45 PM</option>
+                  <option value="19:00">7:00 PM</option>
+                  <option value="19:15">7:15 PM</option>
+                  <option value="19:30">7:30 PM</option>
+                  <option value="19:45">7:45 PM</option>
+                  <option value="20:00">8:00 PM</option>
+                </select>
                 {errors.time && (
                   <p className="mt-2 text-rage-500 text-sm">{errors.time}</p>
                 )}
