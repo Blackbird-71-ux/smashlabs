@@ -95,7 +95,7 @@ export default function PackagesPage() {
                 </ul>
                 <button
                   onClick={() => setSelectedPackage(pkg.id)}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full text-base font-bold shadow-xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm"
+                  className="w-full px-4 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg text-sm font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm"
                 >
                   Book Now
                 </button>
@@ -109,7 +109,7 @@ export default function PackagesPage() {
           <p className="text-gray-300 mb-6">
             Contact us to create a tailored experience for your specific needs.
           </p>
-          <button className="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-full text-base md:text-lg font-bold shadow-xl hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
+          <button className="px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg text-sm md:text-base font-bold shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105 border border-white/20 backdrop-blur-sm">
             💬 Contact Us 🚀
           </button>
         </div>
