@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import BookingForm from '@/components/BookingForm';
 
 export default function BookingPage() {
   return (
@@ -37,90 +38,57 @@ export default function BookingPage() {
         </div>
       </div>
 
-      {/* Booking Options */}
+      {/* Corporate Booking Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          
-          {/* Quick Booking Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
-          >
-            <div className="text-center mb-8">
-              <div className="text-5xl mb-4">⚡</div>
-              <h2 className="text-2xl font-bold text-white mb-4">Quick Booking</h2>
-              <p className="text-gray-300 mb-6">
-                Ready to smash right now? Contact us directly for immediate booking and availability.
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link
-                  href="/contact"
-                  className="block w-full px-6 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 text-center"
-                >
-                  Contact for Immediate Booking 📞
-                </Link>
-              </motion.div>
-              
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <h4 className="font-semibold text-white mb-2">Perfect for:</h4>
-                <ul className="text-sm text-gray-300 space-y-1">
-                  <li>• Same-day bookings</li>
-                  <li>• Corporate events</li>
-                  <li>• Custom packages</li>
-                  <li>• Group sessions</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Corporate Events & Custom Packages
+          </h2>
+          <p className="text-lg text-gray-300 mb-8 max-w-3xl mx-auto">
+            Transform your team's wellness and boost morale with SmashLabs corporate packages.
+          </p>
+          <div className="flex flex-col md:flex-row gap-6 justify-center mb-12">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-pink-600 to-purple-700 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform"
+            >
+              Book Your Corporate Event
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-transparent border-2 border-pink-500 hover:border-pink-600 text-pink-500 hover:text-pink-600 font-bold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105"
+            >
+              Get a Custom Quote
+            </motion.button>
+          </div>
+        </motion.div>
 
-          {/* Pre-Register Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
-          >
-            <div className="text-center mb-8">
-              <div className="text-5xl mb-4">🚀</div>
-              <h2 className="text-2xl font-bold text-white mb-4">Join the Waitlist</h2>
-              <p className="text-gray-300 mb-6">
-                Be the first to know when our online booking system launches. Get exclusive early access!
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link
-                  href="/register"
-                  className="block w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 text-center"
-                >
-                  Join Waitlist 🎯
-                </Link>
-              </motion.div>
-              
-              <div className="bg-white/5 rounded-lg p-4 border border-white/10">
-                <h4 className="font-semibold text-white mb-2">Benefits:</h4>
-                <ul className="text-sm text-gray-300 space-y-1">
-                  <li>• Early access to booking</li>
-                  <li>• Exclusive launch offers</li>
-                  <li>• Priority notifications</li>
-                  <li>• Special member pricing</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        {/* Individual Booking Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20"
+        >
+          <div className="text-center mb-8">
+            <div className="text-5xl mb-4">💥</div>
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Book Your <span className="text-red-500">Smash</span> Session
+            </h2>
+            <p className="text-gray-300 mb-6">
+              Ready to unleash your stress? Fill out the form below and we'll confirm your booking!
+            </p>
+          </div>
+          
+          <BookingForm />
+        </motion.div>
 
         {/* Coming Soon Features */}
         <motion.div

@@ -335,7 +335,7 @@ export default function Home() {
               Unleash Your Inner Beast
             </h1>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">
-              Smash. Destroy. Conquer.
+              <span className="text-red-500">Smash</span>. Destroy. Conquer.
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
               Dive into the ultimate stress-relief experience. Break free from your worries and unleash your rage in a safe, exhilarating environment.
@@ -352,7 +352,7 @@ export default function Home() {
                 onClick={() => scrollToSection('booknow')}
                 className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300"
               >
-                Book Your Smash Session
+                Book Your <span className="text-red-500">Smash</span> Session
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -455,7 +455,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Why Choose SmashLabs?
+              Why Choose <span className="text-red-500">Smash</span>Labs?
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Experience the perfect blend of adrenaline, safety, and premium service.
@@ -515,7 +515,7 @@ export default function Home() {
               className="flex-1"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-                The SmashLabs Experience
+                The <span className="text-red-500">Smash</span>Labs Experience
               </h2>
               <p className="text-lg text-gray-300 mb-8 max-w-xl">
                 At SmashLabs, we don't just offer a service; we offer a transformation. Step into our world of controlled chaos, where every swing, every shatter, and every crash is a step towards liberation.
@@ -620,190 +620,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Packages Section */}
-      <section id="packages" className="section bg-black/30 backdrop-blur-sm py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-rage-400 to-rage-600 text-transparent bg-clip-text">
-              Corporate Packages
-            </h2>
-          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Quick Smash Package */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="glass-card p-8 rounded-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-rage-500 rounded-full mx-auto mb-6">
-                <FaHammer className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white text-center">Quick Smash</h3>
-              <p className="text-gray-300 mb-4 text-center">Perfect for individual stress relief</p>
-              <div className="text-3xl font-bold text-center mb-2 text-rage-400">₹1,999</div>
-              <div className="text-gray-400 text-center mb-6">30 minutes</div>
-              <ul className="space-y-3 mb-8 text-gray-300 flex-grow">
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>One smash room (30 mins)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Sledgehammer & baseball bat</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Choice of music or rock playlist</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Chill zone with healthy juice</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Perfect for stressed professionals</span>
-                </li>
-              </ul>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  trackButtonClick('book_now_package_1', 'packages_section');
-                  scrollToSection('booknow');
-                }}
-                className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 mt-auto"
-              >
-                Book Now
-              </motion.button>
-            </motion.div>
-
-            {/* Team Smash Package */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="glass-card p-8 rounded-xl hover:shadow-2xl transition-all duration-300 border-2 border-rage-500 flex flex-col h-full"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-rage-500 rounded-full mx-auto mb-6">
-                <FaUsers className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white text-center">Team Smash</h3>
-              <p className="text-gray-300 mb-4 text-center">Great for friends and small groups</p>
-              <div className="text-3xl font-bold text-center mb-2 text-rage-400">₹3,999</div>
-              <div className="text-gray-400 text-center mb-6">60 minutes</div>
-              <ul className="space-y-3 mb-8 text-gray-300 flex-grow">
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Two smash rooms (60 mins)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Multiple sledgehammers & bats</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Custom playlist or rock music</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Extended chill zone time</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Healthy juices & snacks for group</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Perfect for friend groups</span>
-                </li>
-              </ul>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  trackButtonClick('book_now_package_2', 'packages_section');
-                  scrollToSection('booknow');
-                }}
-                className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 mt-auto"
-              >
-                Book Now
-              </motion.button>
-            </motion.div>
-
-            {/* Corporate Smash Package */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="glass-card p-8 rounded-xl hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-rage-500 rounded-full mx-auto mb-6">
-                <FaGlassMartiniAlt className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-white text-center">Corporate Smash</h3>
-              <p className="text-gray-300 mb-4 text-center">Team building and stress relief for companies</p>
-              <div className="text-3xl font-bold text-center mb-2 text-rage-400">Contact Us</div>
-              <div className="text-gray-400 text-center mb-6">Custom Duration</div>
-              <ul className="space-y-3 mb-8 text-gray-300 flex-grow">
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Multiple smash rooms (custom duration)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Professional sledgehammers & equipment</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Custom corporate playlists</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Private chill zone with healthy menu</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Stress relief program for teams</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Perfect for burnt-out professionals</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-rage-500 mr-3 mt-0.5">✓</span>
-                  <span>Team bonding through catharsis</span>
-                </li>
-              </ul>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  trackButtonClick('book_now_package_3', 'packages_section');
-                  scrollToSection('booknow');
-                }}
-                className="w-full bg-rage-500 hover:bg-rage-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 mt-auto"
-              >
-                Book Now
-              </motion.button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Chill Zone Section */}
       <section className="py-24 bg-gradient-to-b from-dark-900 to-dark-950 relative overflow-hidden">
@@ -866,7 +683,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rage-400 to-rage-600 bg-clip-text text-transparent">
-              Ready to Smash Your Stress?
+              Ready to <span className="text-red-500">Smash</span> Your Stress?
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               Choose your path to stress relief and join the SmashLabs community today!

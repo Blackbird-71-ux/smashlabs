@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { validateContactForm, sanitizeInput, type ContactFormData } from '@/lib/validation';
 import { submitContact } from '@/lib/api';
 
@@ -195,7 +196,17 @@ Additional Message: ${formData.message || 'None'}
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-900">
       {/* Header */}
       <div className="bg-black/50 backdrop-blur-sm border-b border-red-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* Back to Home Button */}
+          <div className="flex justify-start mb-6">
+            <Link
+              href="/"
+              className="inline-flex items-center px-4 py-2 bg-white/10 border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 transition-all duration-200"
+            >
+              ← Back to Home
+            </Link>
+          </div>
+          
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
