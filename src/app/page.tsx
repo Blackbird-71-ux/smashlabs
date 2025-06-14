@@ -445,62 +445,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section id="why-choose" className="py-16 sm:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* RedBull of India Section */}
+      <section id="lifestyle" className="section bg-black/30 backdrop-blur-sm py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
-              Why Choose SmashLabs?
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-red-500">
+              The Crackhead Version of RedBull
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Experience the perfect blend of adrenaline, safety, and premium service.
+            <p className="text-lg text-gray-300 leading-relaxed mb-6 max-w-4xl mx-auto">
+              Red Bull gives you wings. SmashLabs gives you guts. We're here for the high-achievers, the risk-takers, and the game-changers who operate at 110% and need a release valve that matches their intensity. We're not just a 'rage room'; we are a brand that champions radical self-care and cathartic release.
             </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {[
-              {
-                icon: FaTools,
-                title: 'Premium Arsenal',
-                description: 'State-of-the-art equipment and tools for maximum destruction.'
-              },
-              {
-                icon: FaShieldAlt,
-                title: 'Controlled Chaos',
-                description: 'Expertly designed spaces for safe yet exhilarating experiences.'
-              },
-              {
-                icon: FaUserShield,
-                title: 'Full Protective Gear',
-                description: 'Top-quality safety equipment for worry-free smashing.'
-              },
-              {
-                icon: FaUserTie,
-                title: 'Expert Guidance',
-                description: 'Professional staff ensuring your experience is both safe and satisfying.'
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-4xl mx-auto">
+              We sponsor local bands, host underground art shows, and fuel the creative chaos that drives India forward. We are the rebellion against the mundane.
+            </p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-12"
+            >
+              <button
+                onClick={() => scrollToSection('booknow')}
+                className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300 transform hover:scale-105"
               >
-                <div className="w-12 h-12 bg-rage-500/10 rounded-lg flex items-center justify-center mb-6">
-                  <feature.icon className="w-6 h-6 text-rage-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
+                Book Your Experience
+              </button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -589,41 +568,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RedBull of India Section */}
-      <section id="lifestyle" className="section bg-black/30 backdrop-blur-sm py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise-pattern opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
+      {/* Why Choose Us Section */}
+      <section id="why-choose" className="py-16 sm:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto"
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-red-500">
-              The Crackhead Version of RedBull
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+              Why Choose SmashLabs?
             </h2>
-            <p className="text-lg text-gray-300 leading-relaxed mb-6 max-w-4xl mx-auto">
-              Red Bull gives you wings. SmashLabs gives you guts. We're here for the high-achievers, the risk-takers, and the game-changers who operate at 110% and need a release valve that matches their intensity. We're not just a 'rage room'; we are a brand that champions radical self-care and cathartic release.
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Experience the perfect blend of adrenaline, safety, and premium service.
             </p>
-            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-4xl mx-auto">
-              We sponsor local bands, host underground art shows, and fuel the creative chaos that drives India forward. We are the rebellion against the mundane.
-            </p>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-12"
-            >
-              <button
-                onClick={() => scrollToSection('booknow')}
-                className="btn btn-primary text-lg px-8 py-4 rounded-full bg-rage-500 hover:bg-rage-600 text-white font-bold transition-all duration-300 transform hover:scale-105"
-              >
-                Book Your Experience
-              </button>
-            </motion.div>
           </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {[
+              {
+                icon: FaTools,
+                title: 'Premium Arsenal',
+                description: 'State-of-the-art equipment and tools for maximum destruction.'
+              },
+              {
+                icon: FaShieldAlt,
+                title: 'Controlled Chaos',
+                description: 'Expertly designed spaces for safe yet exhilarating experiences.'
+              },
+              {
+                icon: FaUserShield,
+                title: 'Full Protective Gear',
+                description: 'Top-quality safety equipment for worry-free smashing.'
+              },
+              {
+                icon: FaUserTie,
+                title: 'Expert Guidance',
+                description: 'Professional staff ensuring your experience is both safe and satisfying.'
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-rage-500/10 rounded-lg flex items-center justify-center mb-6">
+                  <feature.icon className="w-6 h-6 text-rage-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
+                <p className="text-gray-300">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
