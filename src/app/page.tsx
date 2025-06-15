@@ -1,5 +1,6 @@
 'use client';
 
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock, FaTools, FaChevronDown, FaUserShield, FaUserTie, FaArrowUp, FaStar, FaQuoteLeft, FaInstagram, FaTwitter, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope, FaCoffee } from 'react-icons/fa'

@@ -1,0 +1,145 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://smashlabs.in/#business",
+  "name": "SmashLabs",
+  "alternateName": "SmashLabs Rage Room",
+  "description": "SmashLabs is the premier rage room and stress relief center offering professional destruction therapy, team building activities, and corporate wellness programs. Experience the ultimate cathartic release in our safe, controlled environment.",
+  "url": "https://smashlabs.in",
+  "logo": "https://smashlabs.in/logo.png",
+  "image": [
+    "https://smashlabs.in/smashlabs-experience-room.png",
+    "https://smashlabs.in/rage-room-interior.png",
+    "https://smashlabs.in/team-building-activity.png"
+  ],
+  "telephone": "+1-800-SMASH-NOW",
+  "email": "info@smashlabs.in",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Stress Relief Lane",
+    "addressLocality": "Wellness City",
+    "addressRegion": "CA",
+    "postalCode": "90210",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "34.052235",
+    "longitude": "-118.243683"
+  },
+  "openingHours": [
+    "Mo-Fr 10:00-22:00",
+    "Sa-Su 11:00-23:00"
+  ],
+  "priceRange": "$$",
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Cash, Credit Card, Debit Card, Online Payment",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "1250",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "SmashLabs Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Basic Smash Package",
+          "description": "30-minute stress relief session with basic smashing items including plates, glasses, and small electronics.",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "SmashLabs"
+          }
+        },
+        "price": "49.99",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Premium Smash Package",
+          "description": "60-minute premium smashing experience with variety of items including furniture, appliances, and custom items.",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "SmashLabs"
+          }
+        },
+        "price": "89.99",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Ultimate Smash Package",
+          "description": "90-minute ultimate destruction experience with premium items, custom playlist, and professional photography.",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "SmashLabs"
+          }
+        },
+        "price": "129.99",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Corporate Team Building",
+          "description": "Custom team building packages for corporate groups including stress relief activities and team bonding exercises.",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "SmashLabs"
+          }
+        },
+        "price": "199.99",
+        "priceCurrency": "USD"
+      }
+    ]
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Los Angeles"
+    },
+    {
+      "@type": "State",
+      "name": "California"
+    },
+    {
+      "@type": "Country",
+      "name": "United States"
+    }
+  ],
+  "serviceType": [
+    "Stress Relief",
+    "Rage Room",
+    "Team Building",
+    "Corporate Events",
+    "Anger Management",
+    "Destruction Therapy",
+    "Wellness Activities"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/SmashLabsOfficial",
+    "https://www.instagram.com/smashlabs_official",
+    "https://twitter.com/smashlabs_hq",
+    "https://www.youtube.com/user/smashlabs-official",
+    "https://www.linkedin.com/company/smashlabs",
+    "https://www.yelp.com/biz/smashlabs",
+    "https://www.google.com/maps/place/smashlabs"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "SmashLabs Founder"
+  },
+  "foundingDate": "2024",
+  "slogan": "Unleash Your Inner Beast. Smash Stress.",
+  "keywords": "rage room, stress relief, smash room, break room, anger management, team building, corporate events, destruction therapy, mental health, wellness, cathartic experience"
+} 

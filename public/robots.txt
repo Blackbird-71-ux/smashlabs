@@ -1,29 +1,53 @@
 User-agent: *
 Allow: /
 
+# Allow important pages
+Allow: /about-us
+Allow: /packages
+Allow: /book
+Allow: /contact
+Allow: /the-experience
+Allow: /testimonials
+Allow: /rage-room
+Allow: /stress-relief
+Allow: /team-building
+Allow: /corporate-events
+Allow: /register
+
 # Disallow admin and private sections
 Disallow: /admin/
 Disallow: /api/
 Disallow: /_next/
 Disallow: /private/
+Disallow: /test/
+Disallow: /.well-known/
 
-# Sitemap location
+# Sitemap locations
 Sitemap: https://smashlabs.in/sitemap.xml
+Sitemap: https://www.smashlabs.in/sitemap.xml
 
 # Crawl delay for polite crawling
 Crawl-delay: 1
 
-# Allow specific search engine bots
+# Allow specific search engine bots with higher priority
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: facebookexternalhit
 Allow: /
 
-# Block malicious bots
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Block malicious and aggressive bots
 User-agent: AhrefsBot
 Disallow: /
 
@@ -31,4 +55,20 @@ User-agent: MJ12bot
 Disallow: /
 
 User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MajesticSEO
+Disallow: /
+
+# Block AI training bots (optional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
 Disallow: / 
