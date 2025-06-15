@@ -4,10 +4,13 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { validateContactForm, sanitizeInput, type ContactFormData } from '@/lib/validation';
-import { submitContact } from '@/lib/api';
+import { submitRegistration, type CreateRegistrationRequest } from '@/lib/registrationApi';
 
-interface RegistrationFormData extends ContactFormData {
+interface RegistrationFormData {
+  name: string;
+  email: string;
   phone: string;
+  message: string;
   interests: string[];
   hearAbout: string;
 }
@@ -133,32 +136,24 @@ export default function RegisterPage() {
     try {
       console.log('🚀 Submitting registration to API...');
       
-      // Prepare message with registration details
-      const registrationMessage = `
-REGISTRATION DETAILS:
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: +91${formData.phone}
-Interests: ${formData.interests.join(', ')}
-How they heard about us: ${formData.hearAbout}
-Additional Message: ${formData.message || 'None'}
-      `.trim();
-
-      const apiData = {
+      // Prepare registration data for the new API
+      const registrationData: CreateRegistrationRequest = {
         name: sanitizeInput(formData.name),
         email: formData.email.toLowerCase().trim(),
-        subject: 'SmashLabs Community Registration',
-        message: registrationMessage,
-        inquiryType: 'general' as const
+        phone: formData.phone,
+        interests: formData.interests,
+        hearAbout: formData.hearAbout,
+        message: formData.message || undefined
       };
 
-      console.log('📤 Sending registration data:', apiData);
+      console.log('📤 Sending registration data:', registrationData);
       
-      const result = await submitContact(apiData);
+      const result = await submitRegistration(registrationData);
       console.log('✅ Registration result:', result);
 
       if (result.success) {
-        showSuccess('🎉 Registration Successful! Thank you for your interest in SmashLabs. We will contact you soon with updates and exclusive offers!');
+        const registrationId = result.data?.registrationId || 'Unknown';
+        showSuccess(`🎉 Registration Successful! Welcome to SmashLabs Community! Your registration ID is: ${registrationId}`);
         
         // Reset form
         setFormData({
@@ -172,21 +167,14 @@ Additional Message: ${formData.message || 'None'}
       } else {
         throw new Error(result.message || 'Registration failed');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('❌ Registration submission error:', error);
       
-      // Show fallback success message
-      showSuccess('🎉 Registration Received! Thank you for your interest. We have received your registration and will contact you soon!');
-      
-      // Reset form even on API error since validation passed
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-        interests: [],
-        hearAbout: ''
-      });
+      if (error.message && error.message.includes('Email already registered')) {
+        showError('Registration Error', 'This email is already registered. Please use a different email address.');
+      } else {
+        showError('Registration Error', error.message || 'Failed to submit registration. Please try again.');
+      }
     } finally {
       setIsSubmitting(false);
     }

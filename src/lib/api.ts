@@ -93,6 +93,30 @@ export interface CreateNewsletterRequest {
   frequency?: 'daily' | 'weekly' | 'monthly' | 'special';
 }
 
+// Registration Types
+export interface SmashLabsRegistration {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  interests: string[];
+  hearAbout: string;
+  message?: string;
+  status: 'active' | 'inactive' | 'unsubscribed';
+  registrationId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateRegistrationRequest {
+  name: string;
+  email: string;
+  phone: string;
+  interests: string[];
+  hearAbout: string;
+  message?: string;
+}
+
 // API Error Class
 export class SmashLabsApiError extends Error {
   constructor(
@@ -251,6 +275,62 @@ export const newsletterApi = {
   },
 };
 
+// Registration API functions
+export const registrationApi = {
+  // Create new registration
+  create: async (data: CreateRegistrationRequest): Promise<BackendResponse<{ registration: SmashLabsRegistration; registrationId: string }>> => {
+    return makeApiRequest('/registrations', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  // Get registration by ID
+  getById: async (id: string): Promise<BackendResponse<SmashLabsRegistration>> => {
+    return makeApiRequest(`/registrations/${id}`);
+  },
+
+  // Get all registrations with pagination (admin)
+  getAll: async (params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    interest?: string;
+    hearAbout?: string;
+  }): Promise<BackendResponse<{ registrations: SmashLabsRegistration[]; pagination: any }>> => {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined) {
+          searchParams.append(key, value.toString());
+        }
+      });
+    }
+    const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
+    return makeApiRequest(`/registrations${query}`);
+  },
+
+  // Update registration status
+  updateStatus: async (id: string, status: 'active' | 'inactive' | 'unsubscribed'): Promise<BackendResponse<SmashLabsRegistration>> => {
+    return makeApiRequest(`/registrations/${id}/status`, {
+      method: 'PUT',
+      body: JSON.stringify({ status }),
+    });
+  },
+
+  // Get registration statistics (admin)
+  getStats: async (): Promise<BackendResponse<{
+    total: number;
+    active: number;
+    inactive: number;
+    unsubscribed: number;
+    lastMonth: number;
+    interestDistribution: Array<{ _id: string; count: number }>;
+  }>> => {
+    return makeApiRequest('/registrations/stats/overview');
+  },
+};
+
 // Health check
 export const healthApi = {
   check: async (): Promise<BackendResponse<{ status: string; timestamp: string; uptime: number; environment: string }>> => {
@@ -286,11 +366,6 @@ export const getGalleryImages = async (): Promise<any[]> => {
   return [];
 };
 
-// Backward compatibility exports
-export const submitBooking = bookingApi.create;
-export const submitContact = contactApi.create;
-export const APIError = SmashLabsApiError;
-
 // Main API export
 export const smashLabsApi = {
   booking: bookingApi,
@@ -298,5 +373,11 @@ export const smashLabsApi = {
   newsletter: newsletterApi,
   health: healthApi,
 };
+
+// Backward compatibility exports
+export const submitBooking = bookingApi.create;
+export const submitContact = contactApi.create;
+export const submitRegistration = registrationApi.create;
+export const APIError = SmashLabsApiError;
 
 export default smashLabsApi; 
