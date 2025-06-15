@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { validateContactForm, sanitizeInput, type ContactFormData } from '@/lib/validation';
+import { validateContactForm, sanitizeInput, sanitizeInputPreserveSpaces, type ContactFormData } from '@/lib/validation';
 import { submitRegistration, type CreateRegistrationRequest } from '@/lib/registrationApi';
 
 interface RegistrationFormData {
@@ -54,7 +54,7 @@ export default function RegisterPage() {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: name === 'message' ? sanitizeInput(value) : value
+      [name]: value
     }));
     
     // Clear error when user starts typing
@@ -143,7 +143,7 @@ export default function RegisterPage() {
         phone: formData.phone,
         interests: formData.interests,
         hearAbout: formData.hearAbout,
-        message: formData.message || undefined
+        message: sanitizeInputPreserveSpaces(formData.message) || undefined
       };
 
       console.log('📤 Sending registration data:', registrationData);

@@ -34,6 +34,13 @@ export const sanitizeInput = (input: string): string => {
     .substring(0, 1000); // Limit length
 };
 
+// Sanitize input while preserving spaces (for messages/text areas)
+export const sanitizeInputPreserveSpaces = (input: string): string => {
+  return input
+    .replace(/[<>]/g, '') // Remove potential HTML tags
+    .substring(0, 1000); // Limit length but don't trim spaces
+};
+
 // Validate email format
 export const isValidEmail = (email: string): boolean => {
   return EMAIL_REGEX.test(email);
