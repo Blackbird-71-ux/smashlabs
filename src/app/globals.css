@@ -224,10 +224,34 @@
   text-shadow: 1px 1px 1px #000000 !important;
 }
 
-/* Focus styles */
+/* Focus styles - Clean, minimal outline */
 *:focus {
-  outline: 3px solid #f43f5e !important;
+  outline: 2px solid rgba(255, 255, 255, 0.3) !important;
   outline-offset: 2px !important;
+}
+
+/* Button focus styles - Remove pinkish effect */
+button:focus,
+.btn:focus,
+[role="button"]:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.4) !important;
+  outline-offset: 2px !important;
+}
+
+/* Override Tailwind focus ring classes to remove pinkish effects */
+.focus\:ring-rage-500:focus,
+.focus\:ring-red-500:focus,
+.focus\:ring-2:focus {
+  --tw-ring-opacity: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Clean button hover effects */
+button:hover,
+.btn:hover,
+[role="button"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Screen reader only content */
