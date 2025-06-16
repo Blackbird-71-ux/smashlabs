@@ -588,58 +588,77 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section id="why-choose" className="py-16 sm:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="why-choose" className="py-20 sm:py-32 bg-black/20 backdrop-blur-sm relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-red-500">
               Why Choose SmashLabs?
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Experience the perfect blend of adrenaline, safety, and premium service.
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Experience the perfect blend of adrenaline, safety, and premium service in our state-of-the-art facility.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {[
               {
                 icon: FaTools,
                 title: 'Premium Arsenal',
-                description: 'State-of-the-art equipment and tools for maximum destruction.'
+                description: 'State-of-the-art equipment and tools designed for maximum destruction and satisfaction.',
+                color: 'red'
               },
               {
                 icon: FaShieldAlt,
                 title: 'Controlled Chaos',
-                description: 'Expertly designed spaces for safe yet exhilarating experiences.'
+                description: 'Expertly designed spaces engineered for safe yet exhilarating stress relief experiences.',
+                color: 'orange'
               },
               {
                 icon: FaUserShield,
                 title: 'Full Protective Gear',
-                description: 'Top-quality safety equipment for worry-free smashing.'
+                description: 'Top-quality safety equipment ensuring worry-free smashing sessions for all participants.',
+                color: 'purple'
               },
               {
                 icon: FaUserTie,
                 title: 'Expert Guidance',
-                description: 'Professional staff ensuring your experience is both safe and satisfying.'
+                description: 'Professional staff providing comprehensive support for safe and satisfying experiences.',
+                color: 'blue'
               }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-red-500/50 transition-all duration-300"
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                whileHover={{ scale: 1.02, y: -8 }}
+                className="group bg-dark-800/50 p-8 rounded-2xl backdrop-blur-sm border border-dark-700/50 hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-500"
               >
-                <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6">
-                  <feature.icon className="w-6 h-6 text-red-400" />
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 ${
+                  feature.color === 'red' ? 'bg-red-500/10 group-hover:bg-red-500/20' :
+                  feature.color === 'orange' ? 'bg-orange-500/10 group-hover:bg-orange-500/20' :
+                  feature.color === 'purple' ? 'bg-purple-500/10 group-hover:bg-purple-500/20' :
+                  'bg-blue-500/10 group-hover:bg-blue-500/20'
+                }`}>
+                  <feature.icon className={`w-8 h-8 transition-colors duration-300 ${
+                    feature.color === 'red' ? 'text-red-400 group-hover:text-red-300' :
+                    feature.color === 'orange' ? 'text-orange-400 group-hover:text-orange-300' :
+                    feature.color === 'purple' ? 'text-purple-400 group-hover:text-purple-300' :
+                    'text-blue-400 group-hover:text-blue-300'
+                  }`} />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-                <p className="text-gray-300">{feature.description}</p>
+                <h3 className="text-xl lg:text-2xl font-bold text-white mb-4 group-hover:text-red-400 transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>

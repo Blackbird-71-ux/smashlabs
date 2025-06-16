@@ -433,4 +433,83 @@ button:focus-visible,
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gradient-to-b from-gray-600 to-gray-700;
+}
+
+/* Button text highlighting fixes - prevent pink/rage color bleeding */
+button,
+a[class*="bg-red-"],
+a[class*="bg-purple-"],
+a[class*="bg-blue-"] {
+  color: white !important;
+}
+
+button:hover,
+a[class*="bg-red-"]:hover,
+a[class*="bg-purple-"]:hover,
+a[class*="bg-blue-"]:hover {
+  color: white !important;
+}
+
+/* Specific button color overrides */
+.bg-red-600,
+.bg-red-600:hover,
+.hover\:bg-red-700:hover {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.bg-purple-600,
+.bg-purple-600:hover,
+.hover\:bg-purple-700:hover {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.bg-blue-600,
+.bg-blue-600:hover,
+.hover\:bg-blue-700:hover {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+/* Override any rage/pink color inheritance */
+*[class*="hover:bg-rage"],
+*[class*="bg-rage"],
+*[class*="text-rage"] {
+  color: white !important;
+}
+
+*[class*="hover:bg-rage"]:hover,
+*[class*="bg-rage"]:hover {
+  color: white !important;
+}
+
+/* Focus states - clean white outlines instead of colored rings */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid white !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
+/* Remove any text selection highlighting that might cause pink effects */
+button::selection,
+a::selection {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+/* Ensure motion components don't inherit unwanted colors */
+[data-framer-component-type] {
+  color: inherit !important;
+}
+
+/* Additional safety overrides for button text */
+button *,
+a[role="button"] *,
+.btn *,
+[class*="bg-red-"] *,
+[class*="bg-purple-"] *,
+[class*="bg-blue-"] * {
+  color: inherit !important;
 } 
