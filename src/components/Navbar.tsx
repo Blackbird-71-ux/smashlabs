@@ -100,7 +100,7 @@ const Navbar = () => {
               priority
             />
             <span className={`text-2xl font-extrabold tracking-tight transition-colors duration-300 ${
-              isScrolled ? 'text-primary-500 group-hover:text-primary-400' : 'text-white group-hover:text-primary-400'
+              isScrolled ? 'text-red-500 group-hover:text-white' : 'text-white group-hover:text-gray-200'
             }`}>
               <span className="text-red-500">SMASH</span>LABS
             </span>

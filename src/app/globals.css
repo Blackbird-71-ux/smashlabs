@@ -254,6 +254,47 @@ button:hover,
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Override any remaining pinkish primary colors */
+.text-primary-400,
+.hover\:text-primary-400:hover,
+.text-rage-400,
+.hover\:text-rage-400:hover {
+  color: #ffffff !important;
+}
+
+/* Override any pinkish border effects */
+.border-primary-400,
+.hover\:border-primary-400:hover,
+.border-rage-400,
+.hover\:border-rage-400:hover {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Override any pinkish background effects */
+.bg-primary-400,
+.hover\:bg-primary-400:hover,
+.bg-rage-400,
+.hover\:bg-rage-400:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Specific targeting for social media icons with proper brand colors */
+.footer .social-facebook:hover {
+  color: #1877f2 !important;
+}
+
+.footer .social-instagram:hover {
+  color: #e4405f !important;
+}
+
+.footer .social-twitter:hover {
+  color: #1da1f2 !important;
+}
+
+.footer .social-linkedin:hover {
+  color: #0a66c2 !important;
+}
+
 /* Screen reader only content */
 .sr-only {
   position: absolute !important;

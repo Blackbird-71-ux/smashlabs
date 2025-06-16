@@ -65,24 +65,33 @@ export default function Footer() {
                 className="transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
               />
-              <span className="text-3xl font-extrabold tracking-tight text-red-500 group-hover:text-red-400 transition-colors">SMASHLABS</span>
+              <span className="text-3xl font-extrabold tracking-tight text-red-500 group-hover:text-white transition-colors">SMASHLABS</span>
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Experience the ultimate stress relief and team building activity at SmashLabs. Unleash your inner beast!
             </p>
             <div className="flex space-x-4">
-              {footerLinks.social.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-primary-400 transition-colors transform hover:scale-110"
-                  aria-label={link.label}
-                >
-                  {socialIcons[link.icon as keyof typeof socialIcons]}
-                </a>
-              ))}
+              {footerLinks.social.map((link) => {
+                const hoverColors = {
+                  facebook: 'hover:text-blue-500',
+                  instagram: 'hover:text-pink-500',
+                  twitter: 'hover:text-blue-400',
+                  linkedin: 'hover:text-blue-600'
+                };
+                
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-gray-400 ${hoverColors[link.icon as keyof typeof hoverColors]} transition-colors transform hover:scale-110`}
+                    aria-label={link.label}
+                  >
+                    {socialIcons[link.icon as keyof typeof socialIcons]}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -94,7 +103,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-primary-400 transition-colors hover:underline"
+                    className="text-gray-400 hover:text-white transition-colors hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -111,7 +120,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-primary-400 transition-colors hover:underline"
+                    className="text-gray-400 hover:text-white transition-colors hover:underline"
                   >
                     {link.label}
                   </Link>
@@ -125,8 +134,8 @@ export default function Footer() {
             <h3 className="text-xl font-semibold text-white mb-4">Contact</h3>
             <address className="not-italic space-y-3 text-gray-400">
               <p>To be Declared</p>
-              <p>Phone: <a href="tel:+919998944920" className="hover:text-primary-400 transition-colors">+91 9998944920</a></p>
-              <p>Email: <a href="mailto:drupad999@gmail.com" className="hover:text-primary-400 transition-colors">drupad999@gmail.com</a></p>
+              <p>Phone: <a href="tel:+919998944920" className="hover:text-white transition-colors">+91 9998944920</a></p>
+              <p>Email: <a href="mailto:drupad999@gmail.com" className="hover:text-white transition-colors">drupad999@gmail.com</a></p>
             </address>
           </div>
         </div>
