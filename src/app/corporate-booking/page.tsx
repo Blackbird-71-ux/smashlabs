@@ -16,7 +16,6 @@ interface CorporateFormData {
   time: string;
   duration: string;
   eventType: string;
-  budget: string;
   specialRequests: string;
 }
 
@@ -32,7 +31,6 @@ export default function CorporateBookingPage() {
     time: '',
     duration: '',
     eventType: '',
-    budget: '',
     specialRequests: ''
   });
 
@@ -76,7 +74,6 @@ export default function CorporateBookingPage() {
     if (!formData.time) newErrors.time = 'Time is required';
     if (!formData.duration) newErrors.duration = 'Duration is required';
     if (!formData.eventType) newErrors.eventType = 'Event type is required';
-    if (!formData.budget) newErrors.budget = 'Budget range is required';
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -90,16 +87,25 @@ export default function CorporateBookingPage() {
     setIsLoading(true);
     
     try {
-      // Here you would typically send to your backend API
-      console.log('Corporate booking data:', formData);
+      const response = await fetch('/api/corporate-bookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const result = await response.json();
       
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to submit booking');
+      }
+      
+      console.log('Corporate booking created:', result);
       setIsSuccess(true);
     } catch (error) {
       console.error('Booking failed:', error);
-      alert('Booking failed. Please try again.');
+      alert(`Booking failed: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`);
     } finally {
       setIsLoading(false);
     }
@@ -118,7 +124,6 @@ export default function CorporateBookingPage() {
       time: '',
       duration: '',
       eventType: '',
-      budget: '',
       specialRequests: ''
     });
   };
@@ -403,28 +408,7 @@ export default function CorporateBookingPage() {
                 {errors.eventType && <p className="text-red-400 text-sm mt-1">{errors.eventType}</p>}
               </div>
 
-              {/* Budget */}
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Budget Range *
-                </label>
-                <select
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-black/30 border rounded-lg text-white focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 ${
-                    errors.budget ? 'border-red-500' : 'border-white/20'
-                  }`}
-                >
-                  <option value="">Select budget range</option>
-                  <option value="under-50k">Under ₹50,000</option>
-                  <option value="50k-1l">₹50,000 - ₹1,00,000</option>
-                  <option value="1l-2l">₹1,00,000 - ₹2,00,000</option>
-                  <option value="2l-5l">₹2,00,000 - ₹5,00,000</option>
-                  <option value="above-5l">Above ₹5,00,000</option>
-                </select>
-                {errors.budget && <p className="text-red-400 text-sm mt-1">{errors.budget}</p>}
-              </div>
+
             </div>
 
             {/* Special Requests */}

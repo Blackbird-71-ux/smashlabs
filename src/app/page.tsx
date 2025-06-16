@@ -846,24 +846,30 @@ export default function Home() {
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                href="#"
-                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-rage-500 transition-colors"
+                href="https://www.instagram.com/smashlab_x?igsh=MTNnZmRydm13ZnU2eg%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-pink-500 transition-colors"
               >
                 <FaInstagram className="w-6 h-6" />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                href="#"
-                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-rage-500 transition-colors"
+                href="https://twitter.com/smashlabs_hq"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-blue-400 transition-colors"
               >
                 <FaTwitter className="w-6 h-6" />
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                href="#"
-                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-rage-500 transition-colors"
+                href="https://facebook.com/smashlabs.official"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-blue-600 transition-colors"
               >
                 <FaFacebook className="w-6 h-6" />
               </motion.a>
