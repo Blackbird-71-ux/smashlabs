@@ -338,11 +338,11 @@ export default function CorporateBookingPage() {
                   }`}
                 >
                   <option value="">Select team size</option>
-                  <option value="5-10">5-10 people</option>
-                  <option value="11-20">11-20 people</option>
-                  <option value="21-30">21-30 people</option>
-                  <option value="31-50">31-50 people</option>
-                  <option value="50+">50+ people</option>
+                  <option value="5-10 people">5-10 people</option>
+                  <option value="11-20 people">11-20 people</option>
+                  <option value="21-30 people">21-30 people</option>
+                  <option value="31-50 people">31-50 people</option>
+                  <option value="50+ people">50+ people</option>
                 </select>
                 {errors.teamSize && <p className="text-red-400 text-sm mt-1">{errors.teamSize}</p>}
               </div>
@@ -380,9 +380,9 @@ export default function CorporateBookingPage() {
                   }`}
                 >
                   <option value="">Select time</option>
-                  <option value="morning">Morning (9 AM - 12 PM)</option>
-                  <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                  <option value="evening">Evening (5 PM - 8 PM)</option>
+                  <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                  <option value="Afternoon (12 PM - 5 PM)">Afternoon (12 PM - 5 PM)</option>
+                  <option value="Evening (5 PM - 8 PM)">Evening (5 PM - 8 PM)</option>
                 </select>
                 {errors.time && <p className="text-red-400 text-sm mt-1">{errors.time}</p>}
               </div>
@@ -401,10 +401,12 @@ export default function CorporateBookingPage() {
                   }`}
                 >
                   <option value="">Select duration</option>
-                  <option value="2-hours">2 hours</option>
-                  <option value="3-hours">3 hours</option>
-                  <option value="4-hours">4 hours (Half day)</option>
-                  <option value="full-day">Full day (8 hours)</option>
+                  <option value="1 hour">1 hour</option>
+                  <option value="2 hours">2 hours</option>
+                  <option value="3 hours">3 hours</option>
+                  <option value="4 hours">4 hours</option>
+                  <option value="Half day">Half day</option>
+                  <option value="Full day">Full day</option>
                 </select>
                 {errors.duration && <p className="text-red-400 text-sm mt-1">{errors.duration}</p>}
               </div>
