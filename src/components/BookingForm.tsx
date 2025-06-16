@@ -153,7 +153,7 @@ export default function BookingForm() {
         preferredDate: dateObj.toISOString(),
         preferredTime: mappedTime,
         duration: selectedPackage.duration,
-        participants: formData.participants === '6+' ? 6 : parseInt(formData.participants),
+        participants: parseInt(formData.participants),
         specialRequests: formData.specialRequests || ''
       };
 
@@ -352,7 +352,6 @@ export default function BookingForm() {
               <option value="4">4 People</option>
               <option value="5">5 People</option>
               <option value="6">6 People</option>
-              <option value="6+">6+ People (Group)</option>
             </select>
             {errors.participants && <p className="text-red-400 text-sm mt-1">{errors.participants}</p>}
           </div>

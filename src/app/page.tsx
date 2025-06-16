@@ -3,7 +3,7 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock, FaTools, FaChevronDown, FaUserShield, FaUserTie, FaArrowUp, FaStar, FaQuoteLeft, FaInstagram, FaTwitter, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope, FaCoffee } from 'react-icons/fa'
+import { FaHammer, FaGlassMartiniAlt, FaTshirt, FaShieldAlt, FaArrowRight, FaCalendarAlt, FaUsers, FaClock, FaTools, FaChevronDown, FaUserShield, FaUserTie, FaArrowUp, FaStar, FaQuoteLeft, FaInstagram, FaTwitter, FaFacebook, FaMapMarkerAlt, FaPhone, FaEnvelope, FaCoffee, FaBriefcase } from 'react-icons/fa'
 import { useEffect, useState, useRef } from 'react'
 import { trackButtonClick, trackFormSubmit, trackVideoInteraction, trackBookingAttempt, trackContactAttempt, trackError } from '@/lib/analytics'
 import { GridSkeleton, TextSkeleton, Skeleton } from '@/components/Skeleton'
@@ -646,7 +646,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Book Session Card */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -670,6 +670,33 @@ export default function Home() {
                   className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600 uppercase tracking-wide inline-block"
                 >
                   Book Now
+                </motion.a>
+              </div>
+            </motion.div>
+
+            {/* Corporate Events Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-purple-500/50 transition-all duration-300"
+            >
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <FaBriefcase className="w-8 h-8 text-purple-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Corporate Events</h3>
+                <p className="text-gray-300 mb-6">
+                  Transform your team dynamics with professional corporate stress relief and team building experiences!
+                </p>
+                <motion.a
+                  href="/corporate-booking"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-purple-500 hover:border-purple-600 uppercase tracking-wide inline-block"
+                >
+                  Book Corporate Event
                 </motion.a>
               </div>
             </motion.div>

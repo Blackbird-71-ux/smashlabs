@@ -8,20 +8,20 @@ export default function Footer() {
 
   const footerLinks = {
     company: [
-      { label: 'About SmashLabs', href: '#about' },
-      { label: 'Our Approach', href: '#approach' },
+      { label: 'About SmashLabs', href: '#experience' },
+      { label: 'Our Approach', href: '#whysmashlabs' },
       { label: 'Smash Packages', href: '#packages' },
       { label: 'Customer Stories', href: '#testimonials' },
     ],
     support: [
-      { label: 'Contact Us', href: '#contact' },
+      { label: 'Contact Us', href: '/book' },
       { label: 'FAQs', href: '#faq' },
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
+      { label: 'Privacy Policy', href: '/privacy-policy' },
+      { label: 'Terms of Service', href: '/terms-of-service' },
     ],
     social: [
       { label: 'Facebook', href: 'https://facebook.com/smashlabs.official', icon: 'facebook' },
-      { label: 'Instagram', href: 'https://instagram.com/smashlabs.official', icon: 'instagram' },
+      { label: 'Instagram', href: 'https://www.instagram.com/smashlab_x?igsh=MTNnZmRydm13ZnU2eg%3D%3D&utm_source=qr', icon: 'instagram' },
       { label: 'Twitter', href: 'https://twitter.com/smashlabs_hq', icon: 'twitter' },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/company/smashlabx', icon: 'linkedin' },
     ],
@@ -124,10 +124,9 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-semibold text-white mb-4">Contact</h3>
             <address className="not-italic space-y-3 text-gray-400">
-              <p>123 Catharsis Lane</p>
-              <p>Rage City, CA 90210, USA</p>
-              <p>Phone: <a href="tel:+1800SMASHNOW" className="hover:text-primary-400 transition-colors">+1 (800) SMASH-NOW</a></p>
-              <p>Email: <a href="mailto:info@smashlabs.com" className="hover:text-primary-400 transition-colors">info@smashlabs.com</a></p>
+              <p>To be Declared</p>
+              <p>Phone: <a href="tel:+919998944920" className="hover:text-primary-400 transition-colors">+91 9998944920</a></p>
+              <p>Email: <a href="mailto:drupad999@gmail.com" className="hover:text-primary-400 transition-colors">drupad999@gmail.com</a></p>
             </address>
           </div>
         </div>
