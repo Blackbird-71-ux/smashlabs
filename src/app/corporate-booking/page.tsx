@@ -87,50 +87,45 @@ export default function CorporateBookingPage() {
     setIsLoading(true);
     
     try {
-      const response = await fetch('/api/corporate-bookings', {
+      // Use the backend API
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://smashlabs-backend-production.up.railway.app/api';
+      
+      // Prepare the data in the format expected by the backend
+      const bookingData = {
+        companyName: formData.companyName,
+        contactPerson: formData.contactPerson,
+        email: formData.email,
+        phone: formData.phone,
+        jobTitle: formData.jobTitle,
+        teamSize: formData.teamSize,
+        date: formData.date,
+        time: formData.time,
+        duration: formData.duration,
+        eventType: formData.eventType,
+        specialRequests: formData.specialRequests
+      };
+      
+      console.log('📡 Submitting corporate booking to:', `${API_BASE_URL}/corporate-bookings`);
+      console.log('📋 Booking data:', bookingData);
+      
+      const response = await fetch(`${API_BASE_URL}/corporate-bookings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(bookingData),
       });
       
-      // Check if response is ok first
+      const result = await response.json();
+      
       if (!response.ok) {
-        // Try to get error message from response
-        let errorMessage = 'Failed to submit booking';
-        try {
-          const errorResult = await response.text();
-          if (errorResult) {
-            const jsonError = JSON.parse(errorResult);
-            errorMessage = jsonError.message || errorMessage;
-          }
-        } catch {
-          errorMessage = `Server error: ${response.status} ${response.statusText}`;
-        }
-        throw new Error(errorMessage);
+        throw new Error(result.message || result.errors?.join(', ') || 'Failed to submit booking');
       }
       
-      // Try to parse JSON response
-      let result;
-      try {
-        const responseText = await response.text();
-        if (responseText) {
-          result = JSON.parse(responseText);
-        } else {
-          // If no response body, assume success
-          result = { success: true };
-        }
-      } catch (jsonError) {
-        // If JSON parsing fails but response was ok, assume success
-        console.warn('Response was not valid JSON, but request succeeded');
-        result = { success: true };
-      }
-      
-      console.log('Corporate booking created:', result);
+      console.log('✅ Corporate booking created successfully:', result);
       setIsSuccess(true);
     } catch (error) {
-      console.error('Booking failed:', error);
+      console.error('❌ Booking failed:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       alert(`Booking failed: ${errorMessage}. Please try again or contact support.`);
     } finally {
