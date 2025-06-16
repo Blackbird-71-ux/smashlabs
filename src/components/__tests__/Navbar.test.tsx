@@ -39,9 +39,9 @@ describe('Navbar', () => {
     // Check navigation links (they have role="menuitem")
     expect(screen.getByRole('menuitem', { name: /home/i })).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /experience/i })).toBeInTheDocument();
-    expect(screen.getByRole('menuitem', { name: /packages/i })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /gallery/i })).toBeInTheDocument();
     expect(screen.getByRole('menuitem', { name: /testimonials/i })).toBeInTheDocument();
-    expect(screen.getByRole('menuitem', { name: /contact/i })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /book now/i })).toBeInTheDocument();
   });
 
   it('toggles mobile menu when hamburger button is clicked', async () => {
