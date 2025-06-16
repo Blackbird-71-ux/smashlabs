@@ -9,7 +9,7 @@ export default function Footer() {
   const footerLinks = {
     company: [
       { label: 'About SmashLabs', href: '#experience' },
-      { label: 'Our Approach', href: '#whysmashlabs' },
+      { label: 'Our Approach', href: '#why-choose' },
       { label: 'Smash Packages', href: '#packages' },
       { label: 'Customer Stories', href: '#testimonials' },
     ],

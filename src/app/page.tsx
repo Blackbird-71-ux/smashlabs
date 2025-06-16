@@ -25,9 +25,9 @@ const trackEvent = (eventName: string, properties?: Record<string, any>) => {
 }
 
 export default function Home() {
-  const { count: customers, isAnimating: customersAnimating } = useCounter(10000);
+  const { count: customers, isAnimating: customersAnimating } = useCounter(0);
   const { count: satisfaction, isAnimating: satisfactionAnimating } = useCounter(95);
-  const { count: events, isAnimating: eventsAnimating } = useCounter(500);
+  const { count: events, isAnimating: eventsAnimating } = useCounter(0);
 
   const statsLoading = customersAnimating || satisfactionAnimating || eventsAnimating;
 
@@ -686,7 +686,7 @@ export default function Home() {
                 <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
                   <FaBriefcase className="w-8 h-8 text-purple-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Corporate Events</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">For Corporates</h3>
                 <p className="text-gray-300 mb-6">
                   Transform your team dynamics with professional corporate stress relief and team building experiences!
                 </p>
@@ -721,7 +721,7 @@ export default function Home() {
                   href="/register"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-gray-600 hover:border-gray-500 uppercase tracking-wide inline-block"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-blue-500 hover:border-blue-600 uppercase tracking-wide inline-block"
                 >
                   Join Community
                 </motion.a>

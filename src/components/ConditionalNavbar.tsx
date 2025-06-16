@@ -7,7 +7,7 @@ export default function ConditionalNavbar() {
   const pathname = usePathname();
   
   // Hide navbar on these pages
-  const hideNavbarPages = ['/book', '/contact', '/register', '/packages'];
+  const hideNavbarPages = ['/book', '/contact', '/register', '/packages', '/privacy-policy', '/terms-of-service', '/corporate-booking'];
   
   if (hideNavbarPages.includes(pathname)) {
     return null;
