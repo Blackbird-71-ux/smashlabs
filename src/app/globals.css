@@ -241,9 +241,13 @@ button:focus,
 /* Override Tailwind focus ring classes to remove pinkish effects */
 .focus\:ring-rage-500:focus,
 .focus\:ring-red-500:focus,
-.focus\:ring-2:focus {
+.focus\:ring-2:focus,
+.focus\:ring-purple-500:focus,
+.focus\:ring-blue-500:focus,
+.focus\:ring-pink-500:focus {
   --tw-ring-opacity: 0 !important;
-  box-shadow: none !important;
+  --tw-ring-color: transparent !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Clean button hover effects */
@@ -357,6 +361,58 @@ button:hover,
     --primary-600: #ffff00;
     filter: contrast(150%);
   }
+}
+
+/* Clean Button Hover Effects - Remove any pinkish tints */
+button,
+.btn,
+[role="button"],
+a[class*="bg-red"],
+a[class*="bg-purple"],
+a[class*="bg-blue"] {
+  transition: all 0.3s ease !important;
+}
+
+button:hover,
+.btn:hover,
+[role="button"]:hover {
+  transform: translateY(-2px) !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Specific overrides for main action buttons */
+.bg-red-600:hover {
+  background-color: #dc2626 !important; /* red-600 */
+  border-color: #dc2626 !important;
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3) !important;
+}
+
+.bg-purple-600:hover {
+  background-color: #9333ea !important; /* purple-600 */
+  border-color: #9333ea !important;
+  box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3) !important;
+}
+
+.bg-blue-600:hover {
+  background-color: #2563eb !important; /* blue-600 */
+  border-color: #2563eb !important;
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* Remove any potential pink/rage color bleeding */
+*[class*="hover:bg-rage"],
+*[class*="hover:border-rage"],
+*[class*="hover:text-rage"] {
+  transition: all 0.3s ease !important;
+}
+
+/* Ensure clean focus states */
+button:focus-visible,
+.btn:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Custom Scrollbar */

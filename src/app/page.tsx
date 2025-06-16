@@ -485,51 +485,62 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-16 sm:py-24 bg-black/10 backdrop-blur-sm">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+      <section id="experience" className="py-20 sm:py-32 bg-black/10 backdrop-blur-sm relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-5" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex-1"
+              className="flex-1 lg:pr-8"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-red-500">
-                The SmashLabs Experience
-              </h2>
-              <p className="text-lg text-gray-300 mb-8 max-w-xl">
-                At SmashLabs, we don't just offer a service; we offer a transformation. Step into our world of controlled chaos, where every swing, every shatter, and every crash is a step towards liberation.
-              </p>
-              <ul className="space-y-6 mb-10">
-                <li className="flex items-start gap-4">
-                  <FaTools className="w-7 h-7 text-blue-400 mt-1" />
-                  <div>
-                    <span className="font-semibold text-white">State-of-the-art Facilities</span>
-                    <p className="text-gray-400 text-sm">State-of-the-art smash rooms designed for exhilarating experiences.</p>
+              <div className="max-w-2xl">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-red-500 leading-tight">
+                  The SmashLabs Experience
+                </h2>
+                <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed">
+                  At SmashLabs, we don't just offer a service; we offer a transformation. Step into our world of controlled chaos, where every swing, every shatter, and every crash is a step towards liberation.
+                </p>
+              </div>
+              <div className="space-y-6 mb-12">
+                <div className="flex items-start gap-5 p-4 rounded-xl bg-dark-800/30 backdrop-blur-sm border border-dark-700/30 hover:border-blue-500/30 transition-all duration-300">
+                  <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaTools className="w-6 h-6 text-blue-400" />
                   </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <FaShieldAlt className="w-7 h-7 text-green-400 mt-1" />
                   <div>
-                    <span className="font-semibold text-white">Diverse Selection</span>
-                    <p className="text-gray-400 text-sm">A diverse selection of items to smash, from electronics to glass.</p>
+                    <h3 className="font-semibold text-white text-lg mb-2">State-of-the-art Facilities</h3>
+                    <p className="text-gray-300">State-of-the-art smash rooms designed for exhilarating experiences.</p>
                   </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <FaUserTie className="w-7 h-7 text-purple-400 mt-1" />
+                </div>
+                <div className="flex items-start gap-5 p-4 rounded-xl bg-dark-800/30 backdrop-blur-sm border border-dark-700/30 hover:border-green-500/30 transition-all duration-300">
+                  <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaShieldAlt className="w-6 h-6 text-green-400" />
+                  </div>
                   <div>
-                    <span className="font-semibold text-white">Customizable Packages</span>
-                    <p className="text-gray-400 text-sm">Customizable packages for individuals, groups, and corporate events.</p>
+                    <h3 className="font-semibold text-white text-lg mb-2">Diverse Selection</h3>
+                    <p className="text-gray-300">A diverse selection of items to smash, from electronics to glass.</p>
                   </div>
-                </li>
-                <li className="flex items-start gap-4">
-                  <FaCoffee className="w-7 h-7 text-orange-400 mt-1" />
+                </div>
+                <div className="flex items-start gap-5 p-4 rounded-xl bg-dark-800/30 backdrop-blur-sm border border-dark-700/30 hover:border-purple-500/30 transition-all duration-300">
+                  <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaUserTie className="w-6 h-6 text-purple-400" />
+                  </div>
                   <div>
-                    <span className="font-semibold text-white">Chill Zone</span>
-                    <p className="text-gray-400 text-sm">Relax after smashing with healthy juices, gourmet snacks, and beverages in our serene environment.</p>
+                    <h3 className="font-semibold text-white text-lg mb-2">Customizable Packages</h3>
+                    <p className="text-gray-300">Customizable packages for individuals, groups, and corporate events.</p>
                   </div>
-                </li>
-              </ul>
+                </div>
+                <div className="flex items-start gap-5 p-4 rounded-xl bg-dark-800/30 backdrop-blur-sm border border-dark-700/30 hover:border-orange-500/30 transition-all duration-300">
+                  <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaCoffee className="w-6 h-6 text-orange-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white text-lg mb-2">Chill Zone</h3>
+                    <p className="text-gray-300">Relax after smashing with healthy juices, gourmet snacks, and beverages in our serene environment.</p>
+                  </div>
+                </div>
+              </div>
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -546,23 +557,30 @@ export default function Home() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex-1"
+              className="flex-1 flex items-center justify-center"
             >
-              <div className="relative aspect-video rounded-xl overflow-hidden group">
+              <div className="relative w-full max-w-2xl aspect-[4/3] rounded-2xl overflow-hidden group shadow-2xl">
                 <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                   className="w-full h-full"
                 >
                   <Image
                     src="/smashlabs-experience-room.png"
-                    alt="SmashLabs Experience"
+                    alt="SmashLabs Experience Room - State-of-the-art Rage Room Facility"
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 60vw"
+                    priority
                   />
                 </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+                    <h3 className="text-white font-semibold text-lg mb-1">Professional Rage Room</h3>
+                    <p className="text-gray-300 text-sm">Safe, controlled environment for ultimate stress relief</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
