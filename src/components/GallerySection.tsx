@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaTimes, FaChevronLeft, FaChevronRight, FaPlay, FaExpand } from 'react-icons/fa';
@@ -23,8 +23,8 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
   
   const lightboxRef = useRef<HTMLDivElement>(null);
 
-  // Fallback images for demo purposes
-  const fallbackImages: GalleryImage[] = [
+  // Fallback images for demo purposes - memoized to prevent re-creation
+  const fallbackImages: GalleryImage[] = useMemo(() => [
     {
       id: '1',
       url: '/images/gallery/smash-room-1.jpg',
@@ -67,7 +67,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
       category: 'team-event',
       caption: 'The joy and relief after a successful smash session'
     },
-  ];
+  ], []);
 
   const categories = [
     { id: 'all', label: 'All Photos' },
@@ -76,6 +76,47 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
     { id: 'corporate', label: 'Corporate' },
     { id: 'before-after', label: 'Before & After' },
   ];
+
+  // Filter images by category
+  const filteredImages = activeCategory === 'all' 
+    ? images 
+    : images.filter(img => img.category === activeCategory);
+
+  // Handle image loading
+  const handleImageLoad = (imageId: string) => {
+    setLoadedImages(prev => {
+      const newSet = new Set(prev);
+      newSet.add(imageId);
+      return newSet;
+    });
+  };
+
+  // Lightbox functionality
+  const openLightbox = (image: GalleryImage, index: number) => {
+    setSelectedImage(image);
+    setCurrentIndex(index);
+    document.body.style.overflow = 'hidden';
+    
+    trackEvent('gallery_image_opened', {
+      category: 'engagement',
+      label: image.category,
+      image_id: image.id,
+    });
+  };
+
+  const closeLightbox = useCallback(() => {
+    setSelectedImage(null);
+    document.body.style.overflow = 'auto';
+  }, []);
+
+  const navigateLightbox = useCallback((direction: 'prev' | 'next') => {
+    const newIndex = direction === 'next' 
+      ? (currentIndex + 1) % filteredImages.length
+      : (currentIndex - 1 + filteredImages.length) % filteredImages.length;
+    
+    setCurrentIndex(newIndex);
+    setSelectedImage(filteredImages[newIndex]);
+  }, [currentIndex, filteredImages]);
 
   // Load gallery images
   useEffect(() => {
@@ -106,48 +147,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
     };
 
     loadImages();
-  }, []);
-
-  // Filter images by category
-  const filteredImages = activeCategory === 'all' 
-    ? images 
-    : images.filter(img => img.category === activeCategory);
-
-  // Handle image loading
-  const handleImageLoad = (imageId: string) => {
-    setLoadedImages(prev => {
-      const newSet = new Set(prev);
-      newSet.add(imageId);
-      return newSet;
-    });
-  };
-
-  // Lightbox functionality
-  const openLightbox = (image: GalleryImage, index: number) => {
-    setSelectedImage(image);
-    setCurrentIndex(index);
-    document.body.style.overflow = 'hidden';
-    
-    trackEvent('gallery_image_opened', {
-      category: 'engagement',
-      label: image.category,
-      image_id: image.id,
-    });
-  };
-
-  const closeLightbox = () => {
-    setSelectedImage(null);
-    document.body.style.overflow = 'auto';
-  };
-
-  const navigateLightbox = (direction: 'prev' | 'next') => {
-    const newIndex = direction === 'next' 
-      ? (currentIndex + 1) % filteredImages.length
-      : (currentIndex - 1 + filteredImages.length) % filteredImages.length;
-    
-    setCurrentIndex(newIndex);
-    setSelectedImage(filteredImages[newIndex]);
-  };
+  }, [fallbackImages]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -182,7 +182,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ className = '' }) => {
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
     }
-  }, [selectedImage, currentIndex, filteredImages]);
+  }, [selectedImage, closeLightbox, navigateLightbox]);
 
   if (loading) {
     return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Particle {
@@ -33,43 +33,44 @@ const SmashAnimation: React.FC<SmashAnimationProps> = ({
 }) => {
   const [particles, setParticles] = useState<Particle[]>([]);
   const [showImpact, setShowImpact] = useState(false);
-  const animationRef = useRef<number>();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Configuration based on material type
-  const getConfig = () => {
+  // Configuration based on type and intensity
+  const getConfig = useCallback(() => {
     const baseConfig = {
       glass: {
-        colors: ['#87CEEB', '#B0E0E6', '#AFEEEE', '#E0FFFF'],
-        particleCount: intensity === 'high' ? 50 : intensity === 'medium' ? 30 : 20,
-        sound: '/sounds/glass-break.mp3',
-        gravity: 0.5,
+        colors: ['#87CEEB', '#B0E0E6', '#E0F6FF', '#FFFFFF'],
+        particleCount: intensity === 'low' ? 15 : intensity === 'medium' ? 25 : 35,
+        gravity: 0.3,
         friction: 0.98,
-        impactColor: 'rgba(135, 206, 235, 0.7)',
+        sound: '/sounds/glass-break.mp3',
+        impactColor: '#87CEEB'
       },
       wood: {
         colors: ['#8B4513', '#A0522D', '#CD853F', '#DEB887'],
-        particleCount: intensity === 'high' ? 40 : intensity === 'medium' ? 25 : 15,
-        sound: '/sounds/wood-break.mp3',
-        gravity: 0.6,
+        particleCount: intensity === 'low' ? 12 : intensity === 'medium' ? 20 : 30,
+        gravity: 0.4,
         friction: 0.95,
-        impactColor: 'rgba(139, 69, 19, 0.7)',
+        sound: '/sounds/wood-break.mp3',
+        impactColor: '#8B4513'
       },
       metal: {
         colors: ['#C0C0C0', '#808080', '#A9A9A9', '#D3D3D3'],
-        particleCount: intensity === 'high' ? 35 : intensity === 'medium' ? 20 : 12,
-        sound: '/sounds/metal-clang.mp3',
-        gravity: 0.7,
+        particleCount: intensity === 'low' ? 10 : intensity === 'medium' ? 18 : 25,
+        gravity: 0.5,
         friction: 0.92,
-        impactColor: 'rgba(192, 192, 192, 0.7)',
-      },
+        sound: '/sounds/metal-clang.mp3',
+        impactColor: '#C0C0C0'
+      }
     };
+
     return baseConfig[type];
-  };
+  }, [type, intensity]);
 
   // Create particles on impact
-  const createParticles = () => {
+  const createParticles = useCallback(() => {
     const config = getConfig();
     const newParticles: Particle[] = [];
     const centerX = 200;
@@ -94,10 +95,10 @@ const SmashAnimation: React.FC<SmashAnimationProps> = ({
     }
 
     setParticles(newParticles);
-  };
+  }, [getConfig, type]);
 
   // Physics simulation
-  const updateParticles = () => {
+  const updateParticles = useCallback(() => {
     const config = getConfig();
     
     setParticles(prevParticles => {
@@ -118,10 +119,10 @@ const SmashAnimation: React.FC<SmashAnimationProps> = ({
           particle.y < 450
         );
     });
-  };
+  }, [getConfig]);
 
   // Sound effect management
-  const playSound = async () => {
+  const playSound = useCallback(async () => {
     if (!enableSound) return;
     
     try {
@@ -139,7 +140,7 @@ const SmashAnimation: React.FC<SmashAnimationProps> = ({
     } catch (error) {
       console.warn('Could not play sound effect:', error);
     }
-  };
+  }, [enableSound, getConfig]);
 
   // Main animation trigger
   useEffect(() => {
@@ -173,7 +174,7 @@ const SmashAnimation: React.FC<SmashAnimationProps> = ({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isActive, type, intensity]);
+  }, [isActive, createParticles, playSound, updateParticles, onComplete]);
 
   const config = getConfig();
 
