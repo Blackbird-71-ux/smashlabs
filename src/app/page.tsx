@@ -652,8 +652,8 @@ export default function Home() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-red-500/50 transition-all duration-300"
+              whileHover={{ scale: 1.01, y: -4 }}
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-red-500/50 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300"
             >
               <div className="text-center">
                 <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -665,9 +665,10 @@ export default function Home() {
                 </p>
                 <motion.a
                   href="/book"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-red-500 hover:border-red-600 uppercase tracking-wide inline-block"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 border border-red-500 hover:border-red-600 hover:shadow-lg hover:shadow-red-500/25 uppercase tracking-wide inline-block"
                 >
                   Book Now
                 </motion.a>
@@ -679,8 +680,8 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-purple-500/50 transition-all duration-300"
+              whileHover={{ scale: 1.01, y: -4 }}
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300"
             >
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -692,9 +693,10 @@ export default function Home() {
                 </p>
                 <motion.a
                   href="/corporate-booking"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-purple-500 hover:border-purple-600 uppercase tracking-wide inline-block"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 border border-purple-500 hover:border-purple-600 hover:shadow-lg hover:shadow-purple-500/25 uppercase tracking-wide inline-block"
                 >
                   Book Corporate Event
                 </motion.a>
@@ -706,8 +708,8 @@ export default function Home() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-blue-500/50 transition-all duration-300"
+              whileHover={{ scale: 1.01, y: -4 }}
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
             >
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -719,9 +721,10 @@ export default function Home() {
                 </p>
                 <motion.a
                   href="/register"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-semibold transition-colors duration-200 border border-blue-500 hover:border-blue-600 uppercase tracking-wide inline-block"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 border border-blue-500 hover:border-blue-600 hover:shadow-lg hover:shadow-blue-500/25 uppercase tracking-wide inline-block"
                 >
                   Join Community
                 </motion.a>

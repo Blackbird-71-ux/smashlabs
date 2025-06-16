@@ -95,17 +95,44 @@ export default function CorporateBookingPage() {
         body: JSON.stringify(formData),
       });
       
-      const result = await response.json();
-      
+      // Check if response is ok first
       if (!response.ok) {
-        throw new Error(result.message || 'Failed to submit booking');
+        // Try to get error message from response
+        let errorMessage = 'Failed to submit booking';
+        try {
+          const errorResult = await response.text();
+          if (errorResult) {
+            const jsonError = JSON.parse(errorResult);
+            errorMessage = jsonError.message || errorMessage;
+          }
+        } catch {
+          errorMessage = `Server error: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorMessage);
+      }
+      
+      // Try to parse JSON response
+      let result;
+      try {
+        const responseText = await response.text();
+        if (responseText) {
+          result = JSON.parse(responseText);
+        } else {
+          // If no response body, assume success
+          result = { success: true };
+        }
+      } catch (jsonError) {
+        // If JSON parsing fails but response was ok, assume success
+        console.warn('Response was not valid JSON, but request succeeded');
+        result = { success: true };
       }
       
       console.log('Corporate booking created:', result);
       setIsSuccess(true);
     } catch (error) {
       console.error('Booking failed:', error);
-      alert(`Booking failed: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again.`);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      alert(`Booking failed: ${errorMessage}. Please try again or contact support.`);
     } finally {
       setIsLoading(false);
     }
