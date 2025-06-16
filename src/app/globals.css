@@ -278,6 +278,24 @@ button:hover,
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+/* Additional overrides for any remaining rage colors */
+.bg-rage-500\/10,
+.hover\:bg-rage-500\/10:hover,
+.bg-rage-500\/20,
+.hover\:bg-rage-500\/20:hover {
+  background-color: rgba(239, 68, 68, 0.1) !important; /* red-500 with opacity */
+}
+
+.text-rage-500,
+.hover\:text-rage-500:hover {
+  color: #ef4444 !important; /* red-500 */
+}
+
+.border-rage-500\/50,
+.hover\:border-rage-500\/50:hover {
+  border-color: rgba(239, 68, 68, 0.5) !important; /* red-500 with opacity */
+}
+
 /* Specific targeting for social media icons with proper brand colors */
 .footer .social-facebook:hover {
   color: #1877f2 !important;
@@ -343,17 +361,20 @@ button:hover,
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-dark-900;
+  @apply bg-dark-950;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-rage-600 rounded-full;
+  @apply bg-gradient-to-b from-gray-700 to-gray-800 rounded-full;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-rage-500;
+  @apply bg-gradient-to-b from-gray-600 to-gray-700;
 } 

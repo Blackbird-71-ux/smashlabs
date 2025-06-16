@@ -299,7 +299,7 @@ export default function Home() {
       
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-rage-500 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-red-500 origin-left z-50"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -390,7 +390,7 @@ export default function Home() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => scrollToSection('booknow')}
-        className="fixed bottom-8 right-8 z-50 bg-rage-500 text-white p-4 rounded-full shadow-lg hover:shadow-rage-500/50 transition-all duration-300"
+        className="fixed bottom-8 right-8 z-50 bg-red-500 text-white p-4 rounded-full shadow-lg hover:shadow-red-500/50 transition-all duration-300"
       >
         <FaCalendarAlt className="w-6 h-6" />
       </motion.button>
@@ -435,7 +435,7 @@ export default function Home() {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="text-4xl md:text-5xl font-bold text-rage-500 mb-2"
+                  className="text-4xl md:text-5xl font-bold text-red-500 mb-2"
                 >
                   {stat.value}
                 </motion.div>
@@ -502,28 +502,28 @@ export default function Home() {
               </p>
               <ul className="space-y-6 mb-10">
                 <li className="flex items-start gap-4">
-                  <FaTools className="w-7 h-7 text-rage-400 mt-1" />
+                  <FaTools className="w-7 h-7 text-blue-400 mt-1" />
                   <div>
                     <span className="font-semibold text-white">State-of-the-art Facilities</span>
                     <p className="text-gray-400 text-sm">State-of-the-art smash rooms designed for exhilarating experiences.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <FaShieldAlt className="w-7 h-7 text-rage-400 mt-1" />
+                  <FaShieldAlt className="w-7 h-7 text-green-400 mt-1" />
                   <div>
                     <span className="font-semibold text-white">Diverse Selection</span>
                     <p className="text-gray-400 text-sm">A diverse selection of items to smash, from electronics to glass.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <FaUserTie className="w-7 h-7 text-rage-400 mt-1" />
+                  <FaUserTie className="w-7 h-7 text-purple-400 mt-1" />
                   <div>
                     <span className="font-semibold text-white">Customizable Packages</span>
                     <p className="text-gray-400 text-sm">Customizable packages for individuals, groups, and corporate events.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <FaCoffee className="w-7 h-7 text-rage-400 mt-1" />
+                  <FaCoffee className="w-7 h-7 text-orange-400 mt-1" />
                   <div>
                     <span className="font-semibold text-white">Chill Zone</span>
                     <p className="text-gray-400 text-sm">Relax after smashing with healthy juices, gourmet snacks, and beverages in our serene environment.</p>
@@ -615,10 +615,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+                className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-red-500/50 transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-rage-500/10 rounded-lg flex items-center justify-center mb-6">
-                  <feature.icon className="w-6 h-6 text-rage-400" />
+                <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6">
+                  <feature.icon className="w-6 h-6 text-red-400" />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
                 <p className="text-gray-300">{feature.description}</p>
@@ -653,11 +653,11 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-red-500/50 transition-all duration-300"
             >
               <div className="text-center">
-                <div className="w-16 h-16 bg-rage-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <FaCalendarAlt className="w-8 h-8 text-rage-400" />
+                <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <FaCalendarAlt className="w-8 h-8 text-red-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Book Your Session</h3>
                 <p className="text-gray-300 mb-6">
@@ -756,20 +756,20 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-red-500/50 transition-all duration-300"
             >
               <div className="flex items-center gap-2 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} className="w-5 h-5 text-rage-400" />
+                  <FaStar key={i} className="w-5 h-5 text-yellow-400" />
                 ))}
               </div>
-              <FaQuoteLeft className="w-8 h-8 text-rage-400/50 mb-4" />
+              <FaQuoteLeft className="w-8 h-8 text-gray-400/50 mb-4" />
               <p className="text-gray-300 mb-6">
                 "SmashLabs exceeded all our expectations! The facilities are world-class, the safety protocols are impeccable, and the overall experience was absolutely phenomenal. Our entire team left feeling rejuvenated and more connected than ever."
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-rage-500/20 flex items-center justify-center">
-                  <span className="text-rage-400 font-bold">JD</span>
+                <div className="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center">
+                  <span className="text-red-400 font-bold">JD</span>
                 </div>
                 <div>
                   <h4 className="font-semibold text-white">John Doe</h4>
@@ -784,14 +784,14 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-blue-500/50 transition-all duration-300"
             >
               <div className="flex items-center gap-2 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} className="w-5 h-5 text-rage-400" />
+                  <FaStar key={i} className="w-5 h-5 text-yellow-400" />
                 ))}
               </div>
-              <FaQuoteLeft className="w-8 h-8 text-rage-400/50 mb-4" />
+              <FaQuoteLeft className="w-8 h-8 text-gray-400/50 mb-4" />
               <p className="text-gray-300 mb-6">
                 "What an incredible team bonding experience! The Chill Zone was perfect for debriefing after our smash session. My team has never been more unified, and the stress relief was exactly what we needed to tackle our next big project."
               </p>
@@ -812,14 +812,14 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-rage-500/50 transition-all duration-300"
+              className="bg-dark-800/50 p-8 rounded-xl backdrop-blur-sm border border-dark-700/50 hover:border-purple-500/50 transition-all duration-300"
             >
               <div className="flex items-center gap-2 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} className="w-5 h-5 text-rage-400" />
+                  <FaStar key={i} className="w-5 h-5 text-yellow-400" />
                 ))}
               </div>
-              <FaQuoteLeft className="w-8 h-8 text-rage-400/50 mb-4" />
+              <FaQuoteLeft className="w-8 h-8 text-gray-400/50 mb-4" />
               <p className="text-gray-300 mb-6">
                 "From an HR perspective, SmashLabs delivers on every front. The safety measures are comprehensive, the staff is highly professional, and the positive impact on employee morale and stress levels is measurable. This is corporate wellness done right."
               </p>
@@ -849,7 +849,7 @@ export default function Home() {
                 href="https://www.instagram.com/smashlab_x?igsh=MTNnZmRydm13ZnU2eg%3D%3D&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-pink-500 transition-colors"
+                className="w-12 h-12 rounded-full bg-dark-800 flex items-center justify-center text-white hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 transition-all duration-300"
               >
                 <FaInstagram className="w-6 h-6" />
               </motion.a>

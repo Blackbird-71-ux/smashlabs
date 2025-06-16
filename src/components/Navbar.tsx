@@ -87,7 +87,7 @@ const Navbar = () => {
           {/* Logo and Title */}
           <Link 
             href="/" 
-            className="flex items-center space-x-3 group focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 rounded-lg p-2" 
+            className="flex items-center space-x-3 group focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-dark-900 rounded-lg p-2" 
             onClick={(e) => scrollToSection('home', e)} 
             aria-label="SmashLabs Home - Go to top of page"
           >
@@ -113,8 +113,8 @@ const Navbar = () => {
                 key={link.id}
                 onClick={(e) => scrollToSection(link.id, e)}
                 onKeyDown={(e) => handleKeyDown(e, link.id)}
-                className={`text-sm lg:text-base font-medium transition-colors duration-300 whitespace-nowrap px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 ${
-                  activeSection === link.id ? 'text-primary-400 font-semibold bg-rage-500/10' : (isScrolled ? 'text-gray-300 hover:text-primary-400 hover:bg-rage-500/5' : 'text-gray-300 hover:text-primary-400 hover:bg-white/5')
+                className={`text-sm lg:text-base font-medium transition-colors duration-300 whitespace-nowrap px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-dark-900 ${
+                  activeSection === link.id ? 'text-white font-semibold bg-red-600/20' : (isScrolled ? 'text-gray-300 hover:text-white hover:bg-gray-700/50' : 'text-gray-300 hover:text-white hover:bg-white/5')
                 }`}
                 aria-current={activeSection === link.id ? 'page' : undefined}
                 role="menuitem"
@@ -129,7 +129,7 @@ const Navbar = () => {
           <button
             onClick={toggleMobileMenu}
             onKeyDown={handleMobileMenuKeyDown}
-            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-rage-500/10 focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 transition-colors duration-300"
+            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-dark-900 transition-colors duration-300"
             aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -146,7 +146,7 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div 
             id="mobile-menu"
-            className="md:hidden bg-dark-900/95 backdrop-blur-lg border-t border-rage-500/20 py-4"
+            className="md:hidden bg-dark-900/95 backdrop-blur-lg border-t border-gray-700/50 py-4"
             role="menu"
             aria-labelledby="mobile-menu-button"
           >
@@ -156,8 +156,8 @@ const Navbar = () => {
                   key={link.id}
                   onClick={(e) => scrollToSection(link.id, e)}
                   onKeyDown={(e) => handleKeyDown(e, link.id)}
-                  className={`text-left px-4 py-3 rounded-lg font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-rage-500 focus:ring-offset-2 focus:ring-offset-dark-900 ${
-                    activeSection === link.id ? 'text-primary-400 font-semibold bg-rage-500/10' : 'text-gray-300 hover:text-primary-400 hover:bg-rage-500/5'
+                  className={`text-left px-4 py-3 rounded-lg font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-dark-900 ${
+                    activeSection === link.id ? 'text-white font-semibold bg-red-600/20' : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
                   }`}
                   aria-current={activeSection === link.id ? 'page' : undefined}
                   role="menuitem"
